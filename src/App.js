@@ -1,37 +1,20 @@
 import React from 'react';
-import {
-  ChakraProvider,
-  theme,
-} from '@chakra-ui/react';
-import {Home} from "./pages/"
-import {Footer, Navbar} from "./components"
+import { ChakraProvider, theme } from '@chakra-ui/react';
+import { Home, PageNotFound } from './pages/';
+import { Footer, Navbar } from './components';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Navbar />
-      <Home/>
-      <Footer/>
-      {/* <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box> */}
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" exact element={<Home/>} />
+          <Route path="*" exact element={<PageNotFound />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </ChakraProvider>
   );
 }
