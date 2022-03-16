@@ -3,5 +3,6 @@ import Home from "./Home";
 import PageNotFound from "./PageNotFound";
 import Login from "./Login";
 import Signup from "./Signup";
+import BookDetails from "./BookDetails";
 
-export {Home, PageNotFound, Login, Signup}
+export {Home, PageNotFound, Login, Signup, BookDetails}
