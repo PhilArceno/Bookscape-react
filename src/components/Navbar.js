@@ -55,9 +55,7 @@ export default function Navbar() {
           />
           <HStack spacing={8} alignItems={'center'}>
             {/* Logo goes here */}
-            <Box fontWeight={600}>
-                Bookscape
-            </Box>
+            <Box fontWeight={600}>Bookscape</Box>
             {/* Each link will be mapped here in a horizontal stack */}
             <HStack
               as={'nav'}
@@ -87,6 +85,7 @@ export default function Navbar() {
                 Sign In
               </Button>
               <Button
+                as={'a'}
                 display={{ base: 'none', md: 'inline-flex' }}
                 fontSize={'sm'}
                 fontWeight={600}
