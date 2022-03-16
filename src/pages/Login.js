@@ -10,7 +10,7 @@ import {
   Checkbox,
   Stack,
   Link,
-  useColorModeValue,
+  useColorModeValue
 } from '@chakra-ui/react';
 
 //NOTES Code from last project
