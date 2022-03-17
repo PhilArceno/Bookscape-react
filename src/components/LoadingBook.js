@@ -30,7 +30,6 @@ const LoadingBook = ({ id, volumeInfo }) => {
       p="5"
       borderWidth="1px"
       borderRadius="lg"
-      className="loading-card"
       shadow={"lg"}
     >
       <Flex flexDirection={{sm: 'column', md:'row'}} gap="5">

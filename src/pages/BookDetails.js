@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { SearchAPIBook, LoadingBook, LoadingCard } from '../components';
-import { Heading, Flex, Box } from '@chakra-ui/react';
+import {
+  Heading,
+  Flex,
+  Box,
+  Button,
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+} from '@chakra-ui/react';
 
 const BookDetails = () => {
   const [details, setDetails] = useState([]);
@@ -29,6 +37,56 @@ const BookDetails = () => {
     setDetails(oldDetails => [...oldDetails, ...resources.data.items]);
   };
 
+  const renderBook = () => {
+    return (
+      <Box maxW="4xl" m="0 auto">
+        <Box className="container" style={{ padding: '2rem 0rem' }}>
+          <Box display={{ sm: 'flex' }} flexDirection="column" gap="5">
+            {details.map((book, index) => (
+              <LoadingBook {...book} key={index} />
+            ))}
+          </Box>
+          <Box>
+            <Heading m="1em auto">Didn't find the book you love?</Heading>
+          </Box>
+        </Box>
+        <Box>
+          <Button onClick={() => loadMore()}>Load More</Button>
+        </Box>
+      </Box>
+    );
+  };
+
+  const renderSkeleton = () => {
+    const item = (
+      <Box p="5" borderWidth="1px" borderRadius="lg" shadow={'lg'}>
+        <Flex flexDirection={{ sm: 'column', md: 'row' }} gap="5">
+          <Skeleton height="150" w={'100%'} maxW={125} />
+          <Box w={'100%'}>
+            <Skeleton
+              height="30px"
+              w={'100%'}
+              maxW="400px"
+              marginBottom={'10px'}
+            />
+            <SkeletonText noOfLines={4} spacing="4" w={'100%'} maxW="300px" />
+          </Box>
+        </Flex>
+      </Box>
+    );
+    return (
+      <Box maxW="4xl" m="0 auto">
+        <Box className="container" style={{ padding: '2rem 0rem' }}>
+          <Box display={{ sm: 'flex' }} flexDirection="column" gap="5"></Box>
+          {item}
+          {item}
+          {item}
+          {item}
+        </Box>
+      </Box>
+    );
+  };
+
   return (
     <Box maxW="4xl" p="0 10px" m="1.5em auto">
       <SearchAPIBook searchText={text => setTerm(text)}></SearchAPIBook>
@@ -36,53 +94,19 @@ const BookDetails = () => {
         Results for '{term}'
       </Heading>
       {isLoading ? (
-        <section className="container" style={{ padding: '2rem 0rem' }}>
-          <LoadingCard />
-          <LoadingCard />
-          <LoadingCard />
-          <LoadingCard />
-        </section>
+        renderSkeleton()
       ) : !details ? (
-        <h1
-          className="loading-name"
-          style={{
-            background: 'white',
-            borderRadius: '1rem',
-            color: '#DB4437',
-            padding: '1rem',
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            fontSize: 33,
-            fontFamily: 'Inria Serif',
-            transform: 'translate(-50%,-50%)',
-            textTransform: 'capitalize',
-          }}
-        >
-          😞 Couldn't find books about {term}
-        </h1>
+        <Heading>😞 Couldn't find books about {term}</Heading>
       ) : (
-        <Box maxW="4xl" m="0 auto">
-          <Box
-            className="container"
-            style={{ padding: '2rem 0rem' }}
-          >
-            <Box display={{ sm: 'flex' }} flexDirection="column" gap="5">
-              {details.map((book, index) => (
-                <LoadingBook {...book} key={index} />
-              ))}
-            </Box>
-            <div className="custom-card">
-              <h3 style={{ fontSize: '1.32rem'}}>
-                Didn't find the book you love?
-              </h3>
-              <br />
-            </div>
+        <>
+          {renderBook()}
+          <Box>
+            <Heading m="1em auto">Didn't find the book you love?</Heading>
           </Box>
-          <div className="load-more">
-            <button onClick={() => loadMore()}>Load More</button>
-          </div>
-        </Box>
+          <Box>
+            <Button onClick={() => loadMore()}>Load More</Button>
+          </Box>
+        </>
       )}
     </Box>
   );
