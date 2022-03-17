@@ -16,6 +16,7 @@ import {
   useColorModeValue,
   Stack,
 } from '@chakra-ui/react';
+import {Link as ReactRouterLink} from "react-router-dom"; 
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 
@@ -24,6 +25,7 @@ const Links = ['Home', 'Books'];
 
 const NavLink = ({ children }) => (
   <Link
+  as={ReactRouterLink} to="/"
     px={2}
     py={1}
     rounded={'md'}
