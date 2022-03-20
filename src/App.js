@@ -3,7 +3,11 @@ import { ChakraProvider, theme } from '@chakra-ui/react';
 import { Home, PageNotFound, Login, Signup, BookDetails } from './pages/';
 import { Footer, Navbar } from './components';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-
+import  UserList from './pages/admin/UserList';
+import  UserDetail from './pages/admin/UserDetail';
+import  UserAdd from './pages/admin/UserAdd';
+import  UserEdit from './pages/admin/UserEdit';
+import BookList from './pages/admin/BookList';
 function App() {
 
   useEffect(() => {
@@ -32,6 +36,11 @@ function App() {
           <Route path="/login" exact element={<Login />} />
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/BookDetails" exact element={<BookDetails />} />
+          <Route exact path='/admin/user/list' element={<UserList/>}/>
+          <Route exact path="/admin/user/:id" element={<UserDetail/>}/>
+          <Route exact path="/admin/user/add" element={<UserAdd/>}/>
+          <Route exact path="/admin/user/edit/:id" element={<UserEdit/>}/>
+          <Route exact path='/admin/book/list' element={<BookList/>}/>
         </Routes>
         <Footer />
       </BrowserRouter>
