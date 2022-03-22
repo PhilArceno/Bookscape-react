@@ -63,7 +63,7 @@ const BookDetails = () => {
 
   const checkBookInDb = isbn => {
     console.log(isbn);
-    fetch(`https://localhost:7098/exists/${isbn}`, {
+    fetch(`https://serene-carson-743929.netlify.app/exists/${isbn}`, {
       method: 'GET',
     })
       .then(response => response.text())

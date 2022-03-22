@@ -9,7 +9,7 @@ const Books = () => {
     }, [])
 
     const getBooks = () => {
-        fetch("https://localhost:7098/api/Books", {
+        fetch("https://serene-carson-743929.netlify.app/Books", {
             method: "GET"
         }).then(response => response.text())
         .then(text => {
