@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import {
   Box,
   Flex,
@@ -18,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import {Link as ReactRouterLink} from "react-router-dom"; 
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 //list of links will be implemented using a function
 const Links = ['Home', 'Books', 'Google Books Search'];

@@ -80,7 +80,7 @@ const BookDetails = () => {
         checkBookInDb(await getBookDetails());
     }
     fetchData();
-  }, []);
+  });
   
   useEffect(() => {
   }, [existsInDb])

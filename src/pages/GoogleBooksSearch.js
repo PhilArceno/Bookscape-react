@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { SearchAPIBook, ApiSearchItem, LoadingCard } from '../components';
+import { SearchAPIBook, ApiSearchItem } from '../components';
 import {
   Heading,
   Flex,
   Box,
   Button,
   Skeleton,
-  SkeletonCircle,
   SkeletonText,
 } from '@chakra-ui/react';
 
