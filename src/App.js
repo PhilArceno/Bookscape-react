@@ -7,6 +7,7 @@ import  UserList from './pages/admin/UserList';
 import  UserDetail from './pages/admin/UserDetail';
 import  UserAdd from './pages/admin/UserAdd';
 import  UserEdit from './pages/admin/UserEdit';
+import Index from './pages/admin/Index';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/login" exact element={<Login />} />
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/BookDetails" exact element={<BookDetails />} />
+          <Route exact path ="/admin/user/Index" element={<Index/>} />
           <Route exact path='/admin/user/list' element={<UserList/>}/>
           <Route exact path="/admin/user/:id" element={<UserDetail/>}/>
           <Route exact path="/admin/user/add" element={<UserAdd/>}/>
