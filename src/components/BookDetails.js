@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Heading, Image, Stack, Text, Link, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Image,
+  Stack,
+  Text,
+  Link,
+  Button,
+} from '@chakra-ui/react';
 import { BiLinkExternal } from 'react-icons/bi';
 import { useParams } from 'react-router-dom';
 
 const BookDetails = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const [existsInDb, setExistsInDb] = useState(false);
   const [bookDetails, setBookDetails] = useState({
     title: '',
     subject: '',
-    authors: [],
+    author: '',
     publishedDate: '',
     publisher: '',
     isbn: [],
@@ -19,32 +28,65 @@ const BookDetails = () => {
     previewLink: '',
   });
 
-  const getBookDetails = () => {
-    fetch(`https://www.googleapis.com/books/v1/volumes/${id}`, {
-        method: 'GET',
-      })
-        .then(response => response.text())
-        .then(text => {
-          let { volumeInfo } = JSON.parse(text);
-          console.log(volumeInfo);
-          setBookDetails({
-            title: volumeInfo.title,
-            authors: volumeInfo.authors,
-            description: volumeInfo.description,
-            publisher: volumeInfo.publisher,
-            categories: volumeInfo.categories,
-            publishedDate: volumeInfo.publishedDate,
-            previewLink: volumeInfo.previewLink,
-            isbn: volumeInfo.industryIdentifiers,
-            coverImage: volumeInfo.imageLinks.large,
-            pageCount: volumeInfo.pageCount,
-          });
-        });
-  }
+  const getBookDetails = async () => {
+    let isbn;
+    await fetch(`https://www.googleapis.com/books/v1/volumes/${id}`, {
+      method: 'GET',
+    })
+      .then(response => response.text())
+      .then(text => {
+        let { volumeInfo } = JSON.parse(text);
+        let imgs = volumeInfo.imageLinks;
+        let coverImage;
+        if (imgs.large) coverImage = imgs.large;
+        else if (imgs.medium) coverImage = imgs.medium;
+        else if (imgs.small) coverImage = imgs.small;
+        else if (imgs.thumbnail) coverImage = imgs.thumbnail;
+        else if (imgs.smallThumbnail) coverImage = imgs.smallThumbnail;
 
-  useEffect(() => {
-    getBookDetails();
+        setBookDetails({
+          title: volumeInfo.title,
+          author: volumeInfo.authors ? volumeInfo.authors[0] : 'Unknown',
+          description: volumeInfo.description,
+          publisher: volumeInfo.publisher,
+          categories: volumeInfo.categories,
+          publishedDate: volumeInfo.publishedDate,
+          previewLink: volumeInfo.previewLink,
+          isbn: volumeInfo.industryIdentifiers,
+          coverImage,
+          pageCount: volumeInfo.pageCount,
+        });
+        isbn = volumeInfo.industryIdentifiers[1].identifier;
+      });
+    return isbn;
+  };
+
+  const checkBookInDb = isbn => {
+    console.log(isbn);
+    fetch(`https://localhost:7098/exists/${isbn}`, {
+      method: 'GET',
+    })
+      .then(response => response.text())
+      .then(text => {
+        let parsed = JSON.parse(text);
+        if (parsed) {
+          setExistsInDb(true);
+        }
+      });
+  };
+
+  useEffect(async () => {
+    checkBookInDb(await getBookDetails());
   }, []);
+  
+  useEffect(() => {
+    
+  
+    return () => {
+      
+    }
+  }, [existsInDb])
+  
 
   const addToLibrary = () => {
     // public decimal Dewey { get; set; } = 0;
@@ -53,30 +95,30 @@ const BookDetails = () => {
 
     // public int CopiesLoaned { get; set; } = 0;
 
-      setIsLoading(true);
-      fetch(`https://localhost:7098/api/Books`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            title: bookDetails.title,
-            author: bookDetails.authors[0],
-            subject: bookDetails.categories[0],
-            description: bookDetails.description,
-            publisher: bookDetails.publisher,
-            isbn: bookDetails.isbn[0].identifier,
-            coverImage: bookDetails.coverImage,
-        })
-      })
-        .then(response => response.text())
-        .then(text => {
-            setIsLoading(false);
-            let parsed = JSON.parse(text);
-            console.log(parsed);
-
-        });
-  }
+    if (!existsInDb) return
+    setIsLoading(true);
+    fetch(`https://localhost:7098/api/Books`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: bookDetails.title,
+        author: bookDetails.author,
+        subject: bookDetails.categories[0],
+        description: bookDetails.description,
+        publisher: bookDetails.publisher,
+        isbn: bookDetails.isbn[1].identifier,
+        coverImage: bookDetails.coverImage,
+      }),
+    })
+      .then(response => response.text())
+      .then(text => {
+        setIsLoading(false);
+        let parsed = JSON.parse(text);
+        console.log(parsed);
+      });
+  };
 
   return (
     <Box>
@@ -87,7 +129,7 @@ const BookDetails = () => {
       >
         <Image
           src={bookDetails ? bookDetails.coverImage : ''}
-          width="400px"
+          minWidth="400px"
           alt="Book-cover"
           whileHover="hover"
           rounded={'xl'}
@@ -108,17 +150,13 @@ const BookDetails = () => {
             {bookDetails.subject}
           </Heading>
           <Heading as="h3" size="sm">
-            {bookDetails.authors.map((author, idx) => {
-              let authorName = author;
-              if (idx < bookDetails.authors.length - 1) authorName += '';
-              return <span key={idx}>{authorName}</span>;
-            })}
+            {bookDetails.author}
           </Heading>
           <Heading as="h3" size="sm">
             {bookDetails.publisher}, {bookDetails.publishedDate}
           </Heading>
           {bookDetails.isbn.map(isbn => (
-            <Heading as="h4" size="xs" key={isbn}>
+            <Heading as="h4" size="xs" key={isbn.identifier}>
               {isbn.type.replaceAll('_', '-')} - {isbn.identifier}
             </Heading>
           ))}
@@ -131,9 +169,21 @@ const BookDetails = () => {
             More Details{' '}
             <BiLinkExternal style={{ display: 'inline' }}></BiLinkExternal>{' '}
           </Link>
-          <Button isLoading={isLoading} colorScheme={"green"} onClick={()=> {addToLibrary()}}>
+          {!existsInDb ? (
+            <Button colorScheme={'gray'}>
+              Already in Library
+            </Button>
+          ) : (
+            <Button
+              isLoading={isLoading}
+              colorScheme={'green'}
+              onClick={() => {
+                addToLibrary();
+              }}
+            >
               Add to Library
-          </Button>
+            </Button>
+          )}
         </Box>
       </Stack>
     </Box>
