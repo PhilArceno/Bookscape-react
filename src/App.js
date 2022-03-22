@@ -12,7 +12,7 @@ import Index from './pages/admin/Index';
 
 function App() {
 
-  // useEffect(() => {
+  useEffect(() => {
   //   fetch("https://localhost:7098/api/Books",
   //     {
   //       method: "GET",
@@ -25,7 +25,7 @@ function App() {
   //   return () => {
       
   //   }
-  // }, [])
+  }, [])
   
 
   return (
