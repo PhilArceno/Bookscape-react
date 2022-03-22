@@ -75,16 +75,14 @@ const BookDetails = () => {
       });
   };
 
-  useEffect(async () => {
-    checkBookInDb(await getBookDetails());
+  useEffect(() => {
+    async function fetchData() {
+        checkBookInDb(await getBookDetails());
+    }
+    fetchData();
   }, []);
   
   useEffect(() => {
-    
-  
-    return () => {
-      
-    }
   }, [existsInDb])
   
 
