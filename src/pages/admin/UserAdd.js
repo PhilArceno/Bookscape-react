@@ -44,7 +44,7 @@ function UserAdd() {
 
 
   return (
-    <div>
+    <div className="container" >
     {error?(<div className="alert alert-danger">{error}</div>):""}
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
