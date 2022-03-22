@@ -9,7 +9,7 @@ const Books = () => {
     }, [])
 
     const getBooks = () => {
-        fetch("https://serene-carson-743929.netlify.app/Books", {
+        fetch("http://bookscapeapi2-dev.us-east-2.elasticbeanstalk.com/api/Books", {
             method: "GET"
         }).then(response => response.text())
         .then(text => {

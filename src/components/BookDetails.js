@@ -63,7 +63,7 @@ const BookDetails = () => {
 
   const checkBookInDb = isbn => {
     console.log(isbn);
-    fetch(`https://serene-carson-743929.netlify.app/exists/${isbn}`, {
+    fetch(`http://bookscapeapi2-dev.us-east-2.elasticbeanstalk.com/api/exists/${isbn}`, {
       method: 'GET',
     })
       .then(response => response.text())
@@ -97,7 +97,7 @@ const BookDetails = () => {
 
     if (!existsInDb) return
     setIsLoading(true);
-    fetch(`https://localhost:7098/api/Books`, {
+    fetch(`http://bookscapeapi2-dev.us-east-2.elasticbeanstalk.com/api/Books`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
