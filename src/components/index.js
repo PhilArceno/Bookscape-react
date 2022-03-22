@@ -3,8 +3,10 @@ import Features from "./Features"
 import Footer from "./Footer"
 import Testimonials from "./Testimonials"
 import Navbar from "./Navbar"
-import LoadingBook from "./LoadingBook"
+import ApiSearchItem from "./ApiSearchItem"
 import SearchAPIBook from "./SearchAPIBook"
+import BookDetails from "./BookDetails"
 
 
-export {Hero, Features, Footer, Testimonials, Navbar, LoadingBook, SearchAPIBook}
+export { BookDetails, Hero, Features, Footer, Testimonials, 
+    Navbar, ApiSearchItem, SearchAPIBook}

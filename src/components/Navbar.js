@@ -21,11 +21,11 @@ import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 
 //list of links will be implemented using a function
-const Links = ['Home', 'Books'];
+const Links = ['Home', 'Books', 'Google Books Search'];
 
 const NavLink = ({ children }) => (
   <Link
-  as={ReactRouterLink} to="/"
+  as={ReactRouterLink} to={`/${children.replaceAll(" ", "-")}`}
     px={2}
     py={1}
     rounded={'md'}

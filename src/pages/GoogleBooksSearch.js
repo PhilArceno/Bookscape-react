@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { SearchAPIBook, LoadingBook, LoadingCard } from '../components';
+import { SearchAPIBook, ApiSearchItem, LoadingCard } from '../components';
 import {
   Heading,
   Flex,
@@ -24,6 +24,7 @@ const BookDetails = () => {
       const resources = await axios.get(
         `https://www.googleapis.com/books/v1/volumes?q=${term}&maxResults=11`
       );
+      console.log(resources.data);
       setDetails(resources.data.items);
       setIsLoading(false);
     };
@@ -43,15 +44,9 @@ const BookDetails = () => {
         <Box className="container" style={{ padding: '2rem 0rem' }}>
           <Box display={{ sm: 'flex' }} flexDirection="column" gap="5">
             {details.map((book, index) => (
-              <LoadingBook {...book} key={index} />
+              <ApiSearchItem {...book} key={book.id} />
             ))}
           </Box>
-          <Box>
-            <Heading m="1em auto">Didn't find the book you love?</Heading>
-          </Box>
-        </Box>
-        <Box>
-          <Button onClick={() => loadMore()}>Load More</Button>
         </Box>
       </Box>
     );
