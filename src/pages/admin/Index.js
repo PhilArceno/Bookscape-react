@@ -1,22 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import  BookAdd from "./BooKAdd.js";
+import  BookDetail from './BookDetail';
+import  BookList from './BookList';
+import  BookEdit from './BookEdit';
+import  UserList from './UserList';
+import  UserDetail from './UserDetail';
+import  UserAdd from './UserAdd';
+import  UserEdit from './UserEdit';
 
 
-   
-    
-    
-    const Index = () => {
-        return (
-            <div>
-                    <h1> </h1>
-                    <Link to='/admin/user/list'>User List</Link><br></br>
-                    <Link to='/admin/book/list'>Book List</Link>
-            </div>
-        )
-    };
-    
-    
-
-    export default Index ; //new
-    
+export {BookAdd,BookDetail,BookList,BookEdit,UserAdd,UserDetail,UserList,UserEdit}
   
