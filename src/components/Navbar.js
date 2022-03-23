@@ -15,7 +15,7 @@ import {
   useColorModeValue,
   Stack,
 } from '@chakra-ui/react';
-import {Link as ReactRouterLink} from "react-router-dom"; 
+import { Link as ReactRouterLink } from 'react-router-dom';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
@@ -24,7 +24,8 @@ const Links = ['Home', 'Books', 'Google Books Search'];
 
 const NavLink = ({ children }) => (
   <Link
-  as={ReactRouterLink} to={`/${children.replaceAll(" ", "-")}`}
+    as={ReactRouterLink}
+    to={`/${children.replaceAll(' ', '-')}`}
     px={2}
     py={1}
     rounded={'md'}
@@ -76,29 +77,37 @@ export default function Navbar() {
               direction={'row'}
               spacing={6}
             >
-              <Button
-                as={Link}
-                fontSize={'sm'}
-                fontWeight={400}
-                variant={'link'}
-                href={'/login'}
-              >
-                Sign In
-              </Button>
-              <Button
-                as={Link}
-                display={{ base: 'none', md: 'inline-flex' }}
-                fontSize={'sm'}
-                fontWeight={600}
-                color={'white'}
-                bg={'pink.400'}
-                href={'/signup'}
+              <Link
+                as={ReactRouterLink}
+                to={'/login'}
                 _hover={{
-                  bg: 'pink.300',
+                  textDecoration: 'none',
                 }}
               >
-                Sign Up
-              </Button>
+                <Button fontSize={'sm'} fontWeight={400}>
+                  Sign In
+                </Button>
+              </Link>
+              <Link
+                as={ReactRouterLink}
+                display={{ base: 'none', md: 'inline-flex' }}
+                to={'/signup'}
+                _hover={{
+                  textDecoration: 'none',
+                }}
+              >
+                <Button
+                  fontSize={'sm'}
+                  fontWeight={600}
+                  color={'white'}
+                  bg={'pink.400'}
+                  _hover={{
+                    bg: 'pink.300',
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </Link>
             </Stack>
             {/* Color switcher */}
             <ColorModeSwitcher justifySelf="flex-end" />

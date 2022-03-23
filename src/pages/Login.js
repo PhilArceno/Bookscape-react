@@ -10,40 +10,49 @@ import {
   Checkbox,
   Stack,
   Link,
-  useColorModeValue
+  useColorModeValue,
 } from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { config } from '../helpers/constants';
 
-//NOTES Code from last project
-//     import React, { useState, useContext } from "react";
-// import axios from "axios";
-// import { Link, useNavigate } from "react-router-dom";
-// import { AuthContext } from "../helpers/AuthContext";
-
-// function Login() {
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
-//   const { setAuthState } = useContext(AuthContext);
-
-//   let navigate = useNavigate();
-
-//   const login = () => {
-//     const data = { username: username, password: password };
-//     axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, data).then((response) => {
-//       if (response.data.error) {
-//         alert(response.data.error);
-//       } else {
-//         localStorage.setItem("accessToken", response.data.token);
-//         setAuthState({
-//           username: response.data.username,
-//           id: response.data.id,
-//           status: true,
-//         });
-//         navigate("/");
-//       }
-//     });
-//   };
+const schema = yup
+  .object({
+    email: yup.string().email().required(),
+    password: yup.string().min(6).max(24).required(),
+  })
+  .required();
 
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = data =>
+    fetch(config.url.API_URL + '/api/Users/authenticate', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+        phoneNumber: "",
+        userName: ""
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.text())
+      .then(text => {
+        let parsed = JSON.parse(text);
+        console.log(parsed);
+      });
+
   return (
     <Flex
       minH={'100vh'}
@@ -64,35 +73,48 @@ export default function Login() {
           boxShadow={'lg'}
           p={8}
         >
-          <Stack spacing={4}>
-            <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input type="password" />
-            </FormControl>
-            <Stack spacing={10}>
-              <Stack
-                direction={{ base: 'column', sm: 'row' }}
-                align={'start'}
-                justify={'space-between'}
-              >
-                <Checkbox>Remember me</Checkbox>
-                <Link color={'blue.400'}>Forgot password?</Link>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Stack spacing={4}>
+              <FormControl id="email">
+                <FormLabel>Email address</FormLabel>
+                <Text color="red">{errors.email?.message}</Text>
+                <Input
+                  placeholder="Ex. JohnDoe@email.com"
+                  type="email"
+                  {...register('email')}
+                />
+              </FormControl>
+              <FormControl id="password">
+                <FormLabel>Password</FormLabel>
+                <Text color="red">{errors.password?.message}</Text>
+                <Input
+                  type="password"
+                  placeholder="Enter a 8-24 length password"
+                  {...register('password')}
+                />
+              </FormControl>
+              <Stack spacing={10}>
+                <Stack
+                  direction={{ base: 'column', sm: 'row' }}
+                  align={'start'}
+                  justify={'space-between'}
+                >
+                  <Checkbox>Remember me</Checkbox>
+                  <Link color={'blue.400'}>Forgot password?</Link>
+                </Stack>
+                <Button
+                  type="submit"
+                  bg={'blue.400'}
+                  color={'white'}
+                  _hover={{
+                    bg: 'blue.500',
+                  }}
+                >
+                  Sign in
+                </Button>
               </Stack>
-              <Button
-                bg={'blue.400'}
-                color={'white'}
-                _hover={{
-                  bg: 'blue.500',
-                }}
-              >
-                Sign in
-              </Button>
             </Stack>
-          </Stack>
+          </form>
         </Box>
       </Stack>
     </Flex>
