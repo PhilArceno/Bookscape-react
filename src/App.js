@@ -25,7 +25,6 @@ function App() {
           <Route path="/books" exact element={<Books />} />
           <Route path="/google-books-search" exact element={<GoogleBooksSearch />} />
           <Route path="/google-books/:id" exact element={<GoogleBooksDetails/>} />
-         
           <Route exact path='/admin/user/list' element={<UserList/>}/>
           <Route exact path="/admin/user/:id" element={<UserDetail/>}/>
           <Route exact path="/admin/user/add" element={<UserAdd/>}/>
