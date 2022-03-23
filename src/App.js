@@ -3,7 +3,7 @@ import { ChakraProvider, theme } from '@chakra-ui/react';
 import * as Pages from './pages/';
 import { Footer, Navbar } from './components';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import { GoogleBooksDetails } from './pages/librarian';
+import * as LibrarianPages from './pages/librarian';
 import * as AdminPages from './pages/admin';
 
 
@@ -24,7 +24,7 @@ function App() {
           <Route path="/signup" exact element={<Pages.Signup />} />
           <Route path="/books" exact element={<Pages.Books />} />
           <Route path="/google-books-search" exact element={<Pages.GoogleBooksSearch />} />
-          <Route path="/google-books/:id" exact element={<Pages.GoogleBooksDetails/>} />
+          <Route path="/google-books/:id" exact element={<LibrarianPages.GoogleBooksDetails/>} />
           <Route exact path='/admin/user/list' element={<AdminPages.UserList/>}/>
           <Route exact path="/admin/user/:id" element={<AdminPages.UserDetail/>}/>
           <Route exact path="/admin/user/add" element={<AdminPages.UserAdd/>}/>
