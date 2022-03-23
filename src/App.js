@@ -3,7 +3,7 @@ import { ChakraProvider, theme } from '@chakra-ui/react';
 import { Home, PageNotFound, Login, Signup, GoogleBooksSearch, Books } from './pages/';
 import { Footer, Navbar } from './components';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import {UserAdd,UserDetail,UserList,UserEdit,BookList,BookAdd,BookEdit,BookDetail} from './pages/admin';
+import {UserAdd,UserDetail,UserList,UserEdit,BookList,BookAdd,BookEdit,BookDetail} from './pages/admin/index';
 import { GoogleBooksDetails } from './pages/librarian';
 
 
