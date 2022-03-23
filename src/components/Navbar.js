@@ -77,7 +77,7 @@ export default function Navbar() {
               spacing={6}
             >
               <Button
-                as={'a'}
+                as={Link}
                 fontSize={'sm'}
                 fontWeight={400}
                 variant={'link'}
@@ -86,7 +86,7 @@ export default function Navbar() {
                 Sign In
               </Button>
               <Button
-                as={'a'}
+                as={Link}
                 display={{ base: 'none', md: 'inline-flex' }}
                 fontSize={'sm'}
                 fontWeight={600}

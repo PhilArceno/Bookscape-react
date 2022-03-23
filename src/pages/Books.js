@@ -1,6 +1,6 @@
 import { Box, Heading, Image } from '@chakra-ui/react';
-import React, {useState, useEffect} from 'react'
-
+import React, {useState, useEffect} from 'react';
+import { config } from "../helpers/constants";
 const Books = () => {
     const [booksList, setBooksList] = useState([])
 
@@ -9,7 +9,7 @@ const Books = () => {
     }, [])
 
     const getBooks = () => {
-        fetch("http://bookscapeapi2-dev.us-east-2.elasticbeanstalk.com/api/Books", {
+        fetch(config.url.API_URL + "/api/Books", {
             method: "GET"
         }).then(response => response.text())
         .then(text => {

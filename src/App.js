@@ -13,18 +13,6 @@ import Index from './pages/admin/Index';
 function App() {
 
   useEffect(() => {
-  //   fetch("https://localhost:7098/api/Books",
-  //     {
-  //       method: "GET",
-  //       header: {
-  //         'Access-Control-Allow-Origin':'http://localhost:3000/',
-  //       }
-  //     }
-  //   ).then((response) => response.text())
-  //   .then((text) => console.log(JSON.parse(text)))  
-  //   return () => {
-      
-  //   }
   }, [])
   
 

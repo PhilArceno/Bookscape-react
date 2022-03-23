@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { BiLinkExternal } from 'react-icons/bi';
 import { useParams } from 'react-router-dom';
+import {config} from '../helpers/constants';
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -63,7 +64,7 @@ const BookDetails = () => {
 
   const checkBookInDb = isbn => {
     console.log(isbn);
-    fetch(`http://bookscapeapi2-dev.us-east-2.elasticbeanstalk.com/api/exists/${isbn}`, {
+    fetch(config.url.API_URL + `/api/exists/${isbn}`, {
       method: 'GET',
     })
       .then(response => response.text())
@@ -95,7 +96,7 @@ const BookDetails = () => {
 
     if (!existsInDb) return
     setIsLoading(true);
-    fetch(`http://bookscapeapi2-dev.us-east-2.elasticbeanstalk.com/api/Books`, {
+    fetch(config.url.API_URL + `/api/Books`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
