@@ -15,7 +15,7 @@ import {
   useColorModeValue,
   Stack,
 } from '@chakra-ui/react';
-import { Link as ReactRouterLink } from 'react-router-dom';
+import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
@@ -42,6 +42,11 @@ const NavLink = ({ children }) => (
 export default function Navbar() {
   //State used for hamburger icon (In mobile)
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    navigate('/')
+  }
 
   return (
     <>
@@ -108,6 +113,9 @@ export default function Navbar() {
                   Sign Up
                 </Button>
               </Link>
+              <Button fontSize={'sm'} fontWeight={400} onClick={logout}>
+                  Logout
+                </Button>
             </Stack>
             {/* Color switcher */}
             <ColorModeSwitcher justifySelf="flex-end" />

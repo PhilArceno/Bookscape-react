@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { config } from '../helpers/constants';
+import { useNavigate } from 'react-router-dom';
 
 const schema = yup
   .object({
@@ -25,6 +26,8 @@ const schema = yup
   .required();
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -51,6 +54,8 @@ export default function Login() {
       .then(text => {
         let parsed = JSON.parse(text);
         console.log(parsed);
+        localStorage.setItem("accessToken", parsed.token);
+        navigate('/');
       });
 
   return (

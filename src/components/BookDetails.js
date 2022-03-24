@@ -64,12 +64,13 @@ const BookDetails = () => {
 
   const checkBookInDb = isbn => {
     console.log(isbn);
-    fetch(config.url.API_URL + `/api/exists/${isbn}`, {
+    fetch(config.url.API_URL + `/exists/${isbn}`, {
       method: 'GET',
     })
       .then(response => response.text())
       .then(text => {
         let parsed = JSON.parse(text);
+        console.log(parsed);
         if (parsed) {
           setExistsInDb(true);
         }
@@ -81,10 +82,7 @@ const BookDetails = () => {
         checkBookInDb(await getBookDetails());
     }
     fetchData();
-  });
-  
-  useEffect(() => {
-  }, [existsInDb])
+  }, []);
   
 
   const addToLibrary = () => {
@@ -94,7 +92,7 @@ const BookDetails = () => {
 
     // public int CopiesLoaned { get; set; } = 0;
 
-    if (!existsInDb) return
+    if (existsInDb) return
     setIsLoading(true);
     fetch(config.url.API_URL + `/api/Books`, {
       method: 'POST',
@@ -116,6 +114,7 @@ const BookDetails = () => {
         setIsLoading(false);
         let parsed = JSON.parse(text);
         console.log(parsed);
+        setExistsInDb(true)
       });
   };
 
@@ -168,7 +167,7 @@ const BookDetails = () => {
             More Details{' '}
             <BiLinkExternal style={{ display: 'inline' }}></BiLinkExternal>{' '}
           </Link>
-          {!existsInDb ? (
+          {existsInDb ? (
             <Button colorScheme={'gray'}>
               Already in Library
             </Button>
