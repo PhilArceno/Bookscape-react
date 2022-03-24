@@ -1,5 +1,5 @@
-import  BookAdd from "./BooKAdd.js";
-import  BookDetail from './BookDetail';
+import BookAdd from'./BookAdd';
+import BookDetail from './BookDetail';
 import  BookList from './BookList';
 import  BookEdit from './BookEdit';
 import  UserList from './UserList';
