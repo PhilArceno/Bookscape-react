@@ -42,9 +42,7 @@ export default function Login() {
       method: 'POST',
       body: JSON.stringify({
         email: data.email,
-        password: data.password,
-        phoneNumber: "",
-        userName: ""
+        password: data.password
       }),
       headers: {
         'Content-Type': 'application/json',
