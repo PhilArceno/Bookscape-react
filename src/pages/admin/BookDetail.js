@@ -5,15 +5,15 @@ import Axios from 'axios';
 function BookDetail() {
 
   const [book, setBook] = useState({});
-  
+  let {id} = useParams();
   useEffect(()=>{
-    /*
-    let {id} = useParams();
+    
+    
     Axios.get(`https://localhost:7098/api/Books/${id}`)
       .then((response)=>{
         setBook(response.data);
       });
-    */  
+      
     
       setBook(book);
      },[]);
