@@ -11,8 +11,8 @@ function UserAdd() {
   const navigate = useNavigate();
   
   const onSubmit = data => {
-    /*
-    Axios.post("http://localhost:3001/api/user",{UserName:data.UserName,Email:data.Email,PhoneNumber:data.PhoneNumber})
+    
+    Axios.post("https://localhost:7098/api/user",{UserName:data.UserName,Email:data.Email,PhoneNumber:data.PhoneNumber})
       .then((response)=>{
         console.log(response);
         if(response.data==='success'){
@@ -22,7 +22,7 @@ function UserAdd() {
         }
       }).catch((error)=>{
         setError('System Error');
-      });*/
+      });
       navigate("/admin/user/list");
 
   };

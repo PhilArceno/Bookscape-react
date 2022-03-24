@@ -11,8 +11,9 @@ function BookAdd() {
   const navigate = useNavigate();
   
   const onSubmit = data => {
-    /*
-    Axios.post("http://localhost:3001/api/book",{Title:data.Title,Author:data.Author,Publisher:data.Publisher,Subject:data.Subject,ISBN:data.ISBN, Dewey:data.Dewey,CoverImage:data.CoverImage, Description:data.Description,TotalCopies:data.TotalCopies,CopiesLoaned:data.CopiesLoaned})
+    
+    Axios.post("https://localhost:7098/api/book",
+    {Title:data.Title,Author:data.Author,Publisher:data.Publisher,Subject:data.Subject,ISBN:data.ISBN, Dewey:data.Dewey,CoverImage:data.CoverImage, Description:data.Description,TotalCopies:data.TotalCopies,CopiesLoaned:data.CopiesLoaned})
       .then((response)=>{
         if(response.data==='success'){
           navigate("/admin/book/list");
@@ -22,7 +23,7 @@ function BookAdd() {
       }).catch((error)=>{
         setError('System Error');
       });
-      */
+     
       navigate("/admin/book/list");
   };
  
