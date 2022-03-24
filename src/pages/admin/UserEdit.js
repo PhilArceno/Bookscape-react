@@ -13,21 +13,19 @@ function UserEdit() {
   const [user, setUser] = useState({});
 
   useEffect(()=>{
-    /*
-    Axios.get(`http://localhost:3001/api/user/${id}`)
+    
+    Axios.get(`https://localhost:7098/api/Users/${id}`)
       .then((response)=>{
-        setBook(response.data);
+        setUser(response.data);
       });
-    */  
-      var user = 
-      {'Id':2, 'UserName':'lynne2','Email':'Lynne2123.com','PhoneNumber':'123456'};
+     
       setUser(user);
     },[]);
 
   const onSubmit = data => {
     console.log(data);
-    /*
-    Axios.put("http://localhost:3001/api/user",{Id:data.Id, UserName:data.UserName,Email:data.Email,PhoneNumber:data.PhoneNumber})
+    
+    Axios.put("http://localhost:7098/api/user",{Id:data.Id, UserName:data.UserName,Email:data.Email,PhoneNumber:data.PhoneNumber})
       .then((response)=>{
         console.log(response);
         if(response.data==='success'){
@@ -37,7 +35,7 @@ function UserEdit() {
         }
       }).catch((error)=>{
         setError('System Error');
-      });*/
+      });
       navigate("/admin/user/list");
 
   };

@@ -7,15 +7,13 @@ function UserDetail() {
   const [user, setUser] = useState({});
 
   useEffect(()=>{
-    /*
+    
     let {id} = useParams();
-    Axios.get(`http://localhost:3001/api/user/${id}`)
+    Axios.get(`https://localhost:7098/api/Users/${id}`)
       .then((response)=>{
         setUser(response.data);
       });
-    */  
-    var user = 
-      {'Id':2, 'UserName':'lynne2','Email':'Lynne2@123.com','PhoneNumber':'123456'};
+     
       setUser(user);
      },[]);
   
