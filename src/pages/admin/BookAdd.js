@@ -12,7 +12,7 @@ function BookAdd() {
   
   const onSubmit = data => {
     
-    Axios.post("https://localhost:7098/api/book",
+    Axios.post("https://localhost:7098/api/Books",
     {Title:data.Title,Author:data.Author,Publisher:data.Publisher,Subject:data.Subject,ISBN:data.ISBN, Dewey:data.Dewey,CoverImage:data.CoverImage, Description:data.Description,TotalCopies:data.TotalCopies,CopiesLoaned:data.CopiesLoaned})
       .then((response)=>{
         if(response.data==='success'){

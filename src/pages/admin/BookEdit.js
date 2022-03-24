@@ -24,7 +24,8 @@ function BookEdit() {
   const onSubmit = data => {
     console.log(data);
     
-    Axios.put("http://localhost:7098/api/book",{Id:data.Id, Title:data.Title,Author:data.Author,Publisher:data.Publisher,Subject:data.Subject,ISBN:data.ISBN, Dewey:data.Dewey,CoverImage:data.CoverImage, Description:data.Description,TotalCopies:data.TotalCopies,CopiesLoaned:data.CopiesLoaned})
+    Axios.put("http://localhost:7098/api/Books",
+    {Id:data.Id, Title:data.Title,Author:data.Author,Publisher:data.Publisher,Subject:data.Subject,ISBN:data.ISBN, Dewey:data.Dewey,CoverImage:data.CoverImage, Description:data.Description,TotalCopies:data.TotalCopies,CopiesLoaned:data.CopiesLoaned})
       .then((response)=>{
         if(response.data==='success'){
           navigate("/admin/book/list");

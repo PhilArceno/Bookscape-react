@@ -9,7 +9,7 @@ function UserDetail() {
   useEffect(()=>{
     
     let {id} = useParams();
-    Axios.get(`https://localhost:7098/api/user/${id}`)
+    Axios.get(`https://localhost:7098/api/Users/${id}`)
       .then((response)=>{
         setUser(response.data);
       });
