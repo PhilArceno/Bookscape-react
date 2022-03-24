@@ -3,7 +3,7 @@ import { useNavigate,useParams } from "react-router-dom";
 import Axios from 'axios';
 
 function BookDetail() {
-
+/*
   const [book, setBook] = useState({});
   
   useEffect(()=>{
@@ -14,7 +14,7 @@ function BookDetail() {
         setBook(response.data);
       });
       setBook(book);
-   }, []);
+   }, []);*/
   return (
     <div className="container">
       <div class="card">
