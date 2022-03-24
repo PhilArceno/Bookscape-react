@@ -12,7 +12,8 @@ function UserAdd() {
   
   const onSubmit = data => {
     
-    Axios.post("https://localhost:7098/api/user",{UserName:data.UserName,Email:data.Email,PhoneNumber:data.PhoneNumber})
+    Axios.post("https://localhost:7098/api/Users",
+    {UserName:data.UserName,Email:data.Email,PhoneNumber:data.PhoneNumber})
       .then((response)=>{
         console.log(response);
         if(response.data==='success'){

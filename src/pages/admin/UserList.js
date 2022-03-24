@@ -10,7 +10,7 @@ function UserList() {
   
   useEffect(()=>{
     
-    Axios.get("http://localhost:7098/api/user")
+    Axios.get("https://localhost:7098/api/Users")
     .then((response)=>{
       setUserList(response.data);
     });

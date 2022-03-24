@@ -14,7 +14,7 @@ function UserEdit() {
 
   useEffect(()=>{
     
-    Axios.get(`http://localhost:7098/api/user/${id}`)
+    Axios.get(`https://localhost:7098/api/Users/${id}`)
       .then((response)=>{
         setUser(response.data);
       });

@@ -10,17 +10,10 @@ function BookList() {
 
   useEffect(()=>{
     
-    Axios.get("https://localhost:7098/api/book")
+    Axios.get("https://localhost:7098/api/Books")
     .then((response)=>{
       setBookList(response.data);
     });
-    
-    var booklist = [
-      {'Id':1,'Title':'hero1','Author':'Tom1','Publisher':'Disney1','Subject':'this is my hero1','ISBN':'123456', 'Dewey':10.2,'CoverImage':'http://11.jpg', 'Description':'my description','TotalCopies':200,CopiesLoaned:100},
-      {'Id':2,'Title':'hero2','Author':'Tom2','Publisher':'Disney2','Subject':'this is my hero2','ISBN':'123456', 'Dewey':10.2,'CoverImage':'http://11.jpg', 'Description':'my description','TotalCopies':200,CopiesLoaned:100},
-      {'Id':3,'Title':'hero3','Author':'Tom3','Publisher':'Disney3','Subject':'this is my hero3','ISBN':'123456', 'Dewey':10.2,'CoverImage':'http://11.jpg', 'Description':'my description','TotalCopies':200,CopiesLoaned:100}
-      ];
-      setBookList(booklist);
      },[bookList]);
 
   
