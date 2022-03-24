@@ -5,10 +5,10 @@ import Axios from 'axios';
 function UserDetail() {
 
   const [user, setUser] = useState({});
+  let {id} = useParams();
 
   useEffect(()=>{
     
-    let {id} = useParams();
     Axios.get(`https://localhost:7098/api/Users/${id}`)
       .then((response)=>{
         setUser(response.data);
