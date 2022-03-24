@@ -8,14 +8,14 @@ function UserDetail() {
   let {id} = useParams();
 
   useEffect(()=>{
-    /*
+    
     Axios.get(`https://localhost:7098/api/Users/${id}`)
       .then((response)=>{
         setUser(response.data);
       });
      
       setUser(user);
-     },[]);*/
+     },[]);
   
   return (
     <div className="container">
