@@ -10,11 +10,14 @@ function UserList() {
   
   useEffect(()=>{
     
-    Axios.get("https://localhost:7098/api/Users")
-    .then((response)=>{
+    Axios.get("https://localhost:7098/api/Users",{
+       headers: {
+        accessToken: localStorage.getItem('accessToken')
+    }
+    }) .then((response)=>{
       setUserList(response.data);
     });
-     },[userList]);
+     },[]);
 
   const editUser = (id)=>{
       navigate("/admin/user/edit/"+id);
