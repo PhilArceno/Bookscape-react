@@ -13,7 +13,7 @@ function BookAdd() {
   const onSubmit = data => {
     
     Axios.post("https://localhost:7098/api/Books",
-    {Title:data.Title,Author:data.Author,Publisher:data.Publisher,Subject:data.Subject,ISBN:data.ISBN, Dewey:data.Dewey,CoverImage:data.CoverImage, Description:data.Description,TotalCopies:data.TotalCopies,CopiesLoaned:data.CopiesLoaned})
+    {title:data.Title,author:data.Author,publisher:data.Publisher,subject:data.Subject,iSBN:data.ISBN, Dewey:data.Dewey,coverImage:data.CoverImage, description:data.Description,totalCopies:data.TotalCopies,copiesLoaned:data.CopiesLoaned})
       .then((response)=>{
         if(response.data==='success'){
           navigate("/admin/book/list");
@@ -52,9 +52,9 @@ function BookAdd() {
           name="Title"
           type="text"
           {...register('Title')}
-          className={`form-control ${errors.Title ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.title ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Title?.message}</div>
+        <div className="invalid-feedback">{errors.title?.message}</div>
       </div>
       <div className="form-group">
         <label>Author</label>
@@ -62,9 +62,9 @@ function BookAdd() {
           name="Author"
           type="text"
           {...register('Author')}
-          className={`form-control ${errors.Author ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.author ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Author?.message}</div>
+        <div className="invalid-feedback">{errors.author?.message}</div>
       </div>
       <div className="form-group">
         <label>Publisher</label>
@@ -72,9 +72,9 @@ function BookAdd() {
           name="Publisher"
           type="text"
           {...register('Publisher')}
-          className={`form-control ${errors.Publisher ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.publisher ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Publisher?.message}</div>
+        <div className="invalid-feedback">{errors.publisher?.message}</div>
       </div>
       <div className="form-group">
         <label>Subject</label>
@@ -82,9 +82,9 @@ function BookAdd() {
           name="Subject"
           type="text"
           {...register('Subject')}
-          className={`form-control ${errors.Subject ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.subject ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Subject?.message}</div>
+        <div className="invalid-feedback">{errors.subject?.message}</div>
       </div>
       <div className="form-group">
         <label>ISBN</label>
@@ -92,9 +92,9 @@ function BookAdd() {
           name="ISBN"
           type="text"
           {...register('ISBN')}
-          className={`form-control ${errors.ISBN ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.iSBN ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.ISBN?.message}</div>
+        <div className="invalid-feedback">{errors.iSBN?.message}</div>
       </div>
       <div className="form-group">
         <label>Dewey</label>
@@ -102,9 +102,9 @@ function BookAdd() {
           name="Dewey"
           type="text"
           {...register('Dewey')}
-          className={`form-control ${errors.Dewey ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.dewey ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Dewey?.message}</div>
+        <div className="invalid-feedback">{errors.dewey?.message}</div>
       </div>
       <div className="form-group">
         <label>CoverImage</label>
@@ -112,9 +112,9 @@ function BookAdd() {
           name="CoverImage"
           type="text"
           {...register('CoverImage')}
-          className={`form-control ${errors.CoverImage ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.coverImage ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.CoverImage?.message}</div>
+        <div className="invalid-feedback">{errors.coverImage?.message}</div>
       </div>
       <div className="form-group">
         <label>Description</label>
@@ -122,9 +122,9 @@ function BookAdd() {
           name="Description"
           type="text"
           {...register('Description')}
-          className={`form-control ${errors.Description ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.description ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Description?.message}</div>
+        <div className="invalid-feedback">{errors.description?.message}</div>
       </div>
       <div className="form-group">
         <label>TotalCopies</label>
@@ -132,9 +132,9 @@ function BookAdd() {
           name="TotalCopies"
           type="text"
           {...register('TotalCopies')}
-          className={`form-control ${errors.TotalCopies ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.totalCopies ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.TotalCopies?.message}</div>
+        <div className="invalid-feedback">{errors.totalCopies?.message}</div>
       </div>
       <div className="form-group">
         <label>CopiesLoaned</label>
@@ -142,9 +142,9 @@ function BookAdd() {
           name="CopiesLoaned"
           type="text"
           {...register('CopiesLoaned')}
-          className={`form-control ${errors.CopiesLoaned ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.copiesLoaned ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.CopiesLoaned?.message}</div>
+        <div className="invalid-feedback">{errors.copiesLoaned?.message}</div>
       </div>
       <div className="form-group">
         <label>Title</label>
@@ -152,9 +152,9 @@ function BookAdd() {
           name="Title"
           type="text"
           {...register('title')}
-          className={`form-control ${errors.Title ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.title ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Title?.message}</div>
+        <div className="invalid-feedback">{errors.title?.message}</div>
       </div>
       <div className="form-group">
         <button type="submit" className="btn btn-primary">

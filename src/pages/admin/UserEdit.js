@@ -25,7 +25,8 @@ function UserEdit() {
   const onSubmit = data => {
     console.log(data);
     
-    Axios.put("http://localhost:7098/api/user",{Id:data.Id, UserName:data.UserName,Email:data.Email,PhoneNumber:data.PhoneNumber})
+    Axios.put("http://localhost:7098/api/user",
+    {id:data.Id, userName:data.UserName,email:data.Email,phoneNumber:data.PhoneNumber})
       .then((response)=>{
         console.log(response);
         if(response.data==='success'){
@@ -60,39 +61,39 @@ function UserEdit() {
     <div className="container">
     {error?(<div className="alert alert-danger">{error}</div>):""}
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input name="Id" type="hidden" value={user.Id}/>
+      <input name="Id" type="hidden" value={user.id}/>
       <div className="form-group">
         <label>UserName</label>
         <input
           name="UserName"
           type="text"
-          defaultValue={user.UserName}
+          defaultValue={user.userName}
           {...register('UserName')}
-          className={`form-control ${errors.UserName ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.userName ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.UserName?.message}</div>
+        <div className="invalid-feedback">{errors.userName?.message}</div>
       </div>
       <div className="form-group">
-        <label>body</label>
+        <label>Email</label>
         <input
           name="Email"
           type="text"
-          defaultValue={user.Email}
+          defaultValue={user.email}
           {...register('Email')}
-          className={`form-control ${errors.Email ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Email?.message}</div>
+        <div className="invalid-feedback">{errors.email?.message}</div>
       </div> 
       <div className="form-group">
         <label>PhoneNumber</label>
         <input
           name="PhoneNumber"
           type="text"
-          defaultValue={user.PhoneNumber}
+          defaultValue={user.phoneNumber}
           {...register('PhoneNumber')}
-          className={`form-control ${errors.PhoneNumber ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.phoneNumber ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.PhoneNumber?.message}</div>
+        <div className="invalid-feedback">{errors.phoneNumber?.message}</div>
       </div> 
       <div className="form-group">
         <button type="submit" className="btn btn-primary">

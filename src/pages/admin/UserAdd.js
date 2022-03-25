@@ -13,7 +13,7 @@ function UserAdd() {
   const onSubmit = data => {
     
     Axios.post("https://localhost:7098/api/Users",
-    {UserName:data.UserName,Email:data.Email,PhoneNumber:data.PhoneNumber})
+    {UserName:data.userName,Email:data.email,PhoneNumber:data.phoneNumber})
       .then((response)=>{
         console.log(response);
         if(response.data==='success'){
@@ -54,9 +54,9 @@ function UserAdd() {
           name="UserName"
           type="text"
           {...register('UserName')}
-          className={`form-control ${errors.UserName ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.userName ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.UserName?.message}</div>
+        <div className="invalid-feedback">{errors.userName?.message}</div>
       </div>
       <div className="form-group">
         <label>Email</label>
@@ -64,9 +64,9 @@ function UserAdd() {
           name="Email"
           type="text"
           {...register('Email')}
-          className={`form-control ${errors.Email ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.email ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Email?.message}</div>
+        <div className="invalid-feedback">{errors.email?.message}</div>
       </div> 
       <div className="form-group">
         <label>PhoneNumber</label>
@@ -74,9 +74,9 @@ function UserAdd() {
           name="PhoneNumber"
           type="text"
           {...register('PhoneNumber')}
-          className={`form-control ${errors.PhoneNumber ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.phoneNumber ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.PhoneNumber?.message}</div>
+        <div className="invalid-feedback">{errors.phoneNumber?.message}</div>
       </div> 
       <div className="form-group">
         <button type="submit" className="btn btn-primary">

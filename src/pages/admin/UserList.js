@@ -32,12 +32,12 @@ function UserList() {
          <a href="/admin/user/add">new user</a><br/>
          <table className="table table-borderless">
            <thead>
-        <tr><th>Id</th><th>UserName</th><th>Email</th><th>PhoneNumber</th></tr>
+        <tr><th>UserName</th><th>Email</th><th>PhoneNumber</th></tr>
            </thead>
            <tbody>
         {userList.length > 0 ? userList.map((user)=>{
           return (<tr key={(user.id)}>
-            <td>{user.id}</td>
+            
             <td><a href={'/admin/user/'+user.id}>{user.userName}</a></td>
             <td>{user.email}</td>
             <td>{user.phoneNumber}</td>

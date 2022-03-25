@@ -30,11 +30,13 @@ function BookList() {
       <div className="container">
         <a href="/admin/book/add">new Book</a><br/>
         <table className="table table-borderless">
-        <tr><td>Id</td><td>Title</td><td>Author</td><td>Publisher</td><td>Subject</td>
-		    <td>ISBN</td><td>Dewey</td><td>CoverImage</td><td>Description</td><td>TotalCopies</td><td>CopiesLoaned</td></tr>
-        {bookList.map((book)=>{
-          return (<tr>
-            <td>{book.id}</td>
+        <thead> <tr><td>Title</td><td>Author</td><td>Publisher</td><td>Subject</td>
+		    <td>ISBN</td><td>Dewey</td><td>CoverImage</td><td>Description</td><td>TotalCopies</td><td>CopiesLoaned</td></tr></thead>
+        {bookList.length > 0 ? bookList.map((book)=>{
+          return (<tr key={(book.id)}>
+       
+         
+           
             <td><a href={'/admin/book/'+book.id}>{book.title}</a></td>
             <td>{book.author}</td>
             <td>{book.publisher}</td>
@@ -46,13 +48,16 @@ function BookList() {
             <td>{book.totalCopies}</td>
             <td>{book.copiesLoaned}</td>
             <button onClick={()=>{EditBook(book.id)}}>Edit</button>
-            <button onClick={()=>{deleteBook(book.id)}}>Delete</button>
-          </tr>)
-        })}
-        </table>
-      </div>
-    
-    );
-  }
-  
+            <button onClick={()=>{deleteBook(book.id)}}>Delete</button></tr>
+            )
+          })
+          :
+          ""
+        }
+          
+          </table>
+        </div>
+      
+      );
+    }
   export default BookList;

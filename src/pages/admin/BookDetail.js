@@ -22,17 +22,17 @@ function BookDetail() {
       <div class="card">
         <div class="card-header"></div>
         <div class="card-body">
-        <p>Id: {book.Id}</p>
-        <p>Title: {book.Title}</p>
-        <p>Author: {book.Author}</p>
-        <p>Publisher: {book.Publisher}</p>
-        <p>Subject: {book.Subject}</p>
-        <p>ISBN: {book.ISBN}</p>
-        <p>Dewey: {book.Dewey}</p>
-        <p>CoverImage: {book.CoverImage}</p>
-        <p>Description: {book.Description}</p>
-        <p>TotalCopies: {book.TotalCopies}</p>
-        <p>CopiesLoaned: {book.CopiesLoaned}</p>
+        <p>Id: {book.id}</p>
+        <p>Title: {book.title}</p>
+        <p>Author: {book.author}</p>
+        <p>Publisher: {book.publisher}</p>
+        <p>Subject: {book.subject}</p>
+        <p>ISBN: {book.iSBN}</p>
+        <p>Dewey: {book.dewey}</p>
+        <p>CoverImage: {book.coverImage}</p>
+        <p>Description: {book.description}</p>
+        <p>TotalCopies: {book.totalCopies}</p>
+        <p>CopiesLoaned: {book.copiesLoaned}</p>
         </div>
       </div>
     </div>     );

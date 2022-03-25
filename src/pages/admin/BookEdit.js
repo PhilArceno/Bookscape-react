@@ -25,7 +25,7 @@ function BookEdit() {
     console.log(data);
     
     Axios.put("http://localhost:7098/api/Books",
-    {Id:data.Id, Title:data.Title,Author:data.Author,Publisher:data.Publisher,Subject:data.Subject,ISBN:data.ISBN, Dewey:data.Dewey,CoverImage:data.CoverImage, Description:data.Description,TotalCopies:data.TotalCopies,CopiesLoaned:data.CopiesLoaned})
+    {id:data.Id, title:data.Title,author:data.Author,publisher:data.Publisher,subject:data.Subject,iSBN:data.ISBN, dewey:data.Dewey,coverImage:data.CoverImage, description:data.Description,totalCopies:data.TotalCopies,copiesLoaned:data.CopiesLoaned})
       .then((response)=>{
         if(response.data==='success'){
           navigate("/admin/book/list");
@@ -63,116 +63,116 @@ function BookEdit() {
     <div className="container">
     {error?(<div className="alert alert-danger">{error}</div>):""}
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input name="Id" type="hidden" defaultValue={book.Id}/>
+      <input name="Id" type="hidden" defaultValue={book.id}/>
       <div className="form-group">
         <label>Title</label>
         <input
           name="Title"
           type="text"
-          defaultValue={book.Title}
+          defaultValue={book.title}
           {...register('Title')}
-          className={`form-control ${errors.Title ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.title ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Title?.message}</div>
+        <div className="invalid-feedback">{errors.title?.message}</div>
       </div>
       <div className="form-group">
         <label>Author</label>
         <input
           name="Author"
           type="text"
-          defaultValue={book.Author}
+          defaultValue={book.author}
           {...register('Author')}
-          className={`form-control ${errors.Author ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.author ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Author?.message}</div>
+        <div className="invalid-feedback">{errors.author?.message}</div>
       </div>
       <div className="form-group">
         <label>Publisher</label>
         <input
           name="Publisher"
           type="text"
-          defaultValue={book.Publisher}
+          defaultValue={book.publisher}
           {...register('Publisher')}
-          className={`form-control ${errors.Publisher ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.publisher ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Publisher?.message}</div>
+        <div className="invalid-feedback">{errors.publisher?.message}</div>
       </div>
       <div className="form-group">
         <label>Subject</label>
         <input
           name="Subject"
           type="text"
-          defaultValue={book.Subject}
+          defaultValue={book.subject}
           {...register('Subject')}
-          className={`form-control ${errors.Subject ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.subject ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Subject?.message}</div>
+        <div className="invalid-feedback">{errors.subject?.message}</div>
       </div>
       <div className="form-group">
         <label>ISBN</label>
         <input
           name="ISBN"
           type="text"
-          defaultValue={book.ISBN}
+          defaultValue={book.iSBN}
           {...register('ISBN')}
-          className={`form-control ${errors.ISBN ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.iSBN ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.ISBN?.message}</div>
+        <div className="invalid-feedback">{errors.iSBN?.message}</div>
       </div>
       <div className="form-group">
         <label>Dewey</label>
         <input
           name="Dewey"
           type="text"
-          defaultValue={book.Dewey}
+          defaultValue={book.dewey}
           {...register('Dewey')}
-          className={`form-control ${errors.Dewey ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.dewey ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Dewey?.message}</div>
+        <div className="invalid-feedback">{errors.dewey?.message}</div>
       </div>
       <div className="form-group">
         <label>CoverImage</label>
         <input
           name="CoverImage"
           type="text"
-          defaultValue={book.CoverImage}
+          defaultValue={book.coverImage}
           {...register('CoverImage')}
-          className={`form-control ${errors.CoverImage ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.coverImage ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.CoverImage?.message}</div>
+        <div className="invalid-feedback">{errors.coverImage?.message}</div>
       </div>
       <div className="form-group">
         <label>Description</label>
         <input
           name="Description"
           type="text"
-          defaultValue={book.Description}
+          defaultValue={book.description}
           {...register('Description')}
-          className={`form-control ${errors.Description ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.description ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Description?.message}</div>
+        <div className="invalid-feedback">{errors.description?.message}</div>
       </div>
       <div className="form-group">
         <label>TotalCopies</label>
         <input
           name="TotalCopies"
           type="text"
-          defaultValue={book.TotalCopies}
+          defaultValue={book.totalCopies}
           {...register('TotalCopies')}
-          className={`form-control ${errors.TotalCopies ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.totalCopies ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.TotalCopies?.message}</div>
+        <div className="invalid-feedback">{errors.totalCopies?.message}</div>
       </div>
       <div className="form-group">
         <label>CopiesLoaned</label>
         <input
           name="CopiesLoaned"
           type="text"
-          defaultValue={book.CopiesLoaned}
+          defaultValue={book.copiesLoaned}
           {...register('CopiesLoaned')}
-          className={`form-control ${errors.CopiesLoaned ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.copiesLoaned ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.CopiesLoaned?.message}</div>
+        <div className="invalid-feedback">{errors.copiesLoaned?.message}</div>
       </div>
       <div className="form-group">
         <button type="submit" className="btn btn-primary">
