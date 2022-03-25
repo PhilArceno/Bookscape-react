@@ -17,6 +17,7 @@ function UserList() {
     }) .then((response)=>{
       setUserList(response.data);
     });
+    
      },[]);
 
   const editUser = (id)=>{
