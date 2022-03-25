@@ -12,11 +12,12 @@ function UserList() {
     
     Axios.get("https://localhost:7098/api/Users",{
        headers: {
-        accessToken: localStorage.getItem('accessToken')
+       'Authentication': 'Bearer' + localStorage.getItem('accessToken')
     }
     }) .then((response)=>{
       setUserList(response.data);
     });
+    
      },[]);
 
   const editUser = (id)=>{
