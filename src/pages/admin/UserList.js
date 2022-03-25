@@ -11,9 +11,9 @@ function UserList() {
   useEffect(()=>{
     
     Axios.get("https://localhost:7098/api/Users",{
-       headers: {
-        accessToken: localStorage.getItem('accessToken')
-    }
+      headers : {
+        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+      }
     }) .then((response)=>{
       setUserList(response.data);
     });
@@ -30,17 +30,24 @@ function UserList() {
       <div>
          <a href="/admin/user/add">new user</a><br/>
          <table className="table table-borderless">
-        <tr><td>Id</td><td>UserName</td><td>Email</td><td>PhoneNumber</td></tr>
-        {userList.map((user)=>{
-          return (<tr>
-            <td>{user.Id}</td>
-            <td><a href={'/admin/user/'+user.Id}>{user.UserName}</a></td>
-            <td>{user.Email}</td>
-            <td>{user.PhoneNumber}</td>
-            <button onClick={()=>{editUser(user.Id)}}>Edit</button>
-            <button onClick={()=>{deleteUser(user.Id)}}>Delete</button>
+           <thead>
+        <tr><th>Id</th><th>UserName</th><th>Email</th><th>PhoneNumber</th></tr>
+           </thead>
+           <tbody>
+        {userList.length > 0 ? userList.map((user)=>{
+          return (<tr key={(user.id)}>
+            <td>{user.id}</td>
+            <td><a href={'/admin/user/'+user.id}>{user.userName}</a></td>
+            <td>{user.email}</td>
+            <td>{user.phoneNumber}</td>
+            <td><button onClick={()=>{editUser(user.id)}}>Edit</button></td>
+            <td><button onClick={()=>{deleteUser(user.id)}}>Delete</button></td>
           </tr>)
-        })}
+        })
+        :
+        ""
+      }
+        </tbody>
         </table>
       </div>
     
