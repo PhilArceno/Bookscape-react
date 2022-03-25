@@ -59,7 +59,7 @@ function UserAdd() {
         <div className="invalid-feedback">{errors.UserName?.message}</div>
       </div>
       <div className="form-group">
-        <label>body</label>
+        <label>Email</label>
         <input
           name="Email"
           type="text"

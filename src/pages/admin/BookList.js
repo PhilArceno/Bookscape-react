@@ -34,19 +34,19 @@ function BookList() {
 		    <td>ISBN</td><td>Dewey</td><td>CoverImage</td><td>Description</td><td>TotalCopies</td><td>CopiesLoaned</td></tr>
         {bookList.map((book)=>{
           return (<tr>
-            <td>{book.Id}</td>
-            <td><a href={'/admin/book/'+book.Id}>{book.Title}</a></td>
-            <td>{book.Author}</td>
-            <td>{book.Publisher}</td>
-            <td>{book.Subject}</td>
-            <td>{book.ISBN}</td>
-            <td>{book.Dewey}</td>
-            <td>{book.CoverImage}</td>
-            <td>{book.Description}</td>
-            <td>{book.TotalCopies}</td>
-            <td>{book.CopiesLoaned}</td>
-            <button onClick={()=>{EditBook(book.Id)}}>Edit</button>
-            <button onClick={()=>{deleteBook(book.Id)}}>Delete</button>
+            <td>{book.id}</td>
+            <td><a href={'/admin/book/'+book.id}>{book.title}</a></td>
+            <td>{book.author}</td>
+            <td>{book.publisher}</td>
+            <td>{book.subject}</td>
+            <td>{book.iSBN}</td>
+            <td>{book.dewey}</td>
+            <td>{book.coverImage}</td>
+            <td>{book.description}</td>
+            <td>{book.totalCopies}</td>
+            <td>{book.copiesLoaned}</td>
+            <button onClick={()=>{EditBook(book.id)}}>Edit</button>
+            <button onClick={()=>{deleteBook(book.id)}}>Delete</button>
           </tr>)
         })}
         </table>

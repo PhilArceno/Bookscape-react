@@ -9,7 +9,11 @@ function UserDetail() {
 
   useEffect(()=>{
     
-    Axios.get(`https://localhost:7098/api/Users/${id}`)
+    Axios.get(`https://localhost:7098/api/Users/${id}`,{
+      headers : {
+        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+      }
+    })
       .then((response)=>{
         setUser(response.data);
       });
@@ -22,10 +26,10 @@ function UserDetail() {
       <div class="card">
         <div class="card-header"></div>
         <div class="card-body">
-        <p>Id: {user.Id}</p>
-        <p>UserName: {user.UserName}</p>
-        <p>Email: {user.Email}</p>
-        <p>PhoneNumber: {user.PhoneNumber}</p>
+        <p>Id: {user.id}</p>
+        <p>UserName: {user.userName}</p>
+        <p>Email: {user.email}</p>
+        <p>PhoneNumber: {user.phoneNumber}</p>
         </div>
       </div>
     </div>      
