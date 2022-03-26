@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate,useParams,Link } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -178,6 +178,7 @@ function BookEdit() {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+        <Link to="/admin/book/list" className="btn btn-danger ml-2">Cancel</Link>
       </div>
     </form>
     </div>

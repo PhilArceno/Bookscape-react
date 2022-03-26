@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { useNavigate,useParams } from "react-router-dom";
 import Axios from 'axios';
+import { Box, Heading, Image } from '@chakra-ui/react';
 
 function BookDetail() {
 
@@ -29,7 +30,7 @@ function BookDetail() {
         <p>Subject: {book.subject}</p>
         <p>ISBN: {book.iSBN}</p>
         <p>Dewey: {book.dewey}</p>
-        <p>CoverImage: {book.coverImage}</p>
+        <p>CoverImage:  <Image src={book.coverImage} maxW="100"/></p>
         <p>Description: {book.description}</p>
         <p>TotalCopies: {book.totalCopies}</p>
         <p>CopiesLoaned: {book.copiesLoaned}</p>

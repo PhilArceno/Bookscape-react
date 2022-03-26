@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate,useParams,Link } from "react-router-dom";
 import Axios from 'axios';
+import { Box, Heading, Image } from '@chakra-ui/react';
 
 function BookList() {
 
@@ -28,25 +29,25 @@ function BookList() {
   return (
     
       <div className="container">
-        <a href="/admin/book/add">new Book</a><br/>
+        <a href="/admin/book/add">Add New Book</a><br/>
         <table className="table table-borderless">
-        <thead> <tr><td>Title</td><td>Author</td><td>Publisher</td><td>Subject</td>
-		    <td>ISBN</td><td>Dewey</td><td>CoverImage</td><td>Description</td><td>TotalCopies</td><td>CopiesLoaned</td></tr></thead>
+        <thead> 
+          <tr>
+          <td>Title</td>
+        <td>Author</td>
+        <td>Publisher</td>
+        <td>Subject</td>
+		    <td>CoverImage</td>
+        <td>Description</td>
+        </tr>
+        </thead>
         {bookList.length > 0 ? bookList.map((book)=>{
           return (<tr key={(book.id)}>
-       
-         
-           
             <td><a href={'/admin/book/'+book.id}>{book.title}</a></td>
             <td>{book.author}</td>
             <td>{book.publisher}</td>
             <td>{book.subject}</td>
-            <td>{book.iSBN}</td>
-            <td>{book.dewey}</td>
-            <td>{book.coverImage}</td>
-            <td>{book.description}</td>
-            <td>{book.totalCopies}</td>
-            <td>{book.copiesLoaned}</td>
+            <td><Image src={book.coverImage} maxW="20"/></td>
             <button onClick={()=>{EditBook(book.id)}}>Edit</button>
             <button onClick={()=>{deleteBook(book.id)}}>Delete</button></tr>
             )
