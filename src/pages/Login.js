@@ -25,7 +25,7 @@ const schema = yup
   })
   .required();
 
-export default function Login() {
+export default function Login({setIsLoggedIn}) {
   const navigate = useNavigate();
 
   const {
@@ -53,6 +53,7 @@ export default function Login() {
         let parsed = JSON.parse(text);
         console.log(parsed);
         localStorage.setItem("accessToken", parsed.token);
+        setIsLoggedIn(true);
         navigate('/');
       });
 
