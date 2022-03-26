@@ -1,9 +1,10 @@
 import React, { useState,useEffect } from 'react';
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate,useParams,Link } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Axios from 'axios';
+
 
 function UserEdit() {
   
@@ -14,19 +15,37 @@ function UserEdit() {
 
   useEffect(()=>{
     
-    Axios.get(`https://localhost:7098/api/Users/${id}`)
-      .then((response)=>{
+    Axios.get(`https://localhost:7098/api/Users/${id}`,{
+      headers : {
+        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+      }
+    })
+    .then((response)=>{
         setUser(response.data);
       });
-     
-      setUser(user);
     },[]);
 
+    const setUserName = data => {
+      setUser({UserName:data});
+    }
+    const setEmail = data => {
+      setUser({Email:data});
+    }
+    const setPhoneNumber = data => {
+      setUser({PhoneNumber:data});
+    }
   const onSubmit = data => {
     console.log(data);
     
-    Axios.put("http://localhost:7098/api/user",
-    {id:data.Id, userName:data.UserName,email:data.Email,phoneNumber:data.PhoneNumber})
+    Axios.put(`http://localhost:7098/api/user/${id}`,
+    {Id:data.id, 
+      UserName:data.userName,
+      Email:data.email,
+      PhoneNumber:data.phoneNumber},{
+        headers : {
+          'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+        }
+      })
       .then((response)=>{
         console.log(response);
         if(response.data==='success'){
@@ -40,12 +59,9 @@ function UserEdit() {
       navigate("/admin/user/list");
 
   };
-
-
   const validationSchema = Yup.object().shape({
     UserName: Yup.string()
     .required('UserName is required')
-
   });
 
   const {
@@ -55,14 +71,12 @@ function UserEdit() {
   } = useForm({
     resolver: yupResolver(validationSchema)
   });
-
-
   return (
     <div className="container">
     {error?(<div className="alert alert-danger">{error}</div>):""}
     <form onSubmit={handleSubmit(onSubmit)}>
       <input name="Id" type="hidden" value={user.id}/>
-      <div className="form-group">
+      <div className="form-group" onChange={ (event) => setUserName(event.target.value) } >
         <label>UserName</label>
         <input
           name="UserName"
@@ -73,7 +87,7 @@ function UserEdit() {
         />
         <div className="invalid-feedback">{errors.userName?.message}</div>
       </div>
-      <div className="form-group">
+      <div className="form-group" onChange={ (event) => setEmail(event.target.value) } >
         <label>Email</label>
         <input
           name="Email"
@@ -84,7 +98,7 @@ function UserEdit() {
         />
         <div className="invalid-feedback">{errors.email?.message}</div>
       </div> 
-      <div className="form-group">
+      <div className="form-group"onChange={ (event) => setPhoneNumber(event.target.value) } >
         <label>PhoneNumber</label>
         <input
           name="PhoneNumber"
@@ -99,6 +113,7 @@ function UserEdit() {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+        <Link to="/admin/user/list" className="btn btn-danger ml-2">Cancel</Link>
       </div>
     </form>
     </div>

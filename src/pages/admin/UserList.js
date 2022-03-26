@@ -29,7 +29,7 @@ function UserList() {
 
   return (
       <div>
-         <a href="/admin/user/add">new user</a><br/>
+         <a href="/admin/user/add">Add New User</a><br/>
          <table className="table table-borderless">
            <thead>
         <tr><th>UserName</th><th>Email</th><th>PhoneNumber</th></tr>

@@ -43,7 +43,7 @@ function App() {
           <Route path="/books" exact element={<Pages.Books />} />
           <Route path="/google-books-search" exact element={<Pages.GoogleBooksSearch />} />
           <Route path="/google-books/:id" exact element={<LibrarianPages.GoogleBooksDetails/>} />
-          {role == "admin" ? (
+          {role == "" ? (
             <>
           <Route exact path='/admin/user/list' element={<AdminPages.UserList/>}/>
           <Route exact path="/admin/user/:id" element={<AdminPages.UserDetail/>}/>
