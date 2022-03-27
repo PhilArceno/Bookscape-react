@@ -26,7 +26,7 @@ function App() {
         let parsed = JSON.parse(text);
         if (parsed.success) {
           setIsLoggedIn(true);
-          setRole(parsed.role);
+          setRole(parsed.data);
         }
       })
   }
