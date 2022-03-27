@@ -1,10 +1,10 @@
 import React, { useState,useEffect } from 'react';
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate,useParams,Link} from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Axios from 'axios';
-
+import { config } from '../../helpers/constants';
 function BookAdd() {
 
   const [error, setError] = useState('');
@@ -12,25 +12,40 @@ function BookAdd() {
   
   const onSubmit = data => {
     
-    Axios.post("https://localhost:7098/api/Books",
-    {title:data.Title,author:data.Author,publisher:data.Publisher,subject:data.Subject,iSBN:data.ISBN, Dewey:data.Dewey,coverImage:data.CoverImage, description:data.Description,totalCopies:data.TotalCopies,copiesLoaned:data.CopiesLoaned})
-      .then((response)=>{
-        if(response.data==='success'){
-          navigate("/admin/book/list");
-        }else{
-          setError(response.data.sqlMessage);
+    Axios.post(config.url.API_URL+"api/Books",
+    {Title:data.Title,
+      Author:data.Author,
+      Publisher:data.Publisher,
+      Subject:data.Subject,
+      ISBN:data.ISBN,
+       Dewey:data.Dewey,
+       CoverImage:data.CoverImage, 
+       Description:data.Description,
+       TotalCopies:data.TotalCopies,
+       CopiesLoaned:data.copiesLoaned
+      },
+       {
+        headers : {
+          'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
         }
+       })
+      .then((response)=>{
+        navigate("/admin/book/list");
       }).catch((error)=>{
-        setError('System Error');
+        setError('error.message');
       });
-     
-      navigate("/admin/book/list");
   };
  
 
   const validationSchema = Yup.object().shape({
     Title: Yup.string()
-      .required('Title is required')
+      .required('Title is required'),
+      Title: Yup.string()
+      .required('Author is required'),
+      Title: Yup.string()
+      .required('Publisheris required'),
+      Title: Yup.string()
+      .required('ISBN is required'),
   });
 
 
@@ -45,6 +60,10 @@ function BookAdd() {
   return (
     <div className="container">
     {error?(<div className="alert alert-danger">{error}</div>):""}
+    <div className ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card"><br/>
+        <h3 className = "text-center"> Create New Book </h3>
+				<div className = "card-body"></div>
+
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
         <label>Title</label>
@@ -52,9 +71,9 @@ function BookAdd() {
           name="Title"
           type="text"
           {...register('Title')}
-          className={`form-control ${errors.title ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.Title ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.title?.message}</div>
+        <div className="invalid-feedback">{errors.Title?.message}</div>
       </div>
       <div className="form-group">
         <label>Author</label>
@@ -62,9 +81,9 @@ function BookAdd() {
           name="Author"
           type="text"
           {...register('Author')}
-          className={`form-control ${errors.author ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.Author ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.author?.message}</div>
+        <div className="invalid-feedback">{errors.Author?.message}</div>
       </div>
       <div className="form-group">
         <label>Publisher</label>
@@ -72,9 +91,9 @@ function BookAdd() {
           name="Publisher"
           type="text"
           {...register('Publisher')}
-          className={`form-control ${errors.publisher ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.Publisher ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.publisher?.message}</div>
+        <div className="invalid-feedback">{errors.Publisher?.message}</div>
       </div>
       <div className="form-group">
         <label>Subject</label>
@@ -82,9 +101,9 @@ function BookAdd() {
           name="Subject"
           type="text"
           {...register('Subject')}
-          className={`form-control ${errors.subject ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.Subject ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.subject?.message}</div>
+        <div className="invalid-feedback">{errors.Subject?.message}</div>
       </div>
       <div className="form-group">
         <label>ISBN</label>
@@ -92,9 +111,9 @@ function BookAdd() {
           name="ISBN"
           type="text"
           {...register('ISBN')}
-          className={`form-control ${errors.iSBN ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.ISBN ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.iSBN?.message}</div>
+        <div className="invalid-feedback">{errors.ISBN?.message}</div>
       </div>
       <div className="form-group">
         <label>Dewey</label>
@@ -102,9 +121,9 @@ function BookAdd() {
           name="Dewey"
           type="text"
           {...register('Dewey')}
-          className={`form-control ${errors.dewey ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.Dewey ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.dewey?.message}</div>
+        <div className="invalid-feedback">{errors.Dewey?.message}</div>
       </div>
       <div className="form-group">
         <label>CoverImage</label>
@@ -112,9 +131,9 @@ function BookAdd() {
           name="CoverImage"
           type="text"
           {...register('CoverImage')}
-          className={`form-control ${errors.coverImage ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.CoverImage ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.coverImage?.message}</div>
+        <div className="invalid-feedback">{errors.CoverImage?.message}</div>
       </div>
       <div className="form-group">
         <label>Description</label>
@@ -122,9 +141,9 @@ function BookAdd() {
           name="Description"
           type="text"
           {...register('Description')}
-          className={`form-control ${errors.description ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.Description ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.description?.message}</div>
+        <div className="invalid-feedback">{errors.Description?.message}</div>
       </div>
       <div className="form-group">
         <label>TotalCopies</label>
@@ -132,9 +151,9 @@ function BookAdd() {
           name="TotalCopies"
           type="text"
           {...register('TotalCopies')}
-          className={`form-control ${errors.totalCopies ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.TotalCopies ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.totalCopies?.message}</div>
+        <div className="invalid-feedback">{errors.TotalCopies?.message}</div>
       </div>
       <div className="form-group">
         <label>CopiesLoaned</label>
@@ -142,27 +161,20 @@ function BookAdd() {
           name="CopiesLoaned"
           type="text"
           {...register('CopiesLoaned')}
-          className={`form-control ${errors.copiesLoaned ? 'is-invalid' : ''}`}
+          className={`form-control ${errors.CopiesLoaned ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.copiesLoaned?.message}</div>
+        <div className="invalid-feedback">{errors.CopiesLoaned?.message}</div>
       </div>
-      <div className="form-group">
-        <label>Title</label>
-        <input
-          name="Title"
-          type="text"
-          {...register('title')}
-          className={`form-control ${errors.title ? 'is-invalid' : ''}`}
-        />
-        <div className="invalid-feedback">{errors.title?.message}</div>
-      </div>
-      <div className="form-group">
-        <button type="submit" className="btn btn-primary">
+     
+        
+      <div className="form-group"><br/>
+        <button type="submit" className="btn btn-primary m-2">
           Submit
         </button>
-      </div>
+        <Link to="/admin/book/list" className="btn btn-danger ml-2">Cancel</Link>
+      </div><br/>
     </form>
-    </div>
+    </div></div>
     );
   }
   

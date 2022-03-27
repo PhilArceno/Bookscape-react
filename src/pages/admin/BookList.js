@@ -1,18 +1,28 @@
 import React, { useState,useEffect } from 'react';
 import { useNavigate,useParams } from "react-router-dom";
 import Axios from 'axios';
+import { Box, Heading, Image } from '@chakra-ui/react';
+import { config } from '../../helpers/constants';
+
+
 
 function BookList() {
-
+  let { id } = useParams();
   const [error, setError] = useState('');
   const [bookList,setBookList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(()=>{
     
-    Axios.get("https://localhost:7098/api/Books")
+    Axios.get("https://localhost:7098/api/Books",{
+      headers : {
+        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+      }
+    })
     .then((response)=>{
       setBookList(response.data);
+    }).catch((error)=>{
+      setError(error.message);
     });
      },[bookList]);
 
@@ -22,33 +32,50 @@ function BookList() {
     };
 
   const deleteBook = (id)=>{
-    console.log('delete book id:'+id);
-  };
+    Axios.delete(config.url.API_URL+`/api/Books/${id}`, {
+      headers : {
+        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+      }
+  }).then((response) => {
+          navigate('/admin/book/list');
+    }).catch((error)=>{
+      setError(error.message);
+    });
+  }
 
   return (
     
       <div className="container">
-        <a href="/admin/book/add">new Book</a><br/>
-        <table className="table table-borderless">
-        <thead> <tr><td>Title</td><td>Author</td><td>Publisher</td><td>Subject</td>
-		    <td>ISBN</td><td>Dewey</td><td>CoverImage</td><td>Description</td><td>TotalCopies</td><td>CopiesLoaned</td></tr></thead>
+         {error?(<div className="alert alert-danger">{error}</div>):""}
+		<br/>
+         <div class = "row">
+			<div class = "col-lg-3">
+        <a class = "btn btn-primary btn-sm mb-3" href="/admin/book/add">Add New Book</a><br/></div></div>
+        <table class = "table table-striped table-bordered">
+        <thead class = "table-dark"> 
+          <tr>
+            <td>Title</td>
+            <td>Author</td>
+            <td>Publisher</td>
+            <td>Subject</td>
+		        <td>CoverImage</td>
+            <td>Update<br/>Delete</td>
+          
+            </tr></thead>
         {bookList.length > 0 ? bookList.map((book)=>{
-          return (<tr key={(book.id)}>
-       
-         
-           
+          return (
+          <tr key={(book.id)}>
             <td><a href={'/admin/book/'+book.id}>{book.title}</a></td>
             <td>{book.author}</td>
             <td>{book.publisher}</td>
             <td>{book.subject}</td>
-            <td>{book.iSBN}</td>
-            <td>{book.dewey}</td>
-            <td>{book.coverImage}</td>
-            <td>{book.description}</td>
-            <td>{book.totalCopies}</td>
-            <td>{book.copiesLoaned}</td>
-            <button onClick={()=>{EditBook(book.id)}}>Edit</button>
-            <button onClick={()=>{deleteBook(book.id)}}>Delete</button></tr>
+           
+          
+            <td><Image src={book.coverImage} maxW="20"/></td>
+            
+            
+            <button  class = "btn btn-primary m-2" onClick={()=>{EditBook(book.id)}}>Update</button>
+            <button class = "btn btn-danger m-2 "  onClick={()=>{deleteBook(book.id)}}>Delete</button></tr>
             )
           })
           :
@@ -56,6 +83,7 @@ function BookList() {
         }
           
           </table>
+         
         </div>
       
       );

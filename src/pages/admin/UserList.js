@@ -1,38 +1,66 @@
 import React, { useState,useEffect } from 'react';
 import { useNavigate,useParams } from "react-router-dom";
 import Axios from 'axios';
+import { config } from '../../helpers/constants';
 
 function UserList() {
-
+  let { id } = useParams();
   const [error, setError] = useState('');
   const [userList,setUserList] = useState([]);
   const navigate = useNavigate();
   
   useEffect(()=>{
     
-    Axios.get("https://localhost:7098/api/Users",{
+    Axios.get(config.url.API_URL+"/api/Users",{
       headers : {
         'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
       }
     }) .then((response)=>{
       setUserList(response.data);
+    }).catch((error)=>{
+      setError(error.message);
     });
     
-     },[]);
+     },[userList]);
 
   const editUser = (id)=>{
       navigate("/admin/user/edit/"+id);
     };
-
+   
   const deleteUser = (id)=>{
-  };
+   
+    Axios.delete(config.url.API_URL+`/api/Users/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+      }
+  }).then((response) => {
+          navigate('/admin/user/list');
+    }).catch((error)=>{
+      setError(error.message);
+    });
+  
+  
+  }
+    
+    
 
   return (
-      <div>
-         <a href="/admin/user/add">new user</a><br/>
-         <table className="table table-borderless">
-           <thead>
-        <tr><th>UserName</th><th>Email</th><th>PhoneNumber</th></tr>
+    <div class ="container">
+       {error?(<div className="alert alert-danger">{error}</div>):""}
+		<br/>
+        
+         <div class = "row">
+			<div class = "col-lg-3">
+         <a class = "btn btn-primary btn-sm mb-3" href="/admin/user/add">Add New user</a><br/></div>
+		</div>
+         <table class = "table table-striped table-bordered">
+           <thead class = "table-dark">
+        <tr><th>UserName</th>
+        <th>Email</th>
+        <th>PhoneNumber</th>
+        <th>Update</th>
+        <th>Delete</th>
+        </tr>
            </thead>
            <tbody>
         {userList.length > 0 ? userList.map((user)=>{
@@ -41,8 +69,9 @@ function UserList() {
             <td><a href={'/admin/user/'+user.id}>{user.userName}</a></td>
             <td>{user.email}</td>
             <td>{user.phoneNumber}</td>
-            <td><button onClick={()=>{editUser(user.id)}}>Edit</button></td>
-            <td><button onClick={()=>{deleteUser(user.id)}}>Delete</button></td>
+            <td><button class = "btn btn-primary" onClick={()=>{editUser(user.id)}}>Update</button></td>
+            <td><button  class = "btn btn-danger" onClick={()=>{deleteUser(user.id)}}>Delete</button></td>
+            
           </tr>)
         })
         :

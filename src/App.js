@@ -5,7 +5,8 @@ import { Footer, Navbar } from './components';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import * as LibrarianPages from './pages/librarian';
 import * as AdminPages from './pages/admin';
-
+import * as Loans from './pages/loans';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -43,8 +44,10 @@ function App() {
           <Route path="/books" exact element={<Pages.Books />} />
           <Route path="/google-books-search" exact element={<Pages.GoogleBooksSearch />} />
           <Route path="/google-books/:id" exact element={<LibrarianPages.GoogleBooksDetails/>} />
-          {role == "admin" ? (
+          <Route /*Testing route*/ path="/loans/list" exact element={<Loans.LoanList/>}/>
+          {role == "" ? (
             <>
+            <Route exact path='/admin/dashboard' element ={<AdminDashboard/>}/>
           <Route exact path='/admin/user/list' element={<AdminPages.UserList/>}/>
           <Route exact path="/admin/user/:id" element={<AdminPages.UserDetail/>}/>
           <Route exact path="/admin/user/add" element={<AdminPages.UserAdd/>}/>
