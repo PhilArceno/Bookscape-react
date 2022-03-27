@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Axios from 'axios';
+import { config } from '../../helpers/constants';
+
 
 function BookEdit() {
 
@@ -14,37 +16,78 @@ function BookEdit() {
   
   useEffect(()=>{
     
-    Axios.get(`https://localhost:7098/api/Books/${id}`)
+    Axios.get(config.url.API_URL+`/api/Books/${id}`,{
+      headers : {
+        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+      }
+
+    })
       .then((response)=>{
+        console.log(response.data);
         setBook(response.data);
       });
-      setBook(book);
+      
      },[]);
+
+     const setTitle = data => {
+      setBook({Title:data});
+    }
+    const setAuthor = data => {
+      setBook({Author:data});
+    }
+    const setPublisher = data => {
+      setBook({Publisher:data});
+    }
+    const setSubject = data => {
+      setBook({Subject:data});
+    }
+    const setIJSBNr = data => {
+      setBook({IJSBN:data});
+    }
+    const setDewey = data => {
+      setBook({Dewey:data});
+    }
+    const setCoverImage = data => {
+      setBook({CoverImageer:data});
+    }
+    const setDescriptiont = data => {
+      setBook({Descriptiont:data});
+    }
+    const setTotalCopies = data => {
+      setBook({TotalCopies:data});
+    }
+    const setCopiesLoaned = data => {
+      setBook({CopiesLoaned:data});
+    }
+
 
   const onSubmit = data => {
     console.log(data);
-    
-    Axios.put("http://localhost:7098/api/Books",
-    {id:data.Id, title:data.Title,author:data.Author,publisher:data.Publisher,subject:data.Subject,iSBN:data.ISBN, dewey:data.Dewey,coverImage:data.CoverImage, description:data.Description,totalCopies:data.TotalCopies,copiesLoaned:data.CopiesLoaned})
+    var body ={
+      Title:data.Title,
+      Author:data.Author,
+      Publisher:data.Publisher,
+      Subject:data.Subject,
+      IJSBN:data.ISBN,
+       Dewey:data.Dewey,
+       CoverImage:data.CoverImage,
+        Description:data.Description,
+        TotalCopies:data.TotalCopies,
+        CopiesLoaned:data.CopiesLoaned
+    }
+    Axios.put(config.url.API_URL+`api/Books/${id}`,
+   body, {
+    headers : {
+      'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+    }
+   })
       .then((response)=>{
-        if(response.data==='success'){
-          navigate("/admin/book/list");
-        }else{
-          setError(response.data.sqlMessage);
-        }
-      }).catch((error)=>{
-        setError('System Error');
+        navigate("/admin/book/list");
+        }).catch((error)=>{
+        setError('error.message');
       });
-      
-      navigate("/admin/book/list");
   };
   
-  const handleChange = e => {
-    setBook({
-      [e.target.name]: e.target.value
-    });
-  };
-
   const validationSchema = Yup.object().shape({
     Title: Yup.string()
       .required('Title is required')
@@ -62,126 +105,131 @@ function BookEdit() {
   return (
     <div className="container">
     {error?(<div className="alert alert-danger">{error}</div>):""}
+    <div className="row">
+        <div className="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+          <br/>  <h4 className="text-center"> Update Book </h4>
+            <div className="card-body">
+
     <form onSubmit={handleSubmit(onSubmit)}>
       <input name="Id" type="hidden" defaultValue={book.id}/>
-      <div className="form-group">
-        <label>Title</label>
+      <div className="form-group" onChange={ (event) => setTitle(event.target.value) } >
+        <label className="control-label m-1">Title</label>
         <input
           name="Title"
           type="text"
-          defaultValue={book.title}
+         value={book.title}
           {...register('Title')}
-          className={`form-control ${errors.title ? 'is-invalid' : ''}`}
+          className={`form-control m-2 ${errors.Title ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.title?.message}</div>
+        <div className="invalid-feedback">{errors.Title?.message}</div>
       </div>
-      <div className="form-group">
-        <label>Author</label>
+      <div className="form-group" onChange={ (event) => setAuthor(event.target.value) } >
+        <label className="control-label m-1">Author</label>
         <input
           name="Author"
           type="text"
-          defaultValue={book.author}
+          value={book.author}
           {...register('Author')}
-          className={`form-control ${errors.author ? 'is-invalid' : ''}`}
+          className={`form-control m-2 ${errors.Author ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.author?.message}</div>
+        <div className="invalid-feedback">{errors.Author?.message}</div>
       </div>
-      <div className="form-group">
-        <label>Publisher</label>
+      <div className="form-group" onChange={ (event) => setPublisher(event.target.value) } >
+        <label className="control-label m-1">Publisher</label>
         <input
           name="Publisher"
           type="text"
-          defaultValue={book.publisher}
+          value={book.publisher}
           {...register('Publisher')}
-          className={`form-control ${errors.publisher ? 'is-invalid' : ''}`}
+          className={`form-control m-2 ${errors.Publisher ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.publisher?.message}</div>
+        <div className="invalid-feedback">{errors.Publisher?.message}</div>
       </div>
-      <div className="form-group">
-        <label>Subject</label>
+      <div className="form-group"onChange={ (event) => setSubject(event.target.value) } >
+        <label className="control-label m-1">Subject</label>
         <input
           name="Subject"
           type="text"
-          defaultValue={book.subject}
+          value={book.subject}
           {...register('Subject')}
-          className={`form-control ${errors.subject ? 'is-invalid' : ''}`}
+          className={`form-control m-2 ${errors.Subject ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.subject?.message}</div>
+        <div className="invalid-feedback">{errors.Subject?.message}</div>
       </div>
-      <div className="form-group">
-        <label>ISBN</label>
+      <div className="form-group"onChange={ (event) => setIJSBNr(event.target.value) } >
+        <label className="control-label m-1">ISBN</label>
         <input
           name="ISBN"
           type="text"
-          defaultValue={book.iSBN}
+         value={book.iSBN}
           {...register('ISBN')}
-          className={`form-control ${errors.iSBN ? 'is-invalid' : ''}`}
+          className={`form-control m-2 ${errors.ISBN ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.iSBN?.message}</div>
+        <div className="invalid-feedback">{errors.ISBN?.message}</div>
       </div>
-      <div className="form-group">
-        <label>Dewey</label>
+      <div className="form-group" onChange={ (event) => setDewey(event.target.value) }>
+        <label className="control-label m-1">Dewey</label>
         <input
           name="Dewey"
           type="text"
-          defaultValue={book.dewey}
+          value={book.dewey}
           {...register('Dewey')}
-          className={`form-control ${errors.dewey ? 'is-invalid' : ''}`}
+          className={`form-control m-2 ${errors.Dewey ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.dewey?.message}</div>
+        <div className="invalid-feedback">{errors.Dewey?.message}</div>
       </div>
-      <div className="form-group">
-        <label>CoverImage</label>
+      <div className="form-group" onChange={ (event) => setCoverImage(event.target.value) } >
+        <label className="control-label m-1" >CoverImage</label>
         <input
           name="CoverImage"
           type="text"
-          defaultValue={book.coverImage}
+          value={book.coverImage}
           {...register('CoverImage')}
-          className={`form-control ${errors.coverImage ? 'is-invalid' : ''}`}
+          className={`form-control m-2 ${errors.CoverImage ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.coverImage?.message}</div>
+        <div className="invalid-feedback">{errors.CoverImage?.message}</div>
       </div>
-      <div className="form-group">
-        <label>Description</label>
+      <div className="form-group" onChange={ (event) => setDescriptiont(event.target.value) }>
+        <label className="control-label m-1">Description</label>
         <input
           name="Description"
           type="text"
-          defaultValue={book.description}
+          value={book.description}
           {...register('Description')}
-          className={`form-control ${errors.description ? 'is-invalid' : ''}`}
+          className={`form-control m-2 ${errors.Description ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.description?.message}</div>
+        <div className="invalid-feedback">{errors.Description?.message}</div>
       </div>
-      <div className="form-group">
-        <label>TotalCopies</label>
+      <div className="form-group" onChange={ (event) => setTotalCopies(event.target.value) }>
+        <label className="control-label m-1" >TotalCopies</label>
         <input
           name="TotalCopies"
           type="text"
-          defaultValue={book.totalCopies}
+          value={book.totalCopies}
           {...register('TotalCopies')}
-          className={`form-control ${errors.totalCopies ? 'is-invalid' : ''}`}
+          className={`form-control m-2 ${errors.TotalCopies ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.totalCopies?.message}</div>
+        <div className="invalid-feedback">{errors.TotalCopies?.message}</div>
       </div>
-      <div className="form-group">
-        <label>CopiesLoaned</label>
+      <div className="form-group"onChange={ (event) => setCopiesLoaned(event.target.value) }>
+        <label className="control-label m-1">CopiesLoaned</label>
         <input
           name="CopiesLoaned"
           type="text"
-          defaultValue={book.copiesLoaned}
+          value={book.copiesLoaned}
           {...register('CopiesLoaned')}
-          className={`form-control ${errors.copiesLoaned ? 'is-invalid' : ''}`}
+          className={`form-control m-2 ${errors.CopiesLoaned ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.copiesLoaned?.message}</div>
+        <div className="invalid-feedback">{errors.CopiesLoaned?.message}</div>
       </div>
-      <div className="form-group">
-        <button type="submit" className="btn btn-primary">
+      <div className="form-group" >
+        <button type="submit" className="btn btn-primary m-2">
           Submit
         </button>
         <Link to="/admin/book/list" className="btn btn-danger ml-2">Cancel</Link>
       </div>
     </form>
-    </div>
+    </div></div></div></div>
     );
   }
   
