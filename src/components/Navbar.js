@@ -140,8 +140,8 @@ export default function Navbar({ userStatus }) {
                   />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Link 1</MenuItem>
-                  <MenuItem>Link 2</MenuItem>
+                  <MenuItem>Profile</MenuItem>
+                  <MenuItem> <a href="/admin/dashboard">Admin</a><br/></MenuItem>
                   <MenuDivider />
                   <MenuItem fontSize={'sm'} fontWeight={400} onClick={logout}>
                       Logout
