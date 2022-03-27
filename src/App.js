@@ -14,6 +14,9 @@ function App() {
 
   useEffect(() => {
     checkLoggedIn();
+    return () => {
+      checkLoggedIn();
+    }
   }, [])
   
   const checkLoggedIn = () => {
@@ -25,6 +28,7 @@ function App() {
     }).then((response) => response.text())
       .then((text) => {
         let parsed = JSON.parse(text);
+        console.log(parsed);
         if (parsed.success) {
           setIsLoggedIn(true);
           setRole(parsed.data);
@@ -45,7 +49,7 @@ function App() {
           <Route path="/google-books-search" exact element={<Pages.GoogleBooksSearch />} />
           <Route path="/google-books/:id" exact element={<LibrarianPages.GoogleBooksDetails/>} />
           <Route /*Testing route*/ path="/loans/list" exact element={<Loans.LoanList/>}/>
-          {role == "" ? (
+          {role == "admin" ? (
             <>
             <Route exact path='/admin/dashboard' element ={<AdminDashboard/>}/>
           <Route exact path='/admin/user/list' element={<AdminPages.UserList/>}/>
