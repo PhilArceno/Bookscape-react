@@ -22,17 +22,10 @@ function UserDetail() {
      },[]);
   
   return (
-    <div className="container">
       <div className="card">
         <div className="card-header"></div>
         <div className="card-body">
         <p>Id: {user.id}</p>
-        <p>UserName: {user.userName}</p>
-        <p>Email: {user.email}</p>
-        <p>PhoneNumber: {user.phoneNumber}</p>
-        </div>
-      </div>
-    </div>      
     );
   }
   

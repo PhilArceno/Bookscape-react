@@ -103,7 +103,7 @@ function BookEdit() {
   });
 
   return (
-    <div className="container">
+    <div className="container m-2">
     {error?(<div className="alert alert-danger">{error}</div>):""}
     <div className="row">
         <div className="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">

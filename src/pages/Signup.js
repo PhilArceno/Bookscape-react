@@ -114,10 +114,10 @@ export default function Signup() {
         >
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={4}>
-              <FormControl id="username" isRequired>
+              <FormControl data-testid="username" id="username" isRequired>
                 <FormLabel>Username</FormLabel>
                 <Text color="red">{errors.username?.message}</Text>
-                <Input
+                <Input data-testid="usernameInput"
                   placeholder="Ex. JohnDoe12"
                   type="text"
                   {...register('username')}
@@ -186,7 +186,7 @@ export default function Signup() {
                 </InputGroup>
               </FormControl>
               <Stack spacing={10} pt={2}>
-                <Button
+                <Button data-testid="signUp"
                   ref={submitBtn}
                   isDisabled={formSuccess}
                   type="submit"

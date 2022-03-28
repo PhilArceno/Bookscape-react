@@ -14,7 +14,7 @@ function BookList() {
 
   useEffect(()=>{
     
-    Axios.get("https://localhost:7098/api/Books",{
+    Axios.get(config.url.API_URL+"/api/Books",{
       headers : {
         'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
       }
@@ -75,7 +75,8 @@ function BookList() {
             
             
             <button  class = "btn btn-primary m-2" onClick={()=>{EditBook(book.id)}}>Update</button>
-            <button class = "btn btn-danger m-2 "  onClick={()=>{deleteBook(book.id)}}>Delete</button></tr>
+            <button class = "btn btn-danger m-2 "  onClick={()=>{deleteBook(book.id)}}>Delete</button>
+            </tr>
             )
           })
           :

@@ -82,7 +82,7 @@ export default function Login({setIsLoggedIn}) {
               <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
                 <Text color="red">{errors.email?.message}</Text>
-                <Input
+                <Input data-testid="email"
                   placeholder="Ex. JohnDoe@email.com"
                   type="email"
                   {...register('email')}
@@ -106,7 +106,7 @@ export default function Login({setIsLoggedIn}) {
                   <Checkbox>Remember me</Checkbox>
                   <Link color={'blue.400'}>Forgot password?</Link>
                 </Stack>
-                <Button
+                <Button data-testid="login"
                   type="submit"
                   bg={'blue.400'}
                   color={'white'}
