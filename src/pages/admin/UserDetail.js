@@ -22,7 +22,7 @@ function UserDetail() {
      },[]);
   
   return (
-    <div className="container">
+    <div className="container m-2">
       <div class="card">
         <div class="card-header"></div>
         <div class="card-body">

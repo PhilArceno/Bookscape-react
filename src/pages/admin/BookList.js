@@ -75,7 +75,8 @@ function BookList() {
             
             
             <button  class = "btn btn-primary m-2" onClick={()=>{EditBook(book.id)}}>Update</button>
-            <button class = "btn btn-danger m-2 "  onClick={()=>{deleteBook(book.id)}}>Delete</button></tr>
+            <button class = "btn btn-danger m-2 "  onClick={()=>{deleteBook(book.id)}}>Delete</button>
+            </tr>
             )
           })
           :

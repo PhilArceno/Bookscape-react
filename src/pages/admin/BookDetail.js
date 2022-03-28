@@ -16,8 +16,8 @@ function BookDetail() {
       setBook(book);
      },[]);
   return (
-    <div className="container">
-      <div class="card">
+    <div className="container ">
+      <div class="card m-2">
         <div class="card-header"></div>
         <div class="card-body">
         <p>Id: {book.id}</p>
