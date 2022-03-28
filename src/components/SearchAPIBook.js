@@ -48,13 +48,13 @@ const SearchAPIBook = ({ searchText }) => {
       </FormControl>
       <Box
         id="popup1"
-        class={showValidTextModal ? 'overlay modal-active' : 'overlay'}
+        className={showValidTextModal ? 'overlay modal-active' : 'overlay'}
       >
-        <Box class="popup">
-          <Box class="close" onClick={() => setShowValidTextModal(false)}>
+        <Box className="popup">
+          <Box className="close" onClick={() => setShowValidTextModal(false)}>
             &times;
           </Box>
-          <Heading class="content">Please Enter the valid text</Heading>
+          <Heading className="content">Please Enter the valid text</Heading>
         </Box>
       </Box>
     </Box>

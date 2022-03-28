@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate,useParams, Link } from "react-router-dom";
 import Axios from 'axios';
 import { Box, Heading, Image } from '@chakra-ui/react';
 import { config } from '../../helpers/constants';
@@ -50,7 +50,7 @@ function BookList() {
 		<br/>
          <div class = "row">
 			<div class = "col-lg-3">
-        <a class = "btn btn-primary btn-sm mb-3" href="/admin/book/add">Add New Book</a><br/></div></div>
+        <Link class = "btn btn-primary btn-sm mb-3" to="/admin/book/add">Add New Book</Link><br/></div></div>
         <table class = "table table-striped table-bordered">
         <thead class = "table-dark"> 
           <tr>
@@ -65,7 +65,7 @@ function BookList() {
         {bookList.length > 0 ? bookList.map((book)=>{
           return (
           <tr key={(book.id)}>
-            <td><a href={'/admin/book/'+book.id}>{book.title}</a></td>
+            <td><Link to={'/admin/book/'+ book.id}>{book.title}</Link></td>
             <td>{book.author}</td>
             <td>{book.publisher}</td>
             <td>{book.subject}</td>

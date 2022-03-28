@@ -18,9 +18,8 @@ import {
 import { Link as ReactRouterLink, useNavigate } from 'react-router-dom';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { useState, useEffect } from 'react';
 
-//list of links will be implemented using a function
-const Links = ['Home', 'Books', 'Google Books Search'];
 
 const NavLink = ({ children }) => (
   <Link
@@ -39,7 +38,9 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
-export default function Navbar({ userStatus }) {
+export default function Navbar({ userStatus, role }) {
+  //list of links will be implemented using a function
+  const [Links, setLinks] = useState(['Home', 'Books'])
   const { isLoggedIn, setIsLoggedIn } = userStatus;
   //State used for hamburger icon (In mobile)
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -49,6 +50,20 @@ export default function Navbar({ userStatus }) {
     setIsLoggedIn(false);
     navigate('/');
   };
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      setLinks(["Home", "Books"])
+    }
+    else if ((role === "admin" || role === "librarian") && !Links.find(l => l === "Google Books Search")) {
+        setLinks([...Links, "Google Books Search"])
+    }
+  }, [isLoggedIn])
+
+  useEffect(() => {
+
+  })
+  
 
   return (
     <>
@@ -141,7 +156,7 @@ export default function Navbar({ userStatus }) {
                 </MenuButton>
                 <MenuList>
                   <MenuItem>Profile</MenuItem>
-                  <MenuItem> <a href="/admin/dashboard">Admin</a><br/></MenuItem>
+                  <MenuItem> <Link as={ReactRouterLink} to="/admin/dashboard">Admin</Link><br/></MenuItem>
                   <MenuDivider />
                   <MenuItem fontSize={'sm'} fontWeight={400} onClick={logout}>
                       Logout

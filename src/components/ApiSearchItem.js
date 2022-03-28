@@ -36,7 +36,7 @@ const ApiSearchItem = ({ id, volumeInfo }) => {
               width="125px"
               alt="Book-cover"
               variants={imageVariants}
-              whileHover="hover"
+              whilehover="hover"
             />
           </Box>
           <Box>

@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { useNavigate,useParams } from "react-router-dom";
+import { Link, useNavigate,useParams } from "react-router-dom";
 import Axios from 'axios';
 import { config } from '../../helpers/constants';
 
@@ -51,7 +51,7 @@ function UserList() {
         
          <div class = "row">
 			<div class = "col-lg-3">
-         <a class = "btn btn-primary btn-sm mb-3" href="/admin/user/add">Add New user</a><br/></div>
+         <Link class = "btn btn-primary btn-sm mb-3" to="/admin/user/add">Add New user</Link><br/></div>
 		</div>
          <table class = "table table-striped table-bordered">
            <thead class = "table-dark">
@@ -66,7 +66,7 @@ function UserList() {
         {userList.length > 0 ? userList.map((user)=>{
           return (<tr key={(user.id)}>
             
-            <td><a href={'/admin/user/'+user.id}>{user.userName}</a></td>
+            <td><Link to={'/admin/user/'+user.id}>{user.userName}</Link></td>
             <td>{user.email}</td>
             <td>{user.phoneNumber}</td>
             <td><button class = "btn btn-primary" onClick={()=>{editUser(user.id)}}>Update</button></td>
