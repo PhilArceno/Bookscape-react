@@ -20,7 +20,6 @@ import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState, useEffect } from 'react';
 
-
 const NavLink = ({ children }) => (
   <Link
     as={ReactRouterLink}
@@ -40,7 +39,7 @@ const NavLink = ({ children }) => (
 
 export default function Navbar({ userStatus, role }) {
   //list of links will be implemented using a function
-  const [Links, setLinks] = useState(['Home', 'Books'])
+  const [Links, setLinks] = useState(['Home', 'Books']);
   const { isLoggedIn, setIsLoggedIn } = userStatus;
   //State used for hamburger icon (In mobile)
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -53,17 +52,16 @@ export default function Navbar({ userStatus, role }) {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      setLinks(["Home", "Books"])
+      setLinks(['Home', 'Books']);
+    } else if (
+      (role === 'admin' || role === 'librarian') &&
+      !Links.find(l => l === 'Google Books Search')
+    ) {
+      setLinks([...Links, 'Google Books Search']);
     }
-    else if ((role === "admin" || role === "librarian") && !Links.find(l => l === "Google Books Search")) {
-        setLinks([...Links, "Google Books Search"])
-    }
-  }, [isLoggedIn])
+  }, [isLoggedIn]);
 
-  useEffect(() => {
-
-  })
-  
+  useEffect(() => {});
 
   return (
     <>
@@ -156,10 +154,16 @@ export default function Navbar({ userStatus, role }) {
                 </MenuButton>
                 <MenuList>
                   <MenuItem>Profile</MenuItem>
-                  <MenuItem> <Link as={ReactRouterLink} to="/admin/dashboard">Admin</Link><br/></MenuItem>
+                  <MenuItem>
+                    {' '}
+                    <Link as={ReactRouterLink} to="/admin/dashboard">
+                      Admin
+                    </Link>
+                    <br />
+                  </MenuItem>
                   <MenuDivider />
                   <MenuItem fontSize={'sm'} fontWeight={400} onClick={logout}>
-                      Logout
+                    Logout
                   </MenuItem>
                 </MenuList>
               </Menu>
