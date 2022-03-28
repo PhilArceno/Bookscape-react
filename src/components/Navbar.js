@@ -156,7 +156,7 @@ export default function Navbar({ userStatus, role }) {
                 </MenuButton>
                 <MenuList>
                   <MenuItem>Profile</MenuItem>
-                  <MenuItem> <a href="/admin/dashboard">Admin</a><br/></MenuItem>
+                  <MenuItem> <Link as={ReactRouterLink} to="/admin/dashboard">Admin</Link><br/></MenuItem>
                   <MenuDivider />
                   <MenuItem fontSize={'sm'} fontWeight={400} onClick={logout}>
                       Logout
