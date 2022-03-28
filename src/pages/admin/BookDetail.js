@@ -25,7 +25,7 @@ function BookDetail() {
         <p>Author: {book.author}</p>
         <p>Publisher: {book.publisher}</p>
         <p>Subject: {book.subject}</p>
-        <p>ISBN: {book.iSBN}</p>
+        <p>ISBN: {book.isbn}</p>
         <p>Dewey: {book.dewey}</p>
         <p>CoverImage: <td><Image src={book.coverImage} maxW="100"/></td></p>
         <p>Description: {book.description}</p>

@@ -24,7 +24,7 @@ function BookList() {
     }).catch((error)=>{
       setError(error.message);
     });
-     },[bookList]);
+     },[]);
 
   
   const EditBook = (id)=>{

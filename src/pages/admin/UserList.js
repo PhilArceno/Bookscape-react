@@ -21,7 +21,7 @@ function UserList() {
       setError(error.message);
     });
     
-     },[userList]);
+     },[]);
 
   const editUser = (id)=>{
       navigate("/admin/user/edit/"+id);
