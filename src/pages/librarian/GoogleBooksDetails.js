@@ -14,7 +14,7 @@ function GoogleBooksDetails() {
     author: '',
     publishedDate: '',
     publisher: '',
-    isbn: [],
+    isbn: {},
     // dewey: -1,
     coverImage: '',
     description: ``,
@@ -37,12 +37,13 @@ function GoogleBooksDetails() {
         else if (imgs.thumbnail) coverImage = imgs.thumbnail;
         else if (imgs.smallThumbnail) coverImage = imgs.smallThumbnail;
 
+        console.log(volumeInfo);
         setBookDetails({
           title: volumeInfo.title,
           author: volumeInfo.authors ? volumeInfo.authors[0] : 'Unknown',
           description: volumeInfo.description,
           publisher: volumeInfo.publisher,
-          categories: volumeInfo.categories,
+          subject: volumeInfo.categories ? volumeInfo.categories[0] : "Other",
           publishedDate: volumeInfo.publishedDate,
           previewLink: volumeInfo.previewLink,
           isbn: volumeInfo.industryIdentifiers[1],
@@ -55,13 +56,12 @@ function GoogleBooksDetails() {
   };
 
   const checkBookInDb = isbn => {
-    fetch(config.url.API_URL + `/exists/${id}`, {
+    fetch(config.url.API_URL + `/exists/${isbn}`, {
       method: 'GET',
     })
       .then(response => response.text())
       .then(text => {
         let parsed = JSON.parse(text);
-        console.log(parsed);
         if (parsed) {
           setExistsInDb(true);
         }
@@ -86,10 +86,10 @@ function GoogleBooksDetails() {
       body: JSON.stringify({
         title: bookDetails.title,
         author: bookDetails.author,
-        subject: bookDetails.categories[0],
+        subject: bookDetails.subject,
         description: bookDetails.description,
         publisher: bookDetails.publisher,
-        isbn: bookDetails.isbn[1].identifier,
+        isbn: bookDetails.isbn.identifier,
         coverImage: bookDetails.coverImage,
       }),
     })

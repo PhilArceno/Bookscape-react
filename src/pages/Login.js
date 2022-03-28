@@ -45,7 +45,6 @@ export default function Login({setIsLoggedIn}) {
         password: data.password
       }),
       headers: {
-        referrerPolicy: "unsafe_url",
         'Content-Type': 'application/json',
       },
     })
