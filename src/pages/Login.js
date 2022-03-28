@@ -40,6 +40,7 @@ export default function Login({setIsLoggedIn}) {
   const onSubmit = data =>
     fetch(config.url.API_URL + '/api/Users/authenticate', {
       method: 'POST',
+      referrerPolicy: "unsafe_url",
       body: JSON.stringify({
         email: data.email,
         password: data.password
