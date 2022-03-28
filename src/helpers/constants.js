@@ -1,6 +1,6 @@
 const prod = {
     url: {
-     API_URL:'http://bookscapeapi2-dev.us-east-2.elasticbeanstalk.com'
+     API_URL:'http://bookscapeapi3-dev.us-east-2.elasticbeanstalk.com/'
     }
    };
    
