@@ -12,8 +12,9 @@ function BookAdd() {
   
   const onSubmit = data => {
     
-    Axios.post(config.url.API_URL+"api/Books",
-    {Title:data.Title,
+    Axios.post(config.url.API_URL+"/api/Books",
+    {
+      Title:data.Title,
       Author:data.Author,
       Publisher:data.Publisher,
       Subject:data.Subject,
@@ -32,7 +33,7 @@ function BookAdd() {
       .then((response)=>{
         navigate("/admin/book/list");
       }).catch((error)=>{
-        setError('error.message');
+        setError(error.message);
       });
   };
  
@@ -40,11 +41,11 @@ function BookAdd() {
   const validationSchema = Yup.object().shape({
     Title: Yup.string()
       .required('Title is required'),
-      Title: Yup.string()
+      Author: Yup.string()
       .required('Author is required'),
-      Title: Yup.string()
+      Publisher: Yup.string()
       .required('Publisheris required'),
-      Title: Yup.string()
+      ISBN: Yup.string()
       .required('ISBN is required'),
   });
 
