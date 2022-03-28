@@ -14,7 +14,7 @@ function BookList() {
 
   useEffect(()=>{
     
-    Axios.get("https://localhost:7098/api/Books",{
+    Axios.get(config.url.API_URL+"/api/Books",{
       headers : {
         'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
       }

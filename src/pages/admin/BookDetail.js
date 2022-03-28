@@ -2,14 +2,14 @@ import React, { useState,useEffect } from 'react';
 import { useNavigate,useParams } from "react-router-dom";
 import Axios from 'axios';
 import { Box, Heading, Image } from '@chakra-ui/react';
-
+import { config } from '../../helpers/constants';
 
 function BookDetail() {
 
   const [book, setBook] = useState({});
   let {id} = useParams();
   useEffect(()=>{
-    Axios.get(`https://localhost:7098/api/Books/${id}`)
+    Axios.get(config.url.API_URL+`/api/Books/${id}`)
       .then((response)=>{
         setBook(response.data);
       });
