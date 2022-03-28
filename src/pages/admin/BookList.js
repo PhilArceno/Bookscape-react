@@ -58,6 +58,7 @@ function BookList() {
             <td>Author</td>
             <td>Publisher</td>
             <td>Subject</td>
+            <td>ISBN</td>
 		        <td>CoverImage</td>
             <td>Update<br/>Delete</td>
           
@@ -69,7 +70,7 @@ function BookList() {
             <td>{book.author}</td>
             <td>{book.publisher}</td>
             <td>{book.subject}</td>
-           
+            <td>{book.isbn}</td> 
           
             <td><Image src={book.coverImage} maxW="20"/></td>
             
