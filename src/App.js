@@ -18,6 +18,7 @@ function App() {
       checkLoggedIn();
     }
   }, [])
+
   
   const checkLoggedIn = () => {
     fetch("https://localhost:7098/api/Users/IsLoggedIn", {
@@ -39,19 +40,24 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <Navbar userStatus={{isLoggedIn, setIsLoggedIn}} />
+        <Navbar userStatus={{isLoggedIn, setIsLoggedIn}} role={role} />
         <Routes>
           <Route path="/" exact element={<Pages.Home/>} />
           <Route path="/home" exact element={<Pages.Home/>} />
           <Route path="/login"  exact element={<Pages.Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/signup" exact element={<Pages.Signup />} />
           <Route path="/books" exact element={<Pages.Books />} />
-          <Route path="/google-books-search" exact element={<Pages.GoogleBooksSearch />} />
-          <Route path="/google-books/:id" exact element={<LibrarianPages.GoogleBooksDetails/>} />
+          <Route path="/books/:id" exact element={<Pages.BookItem isLoggedIn={isLoggedIn}/>} />
+          {role == "admin" || "librarian" ? (
+            <>
+            <Route path="/google-books-search" exact element={<LibrarianPages.GoogleBooksSearch />} />
+            <Route path="/google-books/:id" exact element={<LibrarianPages.GoogleBooksDetails/>} />
+            </>
+          ) : ""}
           <Route /*Testing route*/ path="/loans/list" exact element={<Loans.LoanList/>}/>
           {role == "admin" ? (
             <>
-            <Route exact path='/admin/dashboard' element ={<AdminDashboard/>}/>
+          <Route exact path='/admin/dashboard' element ={<AdminDashboard/>}/>
           <Route exact path='/admin/user/list' element={<AdminPages.UserList/>}/>
           <Route exact path="/admin/user/:id" element={<AdminPages.UserDetail/>}/>
           <Route exact path="/admin/user/add" element={<AdminPages.UserAdd/>}/>

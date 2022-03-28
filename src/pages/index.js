@@ -4,6 +4,6 @@ import Books from "./Books";
 import PageNotFound from "./PageNotFound";
 import Login from "./Login";
 import Signup from "./Signup";
-import GoogleBooksSearch from "./GoogleBooksSearch";
+import BookItem from "./BookItem";
 
-export {Home, PageNotFound, Login, Signup, GoogleBooksSearch, Books}
+export {Home, PageNotFound, Login, Signup, Books, BookItem}
