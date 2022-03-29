@@ -41,6 +41,7 @@ function BookList() {
     }).catch((error)=>{
       setError(error.message);
     });
+     window.location.reload();
   }
 
   return (
