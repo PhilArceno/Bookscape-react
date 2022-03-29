@@ -22,24 +22,18 @@ function UserEdit() {
     })
       .then((response)=>{
         console.log(response.data);
-        setUser(response.data);
+        var user = response.data;
+        const fields = ['userName', 'email', 'phoneNumber'];
+        fields.forEach(field => setValue(field, user[field]));
+        setUser(user);
       });
     },[]);
 
-    const setUserName = data => {
-      setUser({UserName:data});
-    }
-    const setEmail = data => {
-      setUser({Email:data});
-    }
-    const setPhoneNumber = data => {
-      setUser({PhoneNumber:data});
-    }
-  const onSubmit = data => {
+  const onSubmitHandler = data => {
     console.log(data);
-    var body = {UserName:data.UserName,
-        Email:data.Email,
-        PhoneNumber:data.PhoneNumber,
+    var body = {UserName:data.userName,
+        Email:data.email,
+        PhoneNumber:data.phoneNumber,
         Password:'****'};
     Axios.put(config.url.API_URL+`/api/Users/${id}`,
       body,
@@ -57,62 +51,60 @@ function UserEdit() {
   
 
   const validationSchema = Yup.object().shape({
-    UserName: Yup.string()
-    .required('UserName is required'),
-    Email: Yup.string()
-    .required('Email is Required'),
-    PhoneNumber: Yup.string()
-     .required('PhoneNumber is required')
+    userName: Yup.string()
+      .required('UserName is required'),
+    email: Yup.string()
+      .required('Email is Required'),
+    phoneNumber: Yup.string()
+      .required('PhoneNumber is required')
   
   });
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(validationSchema)
   });
   return (
-    <div className="container m-2">
+    <div className="container">
     {error?(<div className="alert alert-danger">{error}</div>):""}
     <div className="row">
         <div className ="col-lg-6 col-md-6 col-sm-6 container justify-content-center card"><br/>
             <h3 className ="text-center"> Update User </h3>
             <div className ="card-body">
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmitHandler)}>
       <input name="Id" type="hidden" value={user.id}/>
-      <div className="form-group" onChange={ (event) => setUserName(event.target.value) } >
+      <div className="form-group">
         <label className="control-label m-1" >UserName</label>
         <input
-          name="UserName"
+          name="userName"
           type="text" 
-          value={user.userName}
-          {...register('UserName')}
-          className={`form-control m-1  ${errors.UserName ? 'is-invalid' : ''}`}
+          {...register('userName')}
+          className={`form-control m-1  ${errors.userName ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.UserName?.message}</div>
+        <div className="invalid-feedback">{errors.userName?.message}</div>
       </div>
-      <div className="form-group" onChange={ (event) => setEmail(event.target.value) }>
+      <div className="form-group">
         <label className="control-label m-1">Email</label>
         <input
-          name="Email"
+          name="email"
           type="text"
-          value={user.email}
-          {...register('Email')}
-          className={`form-control m-1 ${errors.Email ? 'is-invalid' : ''}`}
+          {...register('email')}
+          className={`form-control m-1 ${errors.email ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Email?.message}</div>
+        <div className="invalid-feedback">{errors.email?.message}</div>
       </div> 
-      <div className="form-group" onChange={ (event) => setPhoneNumber(event.target.value) }>
+      <div className="form-group">
         <label className="control-label m-1">PhoneNumber</label>
         <input
-          name="PhoneNumber"
+          name="phoneNumber"
           type="text"
-          value={user.phoneNumber}
-          {...register('PhoneNumber')}
-          className={`form-control m-1 ${errors.PhoneNumber ? 'is-invalid' : ''}`}
+          {...register('phoneNumber')}
+          className={`form-control m-1 ${errors.phoneNumber ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.PhoneNumber?.message}</div>
+        <div className="invalid-feedback">{errors.phoneNumber?.message}</div>
       </div> 
       <div className="form-group"><br/>
         <button  type="submit" className="btn btn-primary m-2">
