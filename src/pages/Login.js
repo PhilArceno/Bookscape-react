@@ -85,7 +85,7 @@ export default function Login({checkLoggedIn}) {
             <Stack spacing={4}>
               <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
-                <Text color="red">{errors.email?.message}</Text>
+                <Text data-testid="emailErrorMessage" color="red">{errors.email?.message}</Text>
                 <Input data-testid="email"
                   placeholder="Ex. JohnDoe@email.com"
                   type="email"
@@ -95,7 +95,7 @@ export default function Login({checkLoggedIn}) {
               <FormControl id="password">
                 <FormLabel>Password</FormLabel>
                 <Text color="red">{errors.password?.message}</Text>
-                <Input
+                <Input data-testid="password"
                   type="password"
                   placeholder="Enter a 8-24 length password"
                   {...register('password')}
