@@ -1,46 +1,26 @@
-import { render, screen, cleanup,fireEvent, getAllByText } from "@testing-library/react";
-import '@testing-library/jest-dom'
-import Login from "../pages/Login";
-import * as ReactRouterDom from "react-router-dom";
-import { shallow } from "enzyme";
-import { act } from 'react-dom/test-utils';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import Login, { Heading, FormLabel, Input } from "../pages/Login";
+import { MemoryRouter } from 'react-router-dom';
 
-describe("Login component", () => {
-    afterEach(() => {
-        cleanup();
-    });
+describe("Login page", () => {
+    afterEach(() => { cleanup(); });
 
-    let container;
-
-    test("render form",  () => {
+    it("Input shows default value", () => {
         act(() => {
-            ReactDOM.render(<Login />, container);
-          });
-        jest.mock('react-router-dom', () => ({
-            useNavigate: jest.fn(() => jest.fn),
-        }));
-        const wrapper = shallow(<Login />);
-
-        const reuslt = wrapper.find(getAllByText("Email address"));
-
-        //const emailElement = screen.getByLabelText("Email address");
-        expect(reuslt).toBeInTheDocument();
+            render(
+                <MemoryRouter>
+                    <Login />
+                </MemoryRouter>);
+        });
+        const email = screen.getByTestId("email");
+        expect(email.value).toMatch("");
+        expect(email).toHaveTextContent("");
+        fireEvent.change(email,{target:{value:"testing"}});
+        expect(email.value).toMatch("testing");
     });
 
-    // test("input email", () => {
-    //     const { getByTestId } = render(<Login />);
-    //     const email = getByTestId("email");
+    //it("")
+})
 
-    //     expect(email.textContent).toBe("");
-    // });
-
-    // it("submit form", () => {
-    //     const mockSubmit = jest.fn();
-    //     const {getByTestId } = render(<Login handleSubmit={mockSubmit}/>);
-
-    //     fireEvent.click(getByTestId("login"));
-
-    //     expect(mockSubmit).toHaveBeenCalled();
-    // });
-});
