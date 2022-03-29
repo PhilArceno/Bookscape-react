@@ -44,7 +44,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Pages.Home/>} />
           <Route path="/home" exact element={<Pages.Home/>} />
-          <Route path="/login"  exact element={<Pages.Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/login"  exact element={<Pages.Login checkLoggedIn={checkLoggedIn} />} />
           <Route path="/signup" exact element={<Pages.Signup />} />
           <Route path="/books" exact element={<Pages.Books />} />
           <Route path="/books/:id" exact element={<Pages.BookItem isLoggedIn={isLoggedIn}/>} />

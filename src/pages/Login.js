@@ -26,7 +26,7 @@ const schema = yup
   })
   .required();
 
-export default function Login({setIsLoggedIn}) {
+export default function Login({checkLoggedIn}) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -56,7 +56,7 @@ export default function Login({setIsLoggedIn}) {
         let parsed = JSON.parse(text);
         console.log(parsed);
         localStorage.setItem("accessToken", parsed.token);
-        setIsLoggedIn(true);
+        checkLoggedIn();
         setIsLoading(false);
         navigate('/');
       });
@@ -111,6 +111,7 @@ export default function Login({setIsLoggedIn}) {
                   <Link color={'blue.400'}>Forgot password?</Link>
                 </Stack>
                 <Button data-testid="login"
+                  isLoading={isLoading}
                   type="submit"
                   bg={'blue.400'}
                   color={'white'}
