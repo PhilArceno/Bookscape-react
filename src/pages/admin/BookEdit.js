@@ -41,8 +41,8 @@ function BookEdit() {
     const setSubject = data => {
       setBook({Subject:data});
     }
-    const setIJSBNr = data => {
-      setBook({IJSBN:data});
+    const setISBN = data => {
+      setBook({ISBN:data});
     }
     const setDewey = data => {
       setBook({Dewey:data});
@@ -68,7 +68,7 @@ function BookEdit() {
       Author:data.Author,
       Publisher:data.Publisher,
       Subject:data.Subject,
-      IJSBN:data.ISBN,
+      ISBN:data.ISBN,
        Dewey:data.Dewey,
        CoverImage:data.CoverImage,
         Description:data.Description,
@@ -156,12 +156,12 @@ function BookEdit() {
         />
         <div className="invalid-feedback">{errors.Subject?.message}</div>
       </div>
-      <div className="form-group"onChange={ (event) => setIJSBNr(event.target.value) } >
+      <div className="form-group"onChange={ (event) => setISBN(event.target.value) } >
         <label className="control-label m-1">ISBN</label>
         <input
           name="ISBN"
           type="text"
-         value={book.iSBN}
+         value={book.isbn}
           {...register('ISBN')}
           className={`form-control m-2 ${errors.ISBN ? 'is-invalid' : ''}`}
         />
