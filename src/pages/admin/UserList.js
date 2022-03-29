@@ -39,7 +39,7 @@ function UserList() {
       setError(error.message);
     });
   
-  
+   window.location.reload();
   }
     
     
