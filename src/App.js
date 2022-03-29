@@ -7,6 +7,7 @@ import * as LibrarianPages from './pages/librarian';
 import * as AdminPages from './pages/admin';
 import * as Loans from './pages/loans';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import { config } from './helpers/constants';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,7 +22,7 @@ function App() {
 
   
   const checkLoggedIn = () => {
-    fetch("https://localhost:7098/api/Users/IsLoggedIn", {
+    fetch(config.url.API_URL + "/api/Users/IsLoggedIn", {
       method: "GET",
       headers : {
         'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
