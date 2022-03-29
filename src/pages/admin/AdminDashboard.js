@@ -7,8 +7,8 @@ function AdminDashboard(){
         <div className="container">
            <Link to="/admin/user/list">User List</Link><br/>
            <Link to="/admin/book/list">Book List</Link><br/>
-           {/* <a href="#">Link</a><br/>
-           <a href="#">Link</a> */}
+           <Link to="/admin/request/list">Book Reservation List</Link><br/>
+         
         </div>);
 }
 export default AdminDashboard;
