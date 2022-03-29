@@ -45,19 +45,22 @@ function BookEdit() {
       setBook({ISBN:data});
     }
     const setDewey = data => {
-      setBook({Dewey:data});
+      setBook({Dewey:parseFloat(data)});
+      console.log(book);
     }
     const setCoverImage = data => {
-      setBook({CoverImageer:data});
+      setBook({CoverImage:data});
     }
     const setDescriptiont = data => {
-      setBook({Descriptiont:data});
+      setBook({Description:data});
     }
     const setTotalCopies = data => {
-      setBook({TotalCopies:data});
+      setBook({TotalCopies:Number(data)});
+      console.log(book);
     }
     const setCopiesLoaned = data => {
-      setBook({CopiesLoaned:data});
+      setBook({CopiesLoaned:Number(data)});
+      console.log(book);
     }
 
 
@@ -75,7 +78,7 @@ function BookEdit() {
         TotalCopies:data.TotalCopies,
         CopiesLoaned:data.CopiesLoaned
     }
-    Axios.put(config.url.API_URL+`api/Books/${id}`,
+    Axios.put(config.url.API_URL+`/api/Books/${id}`,
    body, {
     headers : {
       'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
@@ -84,13 +87,16 @@ function BookEdit() {
       .then((response)=>{
         navigate("/admin/book/list");
         }).catch((error)=>{
-        setError('error.message');
+        setError(error.message);
       });
   };
   
   const validationSchema = Yup.object().shape({
     Title: Yup.string()
-      .required('Title is required')
+      .required('Title is required'),
+    Dewey: Yup.number(),
+    TotalCopies: Yup.number(),
+    CopiesLoaned: Yup.number()
   });
 
 
@@ -103,7 +109,7 @@ function BookEdit() {
   });
 
   return (
-    <div className="container m-2">
+    <div className="container">
     {error?(<div className="alert alert-danger">{error}</div>):""}
     <div className="row">
         <div className="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
@@ -145,7 +151,7 @@ function BookEdit() {
         />
         <div className="invalid-feedback">{errors.Publisher?.message}</div>
       </div>
-      <div className="form-group"onChange={ (event) => setSubject(event.target.value) } >
+      <div className="form-group" onChange={ (event) => setSubject(event.target.value) } >
         <label className="control-label m-1">Subject</label>
         <input
           name="Subject"
@@ -156,7 +162,7 @@ function BookEdit() {
         />
         <div className="invalid-feedback">{errors.Subject?.message}</div>
       </div>
-      <div className="form-group"onChange={ (event) => setISBN(event.target.value) } >
+      <div className="form-group" onChange={ (event) => setISBN(event.target.value) } >
         <label className="control-label m-1">ISBN</label>
         <input
           name="ISBN"
@@ -211,7 +217,7 @@ function BookEdit() {
         />
         <div className="invalid-feedback">{errors.TotalCopies?.message}</div>
       </div>
-      <div className="form-group"onChange={ (event) => setCopiesLoaned(event.target.value) }>
+      <div className="form-group" onChange={ (event) => setCopiesLoaned(event.target.value) }>
         <label className="control-label m-1">CopiesLoaned</label>
         <input
           name="CopiesLoaned"
