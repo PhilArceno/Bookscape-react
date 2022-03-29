@@ -1,6 +1,6 @@
 const prod = {
     url: {
-     API_URL:'https://bookscapeapi20220328211108.azurewebsites.net/api/books'
+     API_URL:'https://bookscapeapi20220328211108.azurewebsites.net'
     }
    };
    
