@@ -12,6 +12,7 @@ import {
   Link,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -27,6 +28,7 @@ const schema = yup
 
 export default function Login({setIsLoggedIn}) {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -37,7 +39,8 @@ export default function Login({setIsLoggedIn}) {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = data =>
+  const onSubmit = data => {
+    setIsLoading(true);
     fetch(config.url.API_URL + '/api/Users/authenticate', {
       method: 'POST',
       body: JSON.stringify({
@@ -54,9 +57,10 @@ export default function Login({setIsLoggedIn}) {
         console.log(parsed);
         localStorage.setItem("accessToken", parsed.token);
         setIsLoggedIn(true);
+        setIsLoading(false);
         navigate('/');
       });
-
+    }
   return (
     <Flex
       minH={'100vh'}

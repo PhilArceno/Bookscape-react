@@ -51,17 +51,7 @@ export default function Navbar({ userStatus, role }) {
   };
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      setLinks(['Home', 'Books']);
-    } else if (
-      (role === 'admin' || role === 'librarian') &&
-      !Links.find(l => l === 'Google Books Search')
-    ) {
-      setLinks([...Links, 'Google Books Search']);
-    }
-  }, [isLoggedIn]);
-
-  useEffect(() => {});
+  }, [isLoggedIn, role]);
 
   return (
     <>
@@ -87,6 +77,8 @@ export default function Navbar({ userStatus, role }) {
               {Links.map(link => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
+              {isLoggedIn && (role === 'admin' || role === 'librarian') ? 
+              <NavLink>Google Books Search</NavLink> : ""}
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
