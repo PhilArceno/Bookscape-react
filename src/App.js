@@ -49,6 +49,7 @@ function App() {
           <Route path="/signup" exact element={<Pages.Signup />} />
           <Route path="/books" exact element={<Pages.Books />} />
           <Route path="/books/:id" exact element={<Pages.BookItem isLoggedIn={isLoggedIn}/>} />
+          <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
           {role == "admin" || "librarian" ? (
             <>
             <Route path="/google-books-search" exact element={<LibrarianPages.GoogleBooksSearch />} />
