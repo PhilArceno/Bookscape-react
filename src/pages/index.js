@@ -5,5 +5,6 @@ import PageNotFound from "./PageNotFound";
 import Login from "./Login";
 import Signup from "./Signup";
 import BookItem from "./BookItem";
+import UserProfile from "./UserProfile";
 
-export {Home, PageNotFound, Login, Signup, Books, BookItem}
+export {Home, PageNotFound, Login, Signup, Books, BookItem, UserProfile}
