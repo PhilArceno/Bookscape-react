@@ -145,7 +145,9 @@ export default function Navbar({ userStatus, role }) {
                   />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Profile</MenuItem>
+                  <MenuItem>                    <Link as={ReactRouterLink} to="/myprofile">
+                      My Profile
+                    </Link></MenuItem>
                   <MenuItem>
                     {' '}
                     <Link as={ReactRouterLink} to="/admin/dashboard">
