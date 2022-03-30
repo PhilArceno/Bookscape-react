@@ -36,18 +36,6 @@ const schema = yup
   })
   .required();
 
-// NOTES Code from last project
-// let navigate = useNavigate();
-
-// const onSubmit = (data) => {
-//   axios.post(`${process.env.REACT_APP_API_URL}/auth`, data).then((response) => {
-//     if (response.data === "Registration successful") {
-//       console.log("Registration successful");
-//       navigate("/login");
-//     }
-//   });
-// };
-
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const submitBtn = useRef(null);
