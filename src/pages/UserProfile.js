@@ -10,9 +10,6 @@ import {
 } from '@chakra-ui/react';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
 import Axios from 'axios';
 import { config } from '../helpers/constants';
 import { AuthContext } from '../helpers/AuthContext';
@@ -23,7 +20,7 @@ export default function UserProfile() {
 
   const { authState } = useContext(AuthContext);
 
-  console.log (authState.id);
+  console.log(authState.id);
 
   useEffect(() => {
     Axios.get(config.url.API_URL + `/api/Users/${authState.id}`, {
@@ -34,22 +31,10 @@ export default function UserProfile() {
       console.log(response.data);
       var user = response.data;
       const fields = ['userName', 'email', 'phoneNumber'];
-      fields.forEach(field => setValue(field, user[field]));
+      fields.forEach(field => user[field]);
       setUser(user);
     });
   }, []);
-
-  const validationSchema = Yup.object().shape({
-    userName: Yup.string().required('UserName is required'),
-    email: Yup.string().required('Email is Required'),
-    phoneNumber: Yup.string().required('PhoneNumber is required'),
-  });
-
-  const {
-    setValue,
-  } = useForm({
-    resolver: yupResolver(validationSchema),
-  });
 
   return (
     <Flex
@@ -68,15 +53,17 @@ export default function UserProfile() {
         p={6}
         my={12}
       >
-        <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
-          My Profile
-        </Heading>
         <Stack direction={['column', 'row']} spacing={6}>
           <Center>
             <Avatar
               size="xl"
               src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
             ></Avatar>
+          </Center>
+          <Center w="full">
+            <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
+              My Profile
+            </Heading>
           </Center>
         </Stack>
         <Text color={'gray.500'}>Name</Text>
@@ -100,10 +87,10 @@ export default function UserProfile() {
             color={'white'}
             w="full"
             _hover={{
-              bg: 'red.500',
+              bg: 'green.500',
             }}
           >
-            Borrowed Books
+            My Borrowed Books
           </Button>
           <Button
             bg={'blue.400'}
@@ -113,7 +100,7 @@ export default function UserProfile() {
               bg: 'blue.500',
             }}
           >
-            Update Profile Info
+            Update My Profile
           </Button>
         </Stack>
       </Stack>
