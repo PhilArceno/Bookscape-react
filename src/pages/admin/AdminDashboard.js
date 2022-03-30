@@ -7,7 +7,7 @@ function AdminDashboard(){
         <div className="container">
            <Link to="/admin/user/list">User List</Link><br/>
            <Link to="/admin/book/list">Book List</Link><br/>
-           <Link to="/admin/request/list">Book Reservation List</Link><br/>
+           <Link to="/admin/request/list">Book Request List</Link><br/>
          
         </div>);
 }
