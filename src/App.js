@@ -8,10 +8,14 @@ import * as AdminPages from './pages/admin';
 import * as Loans from './pages/loans';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import { config } from './helpers/constants';
+import { AuthContext } from "./helpers/AuthContext";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState("");
+  const [authState, setAuthState] = useState({
+    id: "",
+  });
 
   useEffect(() => {
     checkLoggedIn();
@@ -34,11 +38,17 @@ function App() {
         if (parsed.success) {
           setIsLoggedIn(true);
           setRole(parsed.data);
+          setAuthState({
+            id: parsed.id
+          });
         }
       })
   }
 
   return (
+    <div className="App">
+    <AuthContext.Provider
+        value={{ authState, setAuthState }}>
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Navbar userStatus={{isLoggedIn, setIsLoggedIn}} role={role} />
@@ -76,6 +86,8 @@ function App() {
         <Footer />
       </BrowserRouter>
     </ChakraProvider>
+    </AuthContext.Provider>
+    </div>
   );
 }
 

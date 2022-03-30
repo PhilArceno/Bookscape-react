@@ -8,21 +8,25 @@ import {
   Avatar,
   Center,
 } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Axios from 'axios';
 import { config } from '../helpers/constants';
+import { AuthContext } from '../helpers/AuthContext';
 
 export default function UserProfile() {
-  let id = '624099573e3f1c5d0e7d6101';
   const navigate = useNavigate();
   const [user, setUser] = useState({});
 
+  const { authState } = useContext(AuthContext);
+
+  console.log (authState.id);
+
   useEffect(() => {
-    Axios.get(config.url.API_URL + `/api/Users/${id}`, {
+    Axios.get(config.url.API_URL + `/api/Users/${authState.id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
       },
