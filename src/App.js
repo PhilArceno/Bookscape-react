@@ -56,7 +56,6 @@ function App() {
             <Route path="/google-books/:id" exact element={<LibrarianPages.GoogleBooksDetails/>} />
             </>
           ) : ""}
-          <Route /*Testing route*/ path="/loans/list" exact element={<Loans.LoanList/>}/>
           {role == "admin" ? (
             <>
           <Route exact path='/admin/dashboard' element ={<AdminDashboard/>}/>
