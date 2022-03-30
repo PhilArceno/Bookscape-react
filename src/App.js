@@ -8,10 +8,14 @@ import * as AdminPages from './pages/admin';
 import * as Loans from './pages/loans';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import { config } from './helpers/constants';
+import { AuthContext } from "./helpers/AuthContext";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState("");
+  const [authState, setAuthState] = useState({
+    id: "",
+  });
 
   useEffect(() => {
     checkLoggedIn();
@@ -34,11 +38,17 @@ function App() {
         if (parsed.success) {
           setIsLoggedIn(true);
           setRole(parsed.data);
+          setAuthState({
+            id: parsed.id
+          });
         }
       })
   }
 
   return (
+    <div className="App">
+    <AuthContext.Provider
+        value={{ authState, setAuthState }}>
     <ChakraProvider theme={theme}>
       <BrowserRouter>
         <Navbar userStatus={{isLoggedIn, setIsLoggedIn}} role={role} />
@@ -49,7 +59,7 @@ function App() {
           <Route path="/signup" exact element={<Pages.Signup />} />
           <Route path="/books" exact element={<Pages.Books />} />
           <Route path="/books/:id" exact element={<Pages.BookItem isLoggedIn={isLoggedIn}/>} />
-          <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
+          <Route path="/myprofile" exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
           {role == "admin" || "librarian" ? (
             <>
             <Route path="/google-books-search" exact element={<LibrarianPages.GoogleBooksSearch />} />
@@ -75,6 +85,8 @@ function App() {
         <Footer />
       </BrowserRouter>
     </ChakraProvider>
+    </AuthContext.Provider>
+    </div>
   );
 }
 
