@@ -12,9 +12,9 @@ import { AuthContext } from "./helpers/AuthContext";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [role, setRole] = useState("");
   const [authState, setAuthState] = useState({
     id: "",
+    role: ""
   });
 
   useEffect(() => {
@@ -37,9 +37,9 @@ function App() {
         console.log(parsed);
         if (parsed.success) {
           setIsLoggedIn(true);
-          setRole(parsed.data);
           setAuthState({
-            id: parsed.id
+            id: parsed.data.id,
+            role: parsed.data.role
           });
         }
       })
@@ -51,7 +51,7 @@ function App() {
         value={{ authState, setAuthState }}>
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <Navbar userStatus={{isLoggedIn, setIsLoggedIn}} role={role} />
+        <Navbar userStatus={{isLoggedIn, setIsLoggedIn}} role={authState.role} />
         <Routes>
           <Route path="/" exact element={<Pages.Home/>} />
           <Route path="/home" exact element={<Pages.Home/>} />
@@ -61,13 +61,13 @@ function App() {
           <Route path="/books/:id" exact element={<Pages.BookItem isLoggedIn={isLoggedIn}/>} />
           <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
           <Route path="/returns-scanner" exact element={<LibrarianPages.ReturnsScanner/>} />
-          {role == "admin" || "librarian" ? (
+          {authState.role == "admin" || "librarian" ? (
             <>
             <Route path="/google-books-search" exact element={<LibrarianPages.GoogleBooksSearch />} />
             <Route path="/google-books/:id" exact element={<LibrarianPages.GoogleBooksDetails/>} />
             </>
           ) : ""}
-          {role == "admin" ? (
+          {authState.role == "admin" ? (
             <>
           <Route exact path='/admin/dashboard' element ={<AdminDashboard/>}/>
           <Route exact path='/admin/user/list' element={<AdminPages.UserList/>}/>
