@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import * as Pages from './pages/';
 import { Footer, Navbar } from './components';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, Outlet, Navigate} from 'react-router-dom';
 import * as LibrarianPages from './pages/librarian';
 import * as AdminPages from './pages/admin';
 import * as Loans from './pages/loans';
@@ -53,14 +53,16 @@ function App() {
       <BrowserRouter>
         <Navbar userStatus={{isLoggedIn, setIsLoggedIn}} role={authState.role} />
         <Routes>
+        <Route element={<RequireAuth />}>
           <Route path="/" exact element={<Pages.Home/>} />
           <Route path="/home" exact element={<Pages.Home/>} />
-          <Route path="/login"  exact element={<Pages.Login checkLoggedIn={checkLoggedIn} />} />
-          <Route path="/signup" exact element={<Pages.Signup />} />
           <Route path="/books" exact element={<Pages.Books />} />
           <Route path="/books/:id" exact element={<Pages.BookItem isLoggedIn={isLoggedIn}/>} />
           <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
           <Route path="/returns-scanner" exact element={<LibrarianPages.ReturnsScanner/>} />
+        </Route>
+        <Route path="/signup" exact element={<Pages.Signup />} />
+        <Route path="/login"  exact element={<Pages.Login checkLoggedIn={checkLoggedIn} />} />  
           {authState.role == "admin" || "librarian" ? (
             <>
             <Route path="/google-books-search" exact element={<LibrarianPages.GoogleBooksSearch />} />
@@ -89,6 +91,21 @@ function App() {
     </AuthContext.Provider>
     </div>
   );
+
+  function RequireAuth() {
+    let location = useLocation();
+
+    if (!isLoggedIn) {
+      // Redirect them to the /login page, but save the current location they were
+      // trying to go to when they were redirected. This allows us to send them
+      // along to that page after they login, which is a nicer user experience
+      // than dropping them off on the home page.
+      return <Navigate to="/login" state={{ from: location }} />;
+    }
+
+    return <Outlet />;
+  }
+
 }
 
 export default App;
