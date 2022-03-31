@@ -13,15 +13,12 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import { config } from '../helpers/constants';
 import { AuthContext } from '../helpers/AuthContext';
-import UserProfileEdit from './UserProfileEdit';
 
 export default function UserProfile() {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
 
   const { authState } = useContext(AuthContext);
-
-  console.log(authState.id);
 
   const UserProfileEdit = ()=>{
     navigate("/editprofile");
@@ -43,7 +40,7 @@ const UserLoans = ()=>{
       fields.forEach(field => user[field]);
       setUser(user);
     });
-  }, []);
+  });
 
   return (
     <Flex
