@@ -5,7 +5,6 @@ import { Footer, Navbar } from './components';
 import { BrowserRouter, Routes, Route, useLocation, Outlet, Navigate} from 'react-router-dom';
 import * as LibrarianPages from './pages/librarian';
 import * as AdminPages from './pages/admin';
-import * as Loans from './pages/loans';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import { config } from './helpers/constants';
 import { AuthContext } from "./helpers/AuthContext";
@@ -23,7 +22,6 @@ function App() {
       checkLoggedIn();
     }
   }, [])
-
   
   const checkLoggedIn = () => {
     fetch(config.url.API_URL + "/api/Users/IsLoggedIn", {
@@ -59,6 +57,9 @@ function App() {
           <Route path="/books" exact element={<Pages.Books />} />
           <Route path="/books/:id" exact element={<Pages.BookItem isLoggedIn={isLoggedIn}/>} />
           <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
+          <Route path="/editprofile" exact element ={<Pages.UserProfileEdit/>}/>
+          <Route path='/resetpassword' exact element ={<Pages.ResetPasswordForm/>}/>
+          <Route path='/borrowedbooks' exact element ={<Pages.UserLoans/>}/>
           <Route path="/returns-scanner" exact element={<LibrarianPages.ReturnsScanner/>} />
         </Route>
         <Route path="/signup" exact element={<Pages.Signup />} />
