@@ -6,7 +6,7 @@ import  UserList from './UserList';
 import  UserDetail from './UserDetail';
 import  UserAdd from './UserAdd';
 import  UserEdit from './UserEdit';
-import RequestList from './RequestList';
+import LoanList from './LoanList';
 
-export {BookAdd,BookDetail,BookList,BookEdit,UserAdd,UserDetail,UserList,UserEdit,RequestList}
+export {BookAdd,BookDetail,BookList,BookEdit,UserAdd,UserDetail,UserList,UserEdit,LoanList}
   

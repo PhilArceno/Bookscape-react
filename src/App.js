@@ -81,7 +81,7 @@ function App() {
           <Route exact path="/admin/book/:id" element={<AdminPages.BookDetail/>}/>
           <Route exact path="/admin/book/add" element={<AdminPages.BookAdd/>}/>
           <Route exact path="/admin/book/edit/:id" element={<AdminPages.BookEdit/>}/>
-          <Route exact path="/admin/request/list" element={<AdminPages.RequestList/>}/>
+          <Route exact path="/admin/loan/list" element={<AdminPages.LoanList/>}/>
           </>
           ) : ""}
           <Route path="*" exact element={<Pages.PageNotFound />} />
