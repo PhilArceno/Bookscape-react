@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import { config } from '../helpers/constants';
 import { AuthContext } from '../helpers/AuthContext';
+import UserProfileEdit from './UserProfileEdit';
 
 export default function UserProfile() {
   const navigate = useNavigate();
@@ -21,6 +22,14 @@ export default function UserProfile() {
   const { authState } = useContext(AuthContext);
 
   console.log(authState.id);
+
+  const UserProfileEdit = ()=>{
+    navigate("/editprofile");
+};
+
+const UserLoans = ()=>{
+  navigate("/borrowedbooks");
+};
 
   useEffect(() => {
     Axios.get(config.url.API_URL + `/api/Users/${authState.id}`, {
@@ -89,6 +98,7 @@ export default function UserProfile() {
             _hover={{
               bg: 'green.500',
             }}
+            onClick={()=>{UserLoans()}}
           >
             My Borrowed Books
           </Button>
@@ -99,6 +109,7 @@ export default function UserProfile() {
             _hover={{
               bg: 'blue.500',
             }}
+            onClick={()=>{UserProfileEdit()}}
           >
             Update My Profile
           </Button>
