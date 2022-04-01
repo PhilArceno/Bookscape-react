@@ -22,7 +22,7 @@ const SearchAPIBook = ({ searchText, submitSearch }) => {
     //   return;
     // }
     searchText(text);
-    submitSearch();
+    if(submitSearch) submitSearch();
   };
   
   const onChangevalue = e => {
