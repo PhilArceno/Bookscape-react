@@ -1,14 +1,52 @@
 import React from "react";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import Enzyme, { shallow } from "enzyme";
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import "@testing-library/jest-dom";
-import Login from "../pages/Login";
+import Login, { onsubmit } from "../pages/Login";
 import { MemoryRouter } from 'react-router-dom';
 import 'whatwg-fetch';
 
-//jest.mock("../pages/Login");
+Enzyme.configure({ adapter: new Adapter() });
+
+//jest.mock(onsubmit);
+// global.fetch = jest.fn(() => {
+//     Promise.resolve({
+//         method: 'POST',
+//         body: {
+//             email: "test@123.com",
+//             password: "Password123"
+//         },
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//     }).then();
+// });
 
 describe("Login page", () => {
     afterEach(() => { cleanup(); });
+
+    it("render Login page without crashing", () => {
+        shallow(<MemoryRouter>
+            <Login />
+        </MemoryRouter>);
+    });
+
+    it("click submit button should submit a form", () => {
+        const mockOnSubmit = jest.fn();
+        const wrapper = shallow(<MemoryRouter> <Login onsubmit={mockOnSubmit} /> </MemoryRouter>);
+        console.log(wrapper.debug())
+        const emailInput = wrapper.find("#email-input");
+        const passwordInput = wrapper.find("#password-input");
+        emailInput.simulate("change", {target: { value: "test@123.com" }});
+        passwordInput.simulate("change", { target: { value: "Password123" } });
+        
+        wrapper.find('form').simulate('submit', {
+            preventDefault: () =>{}
+          });
+          expect(mockOnSubmit).toBeCalled()
+
+    });
 
     it("email input part", () => {
         act(() => {
@@ -35,6 +73,7 @@ describe("Login page", () => {
     });
 
     it("click login button should submit form", () => {
+        // jest.mock("../pages/Login");
         const mockOnSubmit = jest.fn();
 
         render(
@@ -55,6 +94,9 @@ describe("Login page", () => {
         // expect(mockfn).toBeCalledTimes(0);
     });
 
-
+    // it("mock login page", () => {
+    //     const login = jest.mock("../pages/Login");
+    //     expect(login.)
+    // });
 });
 
