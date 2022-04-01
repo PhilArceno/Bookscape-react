@@ -43,36 +43,9 @@ function App() {
       })
   }
 
-  return (
-    <div className="App">
-    <AuthContext.Provider
-        value={{ authState, setAuthState }}>
-    <ChakraProvider theme={theme}>
-      <BrowserRouter>
-        <Navbar userStatus={{isLoggedIn, setIsLoggedIn}} role={authState.role} />
-        <Routes>
-        <Route element={<RequireAuth />}>
-          <Route path="/" exact element={<Pages.Home/>} />
-          <Route path="/home" exact element={<Pages.Home/>} />
-          <Route path="/books" exact element={<Pages.Books />} />
-          <Route path="/books/:id" exact element={<Pages.BookItem isLoggedIn={isLoggedIn}/>} />
-          <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
-          <Route path="/editprofile" exact element ={<Pages.UserProfileEdit/>}/>
-          <Route path='/resetpassword' exact element ={<Pages.ResetPasswordForm/>}/>
-          <Route path='/borrowedbooks' exact element ={<Pages.UserLoans/>}/>
-          <Route path="/returns-scanner" exact element={<LibrarianPages.ReturnsScanner/>} />
-          <Route path="/loans-scanner" exact element={<LibrarianPages.LoansScanner/>} />
-        </Route>
-        <Route path="/signup" exact element={<Pages.Signup />} />
-        <Route path="/login"  exact element={<Pages.Login checkLoggedIn={checkLoggedIn} />} />  
-          {authState.role == "admin" || "librarian" ? (
-            <>
-            <Route path="/google-books-search" exact element={<LibrarianPages.GoogleBooksSearch />} />
-            <Route path="/google-books/:id" exact element={<LibrarianPages.GoogleBooksDetails/>} />
-            </>
-          ) : ""}
-          {authState.role == "admin" ? (
-            <>
+  const adminRoutes = () => {
+    if (authState.role == "admin") 
+      return <>
           <Route exact path='/admin/dashboard' element ={<AdminDashboard/>}/>
           <Route exact path='/admin/user/list' element={<AdminPages.UserList/>}/>
           <Route exact path="/admin/user/:id" element={<AdminPages.UserDetail/>}/>
@@ -83,8 +56,40 @@ function App() {
           <Route exact path="/admin/book/add" element={<AdminPages.BookAdd/>}/>
           <Route exact path="/admin/book/edit/:id" element={<AdminPages.BookEdit/>}/>
           <Route exact path="/admin/loan/list" element={<AdminPages.LoanList/>}/>
-          </>
-          ) : ""}
+      </>
+  }
+
+  const librarianRoutes = () => {
+    if (authState.role == "admin" || authState.role == "librarian") return <>
+      <Route path="/google-books-search" exact element={<LibrarianPages.GoogleBooksSearch />} />
+      <Route path="/google-books/:id" exact element={<LibrarianPages.GoogleBooksDetails/>} />
+      <Route path="/returns-scanner" exact element={<LibrarianPages.ReturnsScanner/>} />
+      <Route path="/loans-scanner" exact element={<LibrarianPages.LoansScanner/>} />
+      </>
+  }
+
+  return (
+    <div className="App">
+    <AuthContext.Provider
+        value={{ authState, setAuthState }}>
+    <ChakraProvider theme={theme}>
+      <BrowserRouter>
+        <Navbar userStatus={{isLoggedIn, setIsLoggedIn}} role={authState.role} />
+        <Routes>
+          <Route path="/home" exact element={<Pages.Home/>} />
+          <Route path="/books" exact element={<Pages.Books />} />
+          <Route path="/books/:id" exact element={<Pages.BookItem isLoggedIn={isLoggedIn}/>} />
+        <Route element={<RequireAuth />}>
+          <Route path="/" exact element={<Pages.Home/>} />
+          <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
+          <Route path="/editprofile" exact element ={<Pages.UserProfileEdit/>}/>
+          <Route path='/resetpassword' exact element ={<Pages.ResetPasswordForm/>}/>
+          <Route path='/borrowedbooks' exact element ={<Pages.UserLoans/>}/>
+        </Route>
+        <Route path="/signup" exact element={<Pages.Signup />} />
+        <Route path="/login"  exact element={<Pages.Login checkLoggedIn={checkLoggedIn} />} />  
+          {librarianRoutes()}
+          {adminRoutes()}
           <Route path="*" exact element={<Pages.PageNotFound />} />
         </Routes>
         <Footer />

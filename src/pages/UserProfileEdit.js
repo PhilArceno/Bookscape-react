@@ -18,7 +18,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import { config } from '../helpers/constants';
-import { AuthContext } from '../helpers/AuthContext';
+import { AuthContext } from '../helpers/contexts/AuthContext';
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
