@@ -22,13 +22,17 @@ function UserLoans() {
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
-    Axios.get(config.url.API_URL + "/api/loans").then(response => {
+    Axios.get(config.url.API_URL + "/api/loans/active",{
+      headers : {
+        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+      }
+    }).then(response => {
       setLoanList(response.data);
     });
   }, [loanList]);
 
   const renewLoan = (id) => {
-    Axios.put(config.url.API_URL+`/api/Loans/renew/${id}`, {
+    Axios.put(config.url.API_URL+`/api/loans/renew/${id}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
       }
