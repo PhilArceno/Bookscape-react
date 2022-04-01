@@ -50,8 +50,39 @@ export default function Navbar({ userStatus, role }) {
     navigate('/');
   };
 
-  useEffect(() => {
-  }, [isLoggedIn, role]);
+  useEffect(() => {}, [isLoggedIn, role]);
+
+  const renderRoleLinks = () => {
+    let jsx = (<>
+      <MenuItem>
+        <Link as={ReactRouterLink} to="/returns-scanner">
+          Return Scan
+        </Link>
+        <br />
+      </MenuItem>
+      <MenuItem>
+        <Link as={ReactRouterLink} to="/loans-scanner">
+          Loan Scan
+        </Link>
+        <br />
+      </MenuItem>
+      </>);
+
+    if (role === 'librarian' || role === 'admin') {
+      return jsx;
+    }
+    if (role === 'admin') {
+      return <>
+        {jsx}
+        <MenuItem>
+        <Link as={ReactRouterLink} to="/admin/dashboard">
+          Admin
+        </Link>
+        <br />
+      </MenuItem>
+      </>
+    }
+  }
 
   return (
     <>
@@ -77,8 +108,11 @@ export default function Navbar({ userStatus, role }) {
               {Links.map(link => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
-              {isLoggedIn && (role === 'admin' || role === 'librarian') ? 
-              <NavLink>Google Books Search</NavLink> : ""}
+              {isLoggedIn && (role === 'admin' || role === 'librarian') ? (
+                <NavLink>Google Books Search</NavLink>
+              ) : (
+                ''
+              )}
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
@@ -145,16 +179,13 @@ export default function Navbar({ userStatus, role }) {
                   />
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>                    <Link as={ReactRouterLink} to="/myprofile">
-                      My Profile
-                    </Link></MenuItem>
                   <MenuItem>
                     {' '}
-                    <Link as={ReactRouterLink} to="/admin/dashboard">
-                      Admin
+                    <Link as={ReactRouterLink} to="/myprofile">
+                      My Profile
                     </Link>
-                    <br />
                   </MenuItem>
+                    {isLoggedIn && renderRoleLinks()}
                   <MenuDivider />
                   <MenuItem fontSize={'sm'} fontWeight={400} onClick={logout}>
                     Logout
