@@ -15,7 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Axios from 'axios';
 import { config } from '../helpers/constants';
-import { AuthContext } from '../helpers/AuthContext';
+import { AuthContext } from '../helpers/contexts/AuthContext';
 
 export default function UserProfile() {
   const navigate = useNavigate();

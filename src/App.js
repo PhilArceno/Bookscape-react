@@ -8,7 +8,7 @@ import * as AdminPages from './pages/admin';
 import * as Loans from './pages/loans';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import { config } from './helpers/constants';
-import { AuthContext } from "./helpers/AuthContext";
+import { AuthContext } from "./helpers/contexts/AuthContext";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -61,6 +61,7 @@ function App() {
           <Route path="/books/:id" exact element={<Pages.BookItem isLoggedIn={isLoggedIn}/>} />
           <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
           <Route path="/returns-scanner" exact element={<LibrarianPages.ReturnsScanner/>} />
+          <Route path="/loans-scanner" exact element={<LibrarianPages.LoansScanner/>} />
           {authState.role == "admin" || "librarian" ? (
             <>
             <Route path="/google-books-search" exact element={<LibrarianPages.GoogleBooksSearch />} />
