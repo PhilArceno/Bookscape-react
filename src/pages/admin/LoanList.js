@@ -77,6 +77,7 @@ function LoanList() {
         <th>Loan DueDate</th>
         <th>Update</th>
         <th>Delete</th>
+       {/* <th>Detail</th>*/}
 
         </tr>
            </thead>
@@ -90,6 +91,7 @@ function LoanList() {
             <td>{loan.startDate}</td>
             <td>{loan.dueDate}</td>        
             <td><button class = "btn btn-primary" onClick={()=>{editLoan(loan.id)}}>Update</button></td>
+           {/* <td><button class = "btn btn-primary"><a href={'/admin/loan/'+loan.id}>Detail</a></button></td>*/}
             <td><button class = "btn btn-danger" onClick={()=>{deleteLoan(loan.id)}}>Delete</button></td>    
           </tr>)
         })

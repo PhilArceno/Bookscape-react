@@ -26,7 +26,6 @@ import * as Yup from 'yup';
 
 export default function UserProfileEdit() {
   const { authState } = useContext(AuthContext);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
   const [user, setUser] = useState({});
 
@@ -34,6 +33,10 @@ export default function UserProfileEdit() {
 
   const CancelEdit = () => {
     navigate('/myprofile');
+  };
+
+  const NotImplemented = () => {
+    alert("Hello! I am not implemented!!");
   };
 
   useEffect(()=>{
@@ -64,10 +67,8 @@ export default function UserProfileEdit() {
         'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
       }
     })
-      .then((response)=>{
+      .then(()=>{
           navigate("/myprofile");
-      }).catch((error)=>{
-        setError(error.message);
       });
   };
   
@@ -95,7 +96,6 @@ export default function UserProfileEdit() {
       justify={'center'}
       bg={useColorModeValue('gray.50', 'gray.800')}
     >
-      {error?(<div className="alert alert-danger">{error}</div>):""}
       <Stack
         spacing={4}
         w={'full'}
@@ -127,11 +127,12 @@ export default function UserProfileEdit() {
                   colorScheme="red"
                   aria-label="remove Image"
                   icon={<SmallCloseIcon />}
+                  onClick={()=>{NotImplemented()}}
                 />
               </Avatar>
             </Center>
             <Center w="full">
-              <Button w="full">Change Profile Picture</Button>
+              <Button w="full" onClick={()=>{NotImplemented()}}>Change Profile Picture</Button>
             </Center>
           </Stack>
         </FormControl>

@@ -110,7 +110,7 @@ export default function Login({checkLoggedIn}) {
                   <Checkbox>Remember me</Checkbox>
                   <Link color={'blue.400'}>Forgot password?</Link>
                 </Stack>
-                <Button data-testid="login"
+                <Button id="loginbtn" data-testid="login"
                   isLoading={isLoading}
                   type="submit"
                   bg={'blue.400'}

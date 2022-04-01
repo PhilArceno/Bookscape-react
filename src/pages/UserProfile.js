@@ -40,7 +40,7 @@ const UserLoans = ()=>{
       fields.forEach(field => user[field]);
       setUser(user);
     });
-  });
+  },[]);
 
   return (
     <Flex
