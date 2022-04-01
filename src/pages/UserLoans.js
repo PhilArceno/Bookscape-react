@@ -13,7 +13,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Axios from 'axios';
 import { config } from '../helpers/constants';
-import { AuthContext } from '../helpers/AuthContext';
+import { AuthContext } from '../helpers/contexts/';
 
 function UserLoans() {
   const [error, setError] = useState('');
