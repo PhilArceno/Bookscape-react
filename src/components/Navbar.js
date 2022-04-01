@@ -68,7 +68,7 @@ export default function Navbar({ userStatus, role }) {
       </MenuItem>
       </>);
 
-    if (role === 'librarian' || role === 'admin') {
+    if (role === 'librarian') {
       return jsx;
     }
     if (role === 'admin') {
