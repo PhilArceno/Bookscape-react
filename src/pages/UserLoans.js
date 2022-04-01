@@ -12,9 +12,9 @@ import {
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Axios from 'axios';
-import { config } from '../../helpers/constants';
+import { config } from '../helpers/constants';
 
-function LoanList() {
+function UserLoans() {
   const [error, setError] = useState('');
   const [loanList, setLoanList] = useState([]);
   const navigate = useNavigate();
@@ -89,4 +89,4 @@ function LoanList() {
     </Box>
   );
 }
-export default LoanList;
+export default UserLoans;

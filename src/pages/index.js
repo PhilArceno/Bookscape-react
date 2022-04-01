@@ -6,5 +6,9 @@ import Login from "./Login";
 import Signup from "./Signup";
 import BookItem from "./BookItem";
 import UserProfile from "./UserProfile";
+import UserLoans from "./UserLoans";
+import UserProfileEdit from "./UserProfileEdit";
+import ResetPasswordForm from "./ResetPasswordForm";
 
-export {Home, PageNotFound, Login, Signup, Books, BookItem, UserProfile}
+
+export {Home, PageNotFound, Login, Signup, Books, BookItem, UserProfile, UserLoans, UserProfileEdit, ResetPasswordForm}
