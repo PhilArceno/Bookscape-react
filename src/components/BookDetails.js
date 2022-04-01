@@ -47,8 +47,8 @@ const BookDetails = ({ book, action }) => {
           <Heading as="h3" size="sm">
             {book.publisher}, {book.publishedDate}
           </Heading>
-            <Heading as="h4" size="xs" key={book.isbn.identifier}>
-              ISBN-13 - {book.isbn.identifier}
+            <Heading as="h4" size="xs" key={book.isbn}>
+              ISBN-13 - {book.isbn}
             </Heading>
           <Heading as="h4" size="xs">
             {book.dewey}

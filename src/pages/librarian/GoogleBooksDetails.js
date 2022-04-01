@@ -14,7 +14,7 @@ function GoogleBooksDetails() {
     author: '',
     publishedDate: '',
     publisher: '',
-    isbn: {},
+    isbn: '',
     // dewey: -1,
     coverImage: '',
     description: ``,
@@ -46,7 +46,7 @@ function GoogleBooksDetails() {
           subject: volumeInfo.categories ? volumeInfo.categories[0] : "Other",
           publishedDate: volumeInfo.publishedDate,
           previewLink: volumeInfo.previewLink,
-          isbn: volumeInfo.industryIdentifiers[1],
+          isbn: volumeInfo.industryIdentifiers[1].identifier,
           coverImage,
           pageCount: volumeInfo.pageCount,
         });
@@ -89,7 +89,7 @@ function GoogleBooksDetails() {
         subject: bookDetails.subject,
         description: bookDetails.description,
         publisher: bookDetails.publisher,
-        isbn: bookDetails.isbn.identifier,
+        isbn: bookDetails.isbn,
         coverImage: bookDetails.coverImage,
       }),
     })
