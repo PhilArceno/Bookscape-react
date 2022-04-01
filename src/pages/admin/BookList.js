@@ -55,25 +55,27 @@ function BookList() {
         <table class = "table table-striped table-bordered">
         <thead class = "table-dark"> 
           <tr>
+          <td>CoverImage</td>
             <td>Title</td>
             <td>Author</td>
             <td>Publisher</td>
             <td>Subject</td>
             <td>ISBN</td>
-		        <td>CoverImage</td>
+		      
             <td>Update<br/>Delete</td>
           
             </tr></thead>
         {bookList.length > 0 ? bookList.map((book)=>{
           return (
           <tr key={(book.id)}>
+             <td><Image src={book.coverImage} maxW="20"/></td>
             <td><Link to={'/admin/book/'+ book.id}>{book.title}</Link></td>
             <td>{book.author}</td>
             <td>{book.publisher}</td>
             <td>{book.subject}</td>
             <td>{book.isbn}</td> 
           
-            <td><Image src={book.coverImage} maxW="20"/></td>
+           
             
             
             <button  class = "btn btn-primary m-2" onClick={()=>{EditBook(book.id)}}>Update</button>
