@@ -21,7 +21,7 @@ const BookDetails = () => {
     const fetchDetails = async () => {
       setIsLoading(true);
       const resources = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${term}&maxResults=11`
+        `https://www.googleapis.com/books/v1/volumes?q=${term ? term : "Elmo"}&maxResults=11`
       );
       console.log(resources.data);
       setDetails(resources.data.items);
