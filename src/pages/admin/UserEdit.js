@@ -34,7 +34,7 @@ function UserEdit() {
     var body = {UserName:data.userName,
         Email:data.email,
         PhoneNumber:data.phoneNumber,
-        Password:'****'};
+      Password:''  };
     Axios.put(config.url.API_URL+`/api/Users/${id}`,
       body,
       {
