@@ -57,6 +57,8 @@ function App() {
           <Route exact path="/admin/book/edit/:id" element={<AdminPages.BookEdit/>}/>
           <Route exact path="/admin/loan/list" element={<AdminPages.LoanList/>}/>
           <Route exact path="/admin/loan/:id" element={<AdminPages.LoanDetail/>}/>
+          <Route exact path="/admin/loan/add" element={<AdminPages.LoanAdd/>}/>
+         
       </>
   }
 

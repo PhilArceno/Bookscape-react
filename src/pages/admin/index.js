@@ -8,6 +8,8 @@ import  UserAdd from './UserAdd';
 import  UserEdit from './UserEdit';
 import LoanList from './LoanList';
 import LoanDetail from './LoanDetail';
+import LoanAdd from './LoanAdd';
 
-export {BookAdd,BookDetail,BookList,BookEdit,UserAdd,UserDetail,UserList,UserEdit,LoanList,LoanDetail}
+
+export {BookAdd,BookDetail,BookList,BookEdit,UserAdd,UserDetail,UserList,UserEdit, LoanAdd,LoanDetail,LoanList}
   
