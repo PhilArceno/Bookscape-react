@@ -185,6 +185,18 @@ export default function Navbar({ userStatus, role }) {
                       My Profile
                     </Link>
                   </MenuItem>
+                  <MenuItem>
+                    {' '}
+                    <Link as={ReactRouterLink} to="/borrowedbooks">
+                      My Borrowed books
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    {' '}
+                    <Link as={ReactRouterLink} to="/myrequests">
+                      My Requests
+                    </Link>
+                  </MenuItem>
                     {isLoggedIn && renderRoleLinks()}
                   <MenuDivider />
                   <MenuItem fontSize={'sm'} fontWeight={400} onClick={logout}>
