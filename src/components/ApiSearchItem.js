@@ -42,7 +42,7 @@ const ApiSearchItem = ({ id, volumeInfo }) => {
           <Box>
             <Box>
               {title && (
-                <Heading marginBottom={'.3em'} size="md" className="inline">
+                <Heading data-testid="title" marginBottom={'.3em'} size="md" className="inline">
                   {title}
                 </Heading>
               )}

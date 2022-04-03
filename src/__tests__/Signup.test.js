@@ -2,11 +2,15 @@ import { act, render, screen, cleanup, fireEvent, waitFor } from "@testing-libra
 import '@testing-library/jest-dom';
 import user from '@testing-library/user-event';
 import Signup from "../pages/Signup";
+import fetchMock from "jest-fetch-mock";
+
+fetchMock.enableMocks();
 
 describe("Signup component", () => {
     const onSubmit = jest.fn();
+    global.fetch = onSubmit.mockImplementation(() => mockFetchPromise);
     beforeEach(() => {
-        render(<Signup onSubmit = {onSubmit}/>);
+        render(<Signup onSubmit={onSubmit} />);
     });
     afterEach(() => {
         cleanup();
@@ -54,6 +58,7 @@ describe("Signup component", () => {
     });
 
     it("all the infomation are correct can call the sign up button", () => {
+   
         const usernameInput = screen.getByPlaceholderText("Ex. JohnDoe12");
         const emailInput = screen.getByPlaceholderText("Ex. JohnDoe@email.com");
         const phoneInput = screen.getByPlaceholderText("Ex. 514-123-4567");
@@ -70,7 +75,7 @@ describe("Signup component", () => {
 
         user.click(signUpbtn);
 
-        //expect(onSubmit).toBeCalled();
+        //expect(global.fetch).toBeCalled();
 
     });
 
