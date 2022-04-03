@@ -34,7 +34,8 @@ function LoanDetail() {
         loan.coverImage = d.book.coverImage;
         loan.totalCopies= d.book.totalCopies;
         loan.CopiesLoanded = d.book.CopiesLoanded
-    
+        loan.onHold = d.book.onHold;
+        loan.renewCount = d.renewCount;
         setLoan(loan);
       });
      },[]);
@@ -57,8 +58,7 @@ function LoanDetail() {
         <p><Image src={loan.coverImage} maxW="20"/></p>
         <p>Publisher:{loan.publisher}</p>
         <p>Subject:{loan.subject}</p>
-        <p>TotalCopies:{loan.totalCopies}</p>
-        <p>CopiesLoanded:{loan.CopiesLoanded}</p>
+        <p>renewCount:{loan.renewCount}</p>
         
         
         

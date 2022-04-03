@@ -30,6 +30,7 @@ function LoanList() {
         loan.title = d.book.title;
         loan.isbn = d. book.isbn;
         loan.coverImage = d.book.coverImage
+        loan.renewCount = d.renewCount;
         loanList.push(loan);
       })
       setLoanList(loanList);
@@ -90,7 +91,7 @@ function LoanList() {
             <td>{loan.userName}</td>
             <td>{loan.startDate}</td>
             <td>{loan.dueDate}</td>        
-            <td><button class = "btn btn-primary" onClick={()=>{editLoan(loan.id)}}>Update</button></td>
+            <td><button class = "btn btn-primary" onClick={()=>{editLoan(loan.id)}}>Return</button></td>
            {/* <td><button class = "btn btn-primary"><a href={'/admin/loan/'+loan.id}>Detail</a></button></td>*/}
             <td><button class = "btn btn-danger" onClick={()=>{deleteLoan(loan.id)}}>Delete</button></td>    
           </tr>)
