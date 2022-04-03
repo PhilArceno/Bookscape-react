@@ -34,12 +34,12 @@ const SearchAPIBook = ({ searchText, submitSearch }) => {
     <Box>
       <FormControl as={"form"} onSubmit={handleSubmit}>
         <InputGroup>
-          <Input
+          <Input data-testid="searchInput"
             type="text"
             placeholder="Search Spiderman, Batman etc.."
             onChange={onChangevalue}
           />
-          <InputRightElement zIndex={0} children={<Button h={"80%"} w={"80%"} marginRight="10px" type="submit"><SearchIcon/></Button>} />
+          <InputRightElement zIndex={0} children={<Button id="searchbtn" h={"80%"} w={"80%"} marginRight="10px" type="submit"><SearchIcon/></Button>} />
         </InputGroup>
       </FormControl>
       {/* <Box
