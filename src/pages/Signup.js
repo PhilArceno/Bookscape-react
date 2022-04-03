@@ -104,7 +104,7 @@ export default function Signup() {
             <Stack spacing={4}>
               <FormControl data-testid="username" id="username" isRequired>
                 <FormLabel>Username</FormLabel>
-                <Text color="red">{errors.username?.message}</Text>
+                <Text data-testid="username-errormessage" color="red">{errors.username?.message}</Text>
                 <Input data-testid="usernameInput"
                   placeholder="Ex. JohnDoe12"
                   type="text"
@@ -113,7 +113,7 @@ export default function Signup() {
               </FormControl>
               <FormControl id="email" isRequired>
                 <FormLabel>Email address</FormLabel>
-                <Text color="red">{errors.email?.message}</Text>
+                <Text data-testid="email-errormessage" color="red">{errors.email?.message}</Text>
                 <Input
                   placeholder="Ex. JohnDoe@email.com"
                   type="email"
@@ -135,7 +135,7 @@ export default function Signup() {
                 <FormLabel>Password</FormLabel>
                 <Text color="red">{errors.password?.message}</Text>
                 <InputGroup>
-                  <Input
+                  <Input data-testid="passwordInput"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Enter a 8-24 length password"
                     {...register('password')}
@@ -156,7 +156,7 @@ export default function Signup() {
                 <FormLabel>Confirm Password</FormLabel>
                 <Text color="red">{errors.confirmPassword?.message}</Text>
                 <InputGroup>
-                  <Input
+                  <Input data-testid="confirmPasswordInput"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Enter a 8-24 length password"
                     {...register('confirmPassword')}
@@ -174,7 +174,7 @@ export default function Signup() {
                 </InputGroup>
               </FormControl>
               <Stack spacing={10} pt={2}>
-                <Button data-testid="signUp"
+                <Button data-testid="signUpbtn"
                   ref={submitBtn}
                   isDisabled={formSuccess}
                   type="submit"
