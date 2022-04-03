@@ -4,7 +4,7 @@ import { config } from '../../helpers/constants'
 import { LoanContext } from '../../helpers/contexts/LoanContext';
 import {useScanner} from '../../helpers/hooks';
 
-const LoanEdit = () => {
+const LoanReturn = () => {
     const [codes, result, dispatchLoanEvent] = useScanner();
 
     const action = () => {
@@ -39,4 +39,4 @@ const LoanEdit = () => {
   )
 }
 
-export default LoanEdit
+export default LoanReturn
