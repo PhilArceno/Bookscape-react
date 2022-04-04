@@ -24,8 +24,8 @@ export default function UserProfile() {
     navigate("/editprofile");
 };
 
-const UserLoans = ()=>{
-  navigate("/borrowedbooks");
+const ResetPassword = ()=>{
+  navigate("/resetpassword");
 };
 
   useEffect(() => {
@@ -89,15 +89,15 @@ const UserLoans = ()=>{
 
         <Stack spacing={6} direction={['column', 'row']}>
           <Button
-            bg={'green.400'}
+            bg={'red.400'}
             color={'white'}
             w="full"
             _hover={{
-              bg: 'green.500',
+              bg: 'red.500',
             }}
-            onClick={()=>{UserLoans()}}
+            onClick={()=>{ResetPassword()}}
           >
-            My Borrowed Books
+            Reset Password
           </Button>
           <Button
             bg={'blue.400'}
