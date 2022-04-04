@@ -1,4 +1,4 @@
-import { Box, Button} from '@chakra-ui/react';
+import { Box, Button, Heading} from '@chakra-ui/react';
 import {
   Table,
   Thead,
@@ -20,6 +20,8 @@ function UserLoans() {
   const [loanList, setLoanList] = useState([]);
   const navigate = useNavigate();
   const { authState } = useContext(AuthContext);
+  const [renewStatus, setRenewStatus] = useState(false);
+
 
   useEffect(() => {
     Axios.get(config.url.API_URL + "/api/loans/active",{
@@ -36,12 +38,19 @@ function UserLoans() {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
       }
-  });
-  }
+  }).then(response => response.text())
+  .then(text => {
+    if (text) setRenewStatus(true);
+    console.log (text);
+  })};
 
 
   return (
+    <><Box m={10} maxW="1600" display="flex" justifyContent={'center'}>
+    <Heading text-align={'center'}>My borrowed books</Heading>
+    </Box>
     <Box m={10} maxW="1600" display="flex" justifyContent={'center'}>
+
       <Table>
         <Thead>
           {' '}
@@ -78,6 +87,7 @@ function UserLoans() {
         </Tbody>
       </Table>
     </Box>
+    </>
   );
 }
 export default UserLoans;
