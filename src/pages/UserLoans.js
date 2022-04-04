@@ -29,6 +29,7 @@ function UserLoans() {
         'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
       }
     }).then(response => {
+      console.log(response);
       setLoanList(response.data);
     });
   }, [loanList]);
