@@ -87,6 +87,7 @@ function App() {
           <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
           <Route path="/editprofile" exact element ={<Pages.UserProfileEdit/>}/>
           <Route path='/resetpassword' exact element ={<Pages.ResetPasswordForm/>}/>
+          <Route path='/myrequests' exact element ={<Pages.RequestList/>}/>
           <Route path='/borrowedbooks' exact element ={<Pages.UserLoans/>}/>
         </Route>
         <Route path="/signup" exact element={<Pages.Signup />} />
@@ -110,7 +111,7 @@ function App() {
       // trying to go to when they were redirected. This allows us to send them
       // along to that page after they login, which is a nicer user experience
       // than dropping them off on the home page.
-      return <Navigate to="/login" state={{ from: location }} />;
+      return <Navigate to="/books" state={{ from: location }} />;
     }
 
     return <Outlet />;

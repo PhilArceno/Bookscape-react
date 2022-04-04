@@ -15,39 +15,39 @@ import Axios from 'axios';
 import { config } from '../helpers/constants';
 import { AuthContext } from '../helpers/contexts/';
 
-function UserLoans() {
+function RequestList() {
   const [error, setError] = useState('');
-  const [loanList, setLoanList] = useState([]);
+  const [requestList, setRequestList] = useState([]);
   const navigate = useNavigate();
   const { authState } = useContext(AuthContext);
   const [renewStatus, setRenewStatus] = useState(false);
 
 
   useEffect(() => {
-    Axios.get(config.url.API_URL + "/api/loans/active",{
+    Axios.get(config.url.API_URL + "/api/request",{
       headers : {
         'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
       }
     }).then(response => {
-      setLoanList(response.data);
+      setRequestList(response.data);
     });
-  }, [loanList]);
+  }, [requestList]);
 
-  const renewLoan = (id) => {
-    Axios.put(config.url.API_URL+`/api/loans/renew/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+  const cancelRequest = (id) => {   
+        Axios.delete(config.url.API_URL+`/api/request/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+          }
+      }).catch((error)=>{
+          setError(error.message);
+        });
+       window.location.reload();
       }
-  }).then(response => response.text())
-  .then(text => {
-    if (text) setRenewStatus(true);
-    console.log (text);
-  })};
 
 
   return (
     <><Box m={10} maxW="1600" display="flex" justifyContent={'center'}>
-    <Heading text-align={'center'}>My borrowed books</Heading>
+    <Heading text-align={'center'}>My requested books</Heading>
     </Box>
     <Box m={10} maxW="1600" display="flex" justifyContent={'center'}>
 
@@ -57,28 +57,26 @@ function UserLoans() {
           <Tr>
           <Th>Title</Th>
           <Th>Author</Th>
-            <Th>Start Day</Th>
-            <Th>Due Day</Th>
+            <Th>Request Day</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {loanList.length > 0
-            ? loanList.map(loan => {
+          {requestList.length > 0
+            ? requestList.map(request => {
                 return (
-                  <Tr key={loan.id}>
-                    <Td>{loan.book.title}</Td>
-                    <Td>{loan.book.author}</Td>
-                    <Td>{loan.startDate}</Td>
-                    <Td>{loan.dueDate}</Td>
+                  <Tr key={request.id}>
+                    <Td>{request.book.title}</Td>
+                    <Td>{request.book.author}</Td>
+                    <Td>{request.requestDate}</Td>
 
                     <Button
-                      colorScheme="teal"
+                      colorScheme="red"
                       size="md"
                       onClick={() => {
-                        renewLoan(loan.id);
+                        cancelRequest(request.id);
                       }}
                     >
-                      Renew book
+                      Cancel request
                     </Button>
                   </Tr>
                 );
@@ -90,4 +88,4 @@ function UserLoans() {
     </>
   );
 }
-export default UserLoans;
+export default RequestList;
