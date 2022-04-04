@@ -1,4 +1,6 @@
 import {
+  Box,
+  Image,
   Button,
   Flex,
   Heading,
@@ -13,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
 import { config } from '../helpers/constants';
 import { AuthContext } from '../helpers/contexts/AuthContext';
+import { get } from 'react-hook-form';
 
 export default function UserProfile() {
   const navigate = useNavigate();
@@ -29,6 +32,10 @@ const UserLoans = ()=>{
 };
 
   useEffect(() => {
+      getUserDetails();
+  },[]);
+
+  const getUserDetails = () => {
     Axios.get(config.url.API_URL + `/api/Users/${authState.id}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
@@ -40,7 +47,8 @@ const UserLoans = ()=>{
       fields.forEach(field => user[field]);
       setUser(user);
     });
-  },[]);
+  }
+
 
   return (
     <Flex
@@ -72,6 +80,15 @@ const UserLoans = ()=>{
             </Heading>
           </Center>
         </Stack>
+
+        {user.id && (
+        <Stack direction="column" w="full" textAlign="center">
+          <Text color={'gray.500'}>Library ID</Text>
+          <Image m="0 auto" src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${user.id}`}/>
+          <Text>{user.id}</Text>
+        </Stack>
+        )}
+
         <Text color={'gray.500'}>Name</Text>
         <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
           {user.userName}
