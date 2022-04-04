@@ -47,7 +47,7 @@ function LoanEdit() {
         dueDate:data.dueDate,
         userId:data.userId
            };
-    Axios.put(config.url.API_URL+`/api/Loans/${id}`,
+    Axios.put(config.url.API_URL+`/api/Loans/renew/${id}`,
       body,
       {
         headers : {
