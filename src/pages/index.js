@@ -9,6 +9,7 @@ import UserProfile from "./UserProfile";
 import UserLoans from "./UserLoans";
 import UserProfileEdit from "./UserProfileEdit";
 import ResetPasswordForm from "./ResetPasswordForm";
+import RequestList from "./RequestsList";
 
 
-export {Home, PageNotFound, Login, Signup, Books, BookItem, UserProfile, UserLoans, UserProfileEdit, ResetPasswordForm}
+export {Home, PageNotFound, Login, Signup, Books, BookItem, UserProfile, RequestList, UserLoans, UserProfileEdit, ResetPasswordForm}

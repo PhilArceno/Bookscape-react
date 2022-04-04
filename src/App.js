@@ -87,6 +87,7 @@ function App() {
           <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
           <Route path="/editprofile" exact element ={<Pages.UserProfileEdit/>}/>
           <Route path='/resetpassword' exact element ={<Pages.ResetPasswordForm/>}/>
+          <Route path='/myrequests' exact element ={<Pages.RequestList/>}/>
           <Route path='/borrowedbooks' exact element ={<Pages.UserLoans/>}/>
         </Route>
         <Route path="/signup" exact element={<Pages.Signup />} />
