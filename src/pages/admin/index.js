@@ -10,7 +10,7 @@ import LoanList from './LoanList';
 import LoanDetail from './LoanDetail';
 import LoanAdd from './LoanAdd';
 import LoanReturn from './LoanReturn';
+import LoanEdit from './LoanEdit';
 
-
-export {BookAdd,BookDetail,BookList,BookEdit,UserAdd,UserDetail,UserList,UserEdit, LoanAdd,LoanDetail,LoanList,LoanReturn}
+export {BookAdd,BookDetail,BookList,BookEdit,UserAdd,UserDetail,UserList,UserEdit, LoanAdd,LoanDetail,LoanList,LoanReturn,LoanEdit}
   

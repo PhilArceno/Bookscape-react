@@ -30,7 +30,6 @@ function LoanList() {
         loan.title = d.book.title;
         loan.isbn = d. book.isbn;
         loan.coverImage = d.book.coverImage
-        loan.renewCount = d.renewCount;
         loanList.push(loan);
       })
       setLoanList(loanList);
@@ -40,7 +39,10 @@ function LoanList() {
     
      },[]);
 
-  const editLoan = (id)=>{
+  const returnLoan = (id)=>{
+      navigate("/admin/loan/return/"+id);
+    };
+    const editLoan = (id)=>{
       navigate("/admin/loan/edit/"+id);
     };
    
@@ -70,15 +72,15 @@ function LoanList() {
          <table class = "table table-striped table-bordered">
            <thead class = "table-dark">
         <tr>
-          <th>CoverImage</th>
+        <th>CoverImage</th>
         <th>Title</th>
         <th>Book ISBN</th>
         <th>UserName</th>
-        <th>Loan StartDate</th>
-        <th>Loan DueDate</th>
+        <th> StartDate</th>
+        <th> DueDate</th>
+        <th>Return</th>
         <th>Update</th>
         <th>Delete</th>
-       {/* <th>Detail</th>*/}
 
         </tr>
            </thead>
@@ -91,8 +93,8 @@ function LoanList() {
             <td>{loan.userName}</td>
             <td>{loan.startDate}</td>
             <td>{loan.dueDate}</td>        
-            <td><button class = "btn btn-primary" onClick={()=>{editLoan(loan.id)}}>Return</button></td>
-           {/* <td><button class = "btn btn-primary"><a href={'/admin/loan/'+loan.id}>Detail</a></button></td>*/}
+            <td><button class = "btn btn-primary" onClick={()=>{returnLoan(loan.id)}}>Retrun</button></td>
+            <td><button class = "btn btn-primary" onClick={()=>{editLoan(loan.id)}}>Update</button></td>
             <td><button class = "btn btn-danger" onClick={()=>{deleteLoan(loan.id)}}>Delete</button></td>    
           </tr>)
         })
