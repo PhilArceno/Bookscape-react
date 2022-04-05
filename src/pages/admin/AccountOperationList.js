@@ -25,6 +25,7 @@ function AccountOperationList() {
         account.operationType = d.operationType.operationType;
         account.startDate= d.loan.startDate;
         account.dueDate = d.loan.dueDate;
+        account.returnDate= d.loan.returnDate;
         account.userId = d.user.id;
         account.userName = d.user.userName;
         account.bookId = d.book.id;
@@ -72,12 +73,13 @@ function AccountOperationList() {
          <table class = "table table-striped table-bordered">
            <thead class = "table-dark">
         <tr>
-        <th>CoverImage</th>
-        <th>Title</th>
+       
+      
         <th>Book ISBN</th>
         <th>UserName</th>
         <th>StartDate</th>
         <th>DueDate</th>
+        <th>returnDate</th>
         <th>Amount</th>
         <th>Recorder Time</th>
         
@@ -89,12 +91,12 @@ function AccountOperationList() {
            <tbody>
         {accountList.length > 0 ? accountList.map((account)=>{
           return (<tr key={(account.id)}>
-            <td><Image src={account.coverImage} maxW="20"/></td>
-            <td><a href={'/admin/account/'+account.id}>{account.operationType}</a></td>
-            <th>{account.isbn}</th>
+          
+            <td><a href={'/admin/account/'+account.id}>{account.isbn}</a></td>
             <td>{account.userName}</td>
             <td>{account.startDate}</td>
             <td>{account.dueDate}</td> 
+            <td>{account.returnDate}</td>
             <th>{account.amount}</th>   
             <th>{account.recordeTime }</th> 
              
