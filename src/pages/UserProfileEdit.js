@@ -56,19 +56,28 @@ export default function UserProfileEdit() {
 
   const onSubmitHandler = data => {
     console.log(data);
-    var body = {UserName:data.userName,
-        Email:data.email,
-        PhoneNumber:data.phoneNumber,
-        Password:'****'};
-    Axios.put(config.url.API_URL+`/api/Users/${authState.id}`,
-      body,
-      {
-        headers : {
-        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
-      }
+    fetch(config.url.API_URL + `/api/Users/${authState.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        UserName: data.userName,
+        Email: data.email,
+        PhoneNumber: data.phoneNumber
+      }),
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        'Content-Type': 'application/json'
+      },
     })
-      .then(()=>{
-          navigate("/myprofile");
+      .then(async response => {
+        if (!response.ok) {
+          throw Error(await response.text());
+        } else response.text();
+      })
+      .then(text => {
+        navigate("/myprofile");
+      })
+      .catch(error => {
+        alert(error.message);
       });
   };
   
