@@ -32,7 +32,7 @@ function UserLoans() {
       console.log(response);
       setLoanList(response.data);
     });
-  }, [loanList]);
+  }, []);
 
   const renewLoan = (id) => {
     Axios.put(config.url.API_URL+`/api/loans/renew/${id}`, {
@@ -69,8 +69,8 @@ function UserLoans() {
                   <Tr key={loan.id}>
                     <Td>{loan.book.title}</Td>
                     <Td>{loan.book.author}</Td>
-                    <Td>{loan.startDate}</Td>
-                    <Td>{loan.dueDate}</Td>
+                    <Td>{loan.startDate.substring(0, 10)}</Td>
+                    <Td>{loan.dueDate.substring(0, 10)}</Td>
 
                     <Button
                       colorScheme="teal"
