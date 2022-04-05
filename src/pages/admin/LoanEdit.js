@@ -43,9 +43,9 @@ function LoanEdit() {
   const onSubmitHandler = data => {
     console.log(data);
     var body = {
-        startDate:data.startDate,
-        dueDate:data.dueDate,
-        returnDate:data.returnDate,
+        StartDate:data.startDate,
+        DueDate:data.dueDate,
+        ReturnDate:data.returnDate,
         RenewCount:data.renewCount,
         OnHold:data.onHold,
         Overdue:data.overdue
