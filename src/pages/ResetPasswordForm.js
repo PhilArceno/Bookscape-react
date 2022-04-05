@@ -57,27 +57,28 @@ export default function ResetPasswordForm() {
       .then((response)=>{
         console.log(response.data);
         var user = response.data;
-        const fields = ['userName', 'email', 'phoneNumber'];
-        fields.forEach(field => setValue(field, user[field]));
         setUser(user);
       });
     },[]);
 
-    const onSubmitHandler = data => {
+    const onSubmit = (data) => {
       console.log(data);
-      var body = {
-          Password:data.password};
-      Axios.put(config.url.API_URL+`/api/Users/${authState.id}`,
-        body,
-        {
-          headers : {
+      fetch(config.url.API_URL + `/api/Users/${authState.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          password: data.password,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
-        }
-      })
-        .then(()=>{
-            navigate("/myprofile");
-        });
-    };
+        },
+      }).then((response) => response.text())
+      .then((text) => {
+        console.log(text);
+        navigate("/myprofile");
+      });
+    }
+
 
   return (
     <Flex
@@ -96,6 +97,7 @@ export default function ResetPasswordForm() {
         p={6}
         my={12}
       >
+        <form onSubmit={handleSubmit(onSubmit)}>
         <Heading lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
           Reset password
         </Heading>
@@ -104,7 +106,6 @@ export default function ResetPasswordForm() {
           <Text color="red">{errors.password?.message}</Text>
           <InputGroup>
             <Input
-              data-testid="passwordInput"
               type={showPassword ? 'text' : 'password'}
               placeholder="Enter a 8-24 length password"
               {...register('password')}
@@ -140,7 +141,7 @@ export default function ResetPasswordForm() {
           </InputGroup>
         </FormControl>
         <Stack spacing={6}>
-        <Button data-testid="signUpbtn"
+        <Button
                   type="submit"
                   size="lg"
                   bg={'blue.400'}
@@ -152,6 +153,7 @@ export default function ResetPasswordForm() {
                   Submit
                 </Button>
         </Stack>
+        </form>
       </Stack>
     </Flex>
   );
