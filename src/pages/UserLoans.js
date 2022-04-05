@@ -45,20 +45,12 @@ function UserLoans() {
       .then(async response => {
         if (!response.ok) {
           throw Error(await response.text());
-        } else return response.text();
-      })
-      .then(text => {
-        let parsed = JSON.parse(text);
-        console.log(parsed);
-        if (parsed) setRenewStatus(true);
-      })
-      .catch(err => {
-        console.log(err.message);
-        setRenewStatus(false);
-        setMessage('Loan has been successfully renewed');
-        setTimeout(() => {
-          setMessage(null)
-        }, 1000)
+        } else {
+          setMessage('Loan has been successfully renewed');
+          setTimeout(() => {
+            setMessage(null)
+          }, 1000)
+        };
       })
       .catch(err => {
         setMessage(err.message);
