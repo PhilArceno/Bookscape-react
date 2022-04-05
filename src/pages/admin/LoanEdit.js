@@ -31,6 +31,7 @@ function LoanEdit() {
         loan.overdue = d.overdue;
 
         loan.userName = d.user.userName;
+        loan.userId = d.user.id;
         loan.title = d.book.title;
         loan.isbn = d.book.isbn;
         const fields = ['isbn', 'startDate', 'dueDate','renewCount','returnDate','userId'];
@@ -49,6 +50,7 @@ function LoanEdit() {
         RenewCount:data.renewCount,
         OnHold:data.onHold,
         Overdue:data.overdue
+        
            };
     Axios.put(config.url.API_URL+`/api/Loans/renew/${id}`,
       body,
@@ -64,9 +66,13 @@ function LoanEdit() {
       });
   };
   const validationSchema = Yup.object().shape({
-    
+    startDate: Yup.string()
+    .required('StartDate is Required'), 
     dueDate: Yup.string()
       .required('DueDate is Required'), 
+      dueDate: Yup.string()
+      
+
   });
   const {
     register,
