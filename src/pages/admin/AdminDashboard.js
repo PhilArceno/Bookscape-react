@@ -10,6 +10,7 @@ function AdminDashboard(){
            <Link to="/admin/book/list">Book List</Link><br/>
            <Link to="/admin/loan/list">Loan List</Link><br/>
            <Link to="/admin/account/list">AccountOperation List</Link><br/>
+           <Link to="/admin/request/list">Requests List</Link><br/>
            </Box>);
            }
 export default AdminDashboard;

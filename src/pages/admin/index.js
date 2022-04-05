@@ -15,6 +15,7 @@ import AccountOperationList from "./AccountOperationList";
 import AccountAdd from "./AccountAdd";
 import AccountDetail from "./AccountDetail";
 import AccountEdit from "./AccountEdit";
+import RequestsList from "./RequestsList";
 
-export {BookAdd,BookDetail,BookList,BookEdit,UserAdd,UserDetail,UserList,UserEdit, LoanAdd,LoanDetail,LoanList,LoanReturn,LoanEdit,AccountOperationList,AccountAdd,AccountDetail,AccountEdit}
+export {BookAdd,BookDetail,BookList,BookEdit,UserAdd,UserDetail,UserList,UserEdit, LoanAdd,LoanDetail,LoanList,LoanReturn,LoanEdit,AccountOperationList,AccountAdd,AccountDetail,AccountEdit, RequestsList}
   
