@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useRef } from 'react';
 import { useNavigate,useParams,Link } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -7,7 +7,8 @@ import Axios from 'axios';
 import { config } from '../../helpers/constants';
 
 function LoanEdit() {
-
+  const dueDateRef = useRef(null);
+  const returnDateRef = useRef(null);
   let {id} = useParams();
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -22,35 +23,29 @@ function LoanEdit() {
     })
     .then((response)=>{
         var d = response.data;
-        var loan = {};
-        loan.id = d.id;
-        loan.startDate = d.startDate
-        loan.dueDate = d.dueDate;
-        loan.returnDate= d.returnDate;
-        loan.renewCount= d.renewCount;
-        loan.overdue = d.overdue;
-
-        loan.userName = d.user.userName;
-        loan.title = d.book.title;
-        loan.isbn = d.book.isbn;
-        const fields = ['isbn', 'startDate', 'dueDate','renewCount','returnDate','userId'];
+        let dueDate = new Date(d.dueDate).toISOString();
+        let returnDate = new Date(d.returnDate).toISOString();
+        dueDate = dueDate.substring(0,dueDate.length-1);
+        returnDate = returnDate.substring(0,returnDate.length-1);
+        var loan = {
+          dueDate,
+          returnDate,
+          userName: d.user.userName,
+          isbn: d.book.isbn
+        };
+        const fields = ['isbn', 'dueDate','overdue','returnDate','userId'];
         fields.forEach(field => setValue(field, loan[field]));
         setLoan(loan);
-        
       });
      },[]);
   
   const onSubmitHandler = data => {
     console.log(data);
     var body = {
-        StartDate:data.startDate,
-        DueDate:data.dueDate,
-        ReturnDate:data.returnDate,
-        RenewCount:data.renewCount,
-        OnHold:data.onHold,
-        Overdue:data.overdue
+        DueDate: new Date(data.dueDate).toJSON(),
+        ReturnDate:new Date(data.returnDate).toJSON(),
            };
-    Axios.put(config.url.API_URL+`/api/Loans/renew/${id}`,
+    Axios.put(config.url.API_URL+`/api/Loans/${id}`,
       body,
       {
         headers : {
@@ -64,9 +59,10 @@ function LoanEdit() {
       });
   };
   const validationSchema = Yup.object().shape({
-    
-    dueDate: Yup.string()
-      .required('DueDate is Required'), 
+    dueDate: Yup.date()
+      .required('Due Date is Required'), 
+    returnDate: Yup.date()
+      .required('Return Date is Required'), 
   });
   const {
     register,
@@ -87,45 +83,29 @@ function LoanEdit() {
       <input name="Id" type="hidden" value={loan.id}/>
        Book ISBN: {loan.isbn}<br/>
        User Name :{loan.userName}<br/>
-       <div className="form-group">
-        <label className="control-label m-1">StartDate</label>
-        <input
-          name="startDate"
-          type="datetime-local"
-          {...register('startDate')}
-          className={`form-control m-1 ${errors.dueDate ? 'is-invalid' : ''}`}
-        />
-        <div className="invalid-feedback">{errors.dueDate?.message}</div>
-      </div> 
       <div className="form-group">
         <label className="control-label m-1" >Due Date</label>
         <input
+        ref={dueDateRef}
           name="dueDate"
           type="datetime-local" 
           {...register('dueDate')}
           className={`form-control m-1  ${errors.dueDate ? 'is-invalid' : ''}`}
-        />
+          step="any"
+          />
         <div className="invalid-feedback">{errors.dueDate?.message}</div>
       </div>
       <div className="form-group">
         <label className="control-label m-1">Return Date</label>
         <input
+          ref={returnDateRef}
           name="returnDate"
           type="datetime-local"
           {...register('returnDate')}
           className={`form-control m-1 ${errors.returnDate ? 'is-invalid' : ''}`}
+          step="any"
         />
         <div className="invalid-feedback">{errors.returnDate?.message}</div>
-      </div> 
-      <div className="form-group">
-        <label className="control-label m-1" >Renew Acccount</label>
-        <input
-          name="renewCount"
-          type="number" 
-          {...register('renewCount')}
-          className={`form-control m-1  ${errors.renewCount ? 'is-invalid' : ''}`}
-        />
-        <div className="invalid-feedback">{errors.renewCount?.message}</div>
       </div>
       <div className="form-group"><br/>
         <button  type="submit" className="btn btn-primary m-2">
