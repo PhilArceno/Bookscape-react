@@ -39,9 +39,15 @@ function UserLoans() {
       })
       .then(text => {
         setMessage('Loan has been successfully renewed');
+        setTimeout(() => {
+          setMessage(null)
+        }, 1000)
       })
       .catch(err => {
         setMessage(err.message);
+        setTimeout(() => {
+          setMessage(null)
+        }, 1000)
       });
   };
 
