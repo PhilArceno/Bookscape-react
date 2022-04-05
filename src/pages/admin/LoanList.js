@@ -89,8 +89,8 @@ function LoanList() {
             <td><a href={'/admin/loan/'+loan.id}>{loan.isbn}</a></td>
           
             <td>{loan.userName}</td>
-            <td>{loan.startDate.substring(0, 10)}</td>
-            <td>{loan.dueDate.substring(0, 10)}</td>
+            <td>{loan.startDate}</td>
+            <td>{loan.dueDate}</td>
             <td>{loan.returnDate}</td>        
             <td><button class = "btn btn-primary" onClick={()=>{editLoan(loan.id)}}>Update</button></td>
             <td><button class = "btn btn-danger" onClick={()=>{deleteLoan(loan.id)}}>Delete</button></td>    

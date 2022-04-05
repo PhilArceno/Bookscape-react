@@ -23,6 +23,7 @@ function LoanEdit() {
     })
     .then((response)=>{
         var d = response.data;
+<<<<<<< HEAD
         let dueDate = new Date(d.dueDate).toISOString();
         let returnDate = new Date(d.returnDate).toISOString();
         dueDate = dueDate.substring(0,dueDate.length-1);
@@ -34,6 +35,21 @@ function LoanEdit() {
           isbn: d.book.isbn
         };
         const fields = ['isbn', 'dueDate','overdue','returnDate','userId'];
+=======
+        var loan = {};
+        loan.id = d.id;
+        loan.startDate = d.startDate
+        loan.dueDate = d.dueDate;
+        loan.returnDate= d.returnDate;
+        loan.renewCount= d.renewCount;
+        loan.overdue = d.overdue;
+
+        loan.userName = d.user.userName;
+        loan.userId = d.user.id;
+        loan.title = d.book.title;
+        loan.isbn = d.book.isbn;
+        const fields = ['isbn', 'startDate', 'dueDate','renewCount','returnDate','userId'];
+>>>>>>> 745dd99e39517a09f01d6c47983c2c2b3e9141a0
         fields.forEach(field => setValue(field, loan[field]));
         setLoan(loan);
       });
@@ -42,8 +58,18 @@ function LoanEdit() {
   const onSubmitHandler = data => {
     console.log(data);
     var body = {
+<<<<<<< HEAD
         DueDate: new Date(data.dueDate).toJSON(),
         ReturnDate:new Date(data.returnDate).toJSON(),
+=======
+        StartDate:data.startDate,
+        DueDate:data.dueDate,
+        ReturnDate:data.returnDate,
+        RenewCount:data.renewCount,
+        OnHold:data.onHold,
+        Overdue:data.overdue
+        
+>>>>>>> 745dd99e39517a09f01d6c47983c2c2b3e9141a0
            };
     Axios.put(config.url.API_URL+`/api/Loans/${id}`,
       body,
@@ -59,10 +85,20 @@ function LoanEdit() {
       });
   };
   const validationSchema = Yup.object().shape({
+<<<<<<< HEAD
     dueDate: Yup.date()
       .required('Due Date is Required'), 
     returnDate: Yup.date()
       .required('Return Date is Required'), 
+=======
+    startDate: Yup.string()
+    .required('StartDate is Required'), 
+    dueDate: Yup.string()
+      .required('DueDate is Required'), 
+      dueDate: Yup.string()
+      
+
+>>>>>>> 745dd99e39517a09f01d6c47983c2c2b3e9141a0
   });
   const {
     register,

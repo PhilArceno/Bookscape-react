@@ -56,9 +56,15 @@ function UserLoans() {
         console.log(err.message);
         setRenewStatus(false);
         setMessage('Loan has been successfully renewed');
+        setTimeout(() => {
+          setMessage(null)
+        }, 1000)
       })
       .catch(err => {
         setMessage(err.message);
+        setTimeout(() => {
+          setMessage(null)
+        }, 1000)
       });
   };
 
@@ -68,14 +74,13 @@ function UserLoans() {
         <Heading text-align={'center'}>My borrowed books</Heading>
       </Box>
       <Box m={10} maxW="1600" display="flex" justifyContent={'center'}>
-        <Text fontSize='4xl' color='tomato' as='mark'>{message}</Text>
+        <Text fontSize='4xl' color='tomato' >{message}</Text>
       </Box>
       <Box m={10} maxW="1600" display="flex" justifyContent={'center'}>
         <Table>
           <Thead>
             {' '}
             <Tr>
-              <Th>Cover Image</Th>
               <Th>Title</Th>
               <Th>Author</Th>
               <Th>Start Day</Th>
@@ -88,9 +93,6 @@ function UserLoans() {
               ? loanList.map(loan => {
                   return (
                     <Tr key={loan.id}>
-                      <Td>
-                        <Image src={loan.book.coverImage} maxH="20" />
-                      </Td>
                       <Td>{loan.book.title}</Td>
                       <Td>{loan.book.author}</Td>
                       <Td>{loan.startDate.substring(0, 10)}</Td>
