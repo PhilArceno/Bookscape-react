@@ -67,7 +67,7 @@ function RequestList() {
                   <Tr key={request.id}>
                     <Td>{request.book.title}</Td>
                     <Td>{request.book.author}</Td>
-                    <Td>{request.requestDate}</Td>
+                    <Td>{request.requestDate.substring(0, 10)}</Td>
 
                     <Button
                       colorScheme="red"

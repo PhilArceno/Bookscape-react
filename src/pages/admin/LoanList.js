@@ -24,7 +24,10 @@ function LoanList() {
         loan.id = d.id;
         loan.startDate = d.startDate;
         loan.dueDate = d.dueDate;
-        loan.userId = d.user.id;
+        loan.returnDate= d.returnDate;
+      
+        
+      
         loan.userName = d.user.userName;
         loan.bookId = d.book.id;
         loan.title = d.book.title;
@@ -72,29 +75,31 @@ function LoanList() {
          <table class = "table table-striped table-bordered">
            <thead class = "table-dark">
         <tr>
-        <th>CoverImage</th>
-        <th>Title</th>
+      
+        
         <th>Book ISBN</th>
-        <th>UserName</th>
-        <th> StartDate</th>
-        <th> DueDate</th>
+        <th>User Name</th>
+        <th> Start Date</th>
+        <th> Due Date</th>
+        <th>Return Date</th>
         <th>Return</th>
-        <th>Renew</th>
+        <th>Update</th>
         <th>Delete</th>
-
+        <th></th>
         </tr>
            </thead>
            <tbody>
         {loanList.length > 0 ? loanList.map((loan)=>{
           return (<tr key={(loan.id)}>
-            <td><Image src={loan.coverImage} maxW="20"/></td>
-            <td><a href={'/admin/loan/'+loan.id}>{loan.title}</a></td>
-            <th>{loan.isbn}</th>
+           
+            <td><a href={'/admin/loan/'+loan.id}>{loan.isbn}</a></td>
+          
             <td>{loan.userName}</td>
-            <td>{loan.startDate}</td>
-            <td>{loan.dueDate}</td>        
+            <td>{loan.startDate.substring(0, 10)}</td>
+            <td>{loan.dueDate.substring(0, 10)}</td>
+            <td>{loan.returnDate}</td>        
             <td><button class = "btn btn-primary" onClick={()=>{returnLoan(loan.id)}}>Retrun</button></td>
-            <td><button class = "btn btn-primary" onClick={()=>{editLoan(loan.id)}}>Renew</button></td>
+            <td><button class = "btn btn-primary" onClick={()=>{editLoan(loan.id)}}>Update</button></td>
             <td><button class = "btn btn-danger" onClick={()=>{deleteLoan(loan.id)}}>Delete</button></td>    
           </tr>)
         })
