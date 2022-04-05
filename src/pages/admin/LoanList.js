@@ -67,11 +67,6 @@ function LoanList() {
     <div class ="container">
        {error?(<div className="alert alert-danger">{error}</div>):""}
 		<br/>
-        
-         <div class = "row">
-			<div class = "col-lg-3">
-         <a class = "btn btn-primary btn-sm mb-3" href="/admin/loan/add">Add New Loan</a><br/></div>
-		</div>
          <table class = "table table-striped table-bordered">
            <thead class = "table-dark">
         <tr>
@@ -82,7 +77,6 @@ function LoanList() {
         <th> Start Date</th>
         <th> Due Date</th>
         <th>Return Date</th>
-        <th>Return</th>
         <th>Update</th>
         <th>Delete</th>
         <th></th>
@@ -98,7 +92,6 @@ function LoanList() {
             <td>{loan.startDate.substring(0, 10)}</td>
             <td>{loan.dueDate.substring(0, 10)}</td>
             <td>{loan.returnDate}</td>        
-            <td><button class = "btn btn-primary" onClick={()=>{returnLoan(loan.id)}}>Retrun</button></td>
             <td><button class = "btn btn-primary" onClick={()=>{editLoan(loan.id)}}>Update</button></td>
             <td><button class = "btn btn-danger" onClick={()=>{deleteLoan(loan.id)}}>Delete</button></td>    
           </tr>)
