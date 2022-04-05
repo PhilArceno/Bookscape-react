@@ -22,10 +22,15 @@ function LoanDetail() {
         loan.id = d.id;
         loan.startDate = d.startDate;
         loan.dueDate = d.dueDate;
+        loan.returnDate=d.returnDate
+        loan.onHold = d.book.onHold;
+        loan.renewCount = d.renewCount;
+
         loan.userId = d.user.id;
         loan.userName = d.user.userName;
         loan.userEmail = d.user.email;
         loan.userPhoneNumber = d.user.phoneNumber
+
         loan.bookId = d.book.id;
         loan.title = d.book.title;
         loan.isbn = d.book.isbn;
@@ -34,8 +39,7 @@ function LoanDetail() {
         loan.coverImage = d.book.coverImage;
         loan.totalCopies= d.book.totalCopies;
         loan.CopiesLoanded = d.book.CopiesLoanded
-        loan.onHold = d.book.onHold;
-        loan.renewCount = d.renewCount;
+       
         setLoan(loan);
       });
      },[]);
@@ -47,7 +51,11 @@ function LoanDetail() {
         <div class="card-body">
         <p>Id: {loan.id}</p>
         <p>Start Date: {loan.startDate}</p>
-        <p>Due Date: {loan.dueDate}</p><br/>
+        <p>Due Date: {loan.dueDate}</p>
+        <p>returnDate:{loan.returnDate}</p>
+        <p>renewCount:{loan.renewCount}</p>
+        <p>onHold:{loan.onHold}</p>
+        <br/>
         <p>User Id: {loan.userId}</p>
         <p>Name: {loan.userName}</p>
         <p>Email:{loan.userEmail}</p>
@@ -58,7 +66,7 @@ function LoanDetail() {
         <p><Image src={loan.coverImage} maxW="20"/></p>
         <p>Publisher:{loan.publisher}</p>
         <p>Subject:{loan.subject}</p>
-        <p>renewCount:{loan.renewCount}</p>
+     
         
         
         

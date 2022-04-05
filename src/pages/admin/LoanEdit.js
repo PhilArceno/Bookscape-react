@@ -28,9 +28,9 @@ function LoanEdit() {
         loan.dueDate = d.dueDate;
         loan.returnDate= d.returnDate;
         loan.renewCount= d.renewCount;
-        loan.userId = d.user.id;
+        loan.overdue = d.overdue;
+
         loan.userName = d.user.userName;
-        loan.bookId = d.book.id;
         loan.title = d.book.title;
         loan.isbn = d.book.isbn;
         const fields = ['isbn', 'startDate', 'dueDate','renewCount','returnDate','userId'];
@@ -45,7 +45,10 @@ function LoanEdit() {
     var body = {
         startDate:data.startDate,
         dueDate:data.dueDate,
-        userId:data.userId
+        returnDate:data.returnDate,
+        RenewCount:data.renewCount,
+        OnHold:data.onHold,
+        Overdue:data.overdue
            };
     Axios.put(config.url.API_URL+`/api/Loans/renew/${id}`,
       body,
@@ -103,6 +106,26 @@ function LoanEdit() {
           className={`form-control m-1  ${errors.dueDate ? 'is-invalid' : ''}`}
         />
         <div className="invalid-feedback">{errors.dueDate?.message}</div>
+      </div>
+      <div className="form-group">
+        <label className="control-label m-1">Return Date</label>
+        <input
+          name="returnDate"
+          type="datetime-local"
+          {...register('returnDate')}
+          className={`form-control m-1 ${errors.returnDate ? 'is-invalid' : ''}`}
+        />
+        <div className="invalid-feedback">{errors.returnDate?.message}</div>
+      </div> 
+      <div className="form-group">
+        <label className="control-label m-1" >Renew Acccount</label>
+        <input
+          name="renewCount"
+          type="number" 
+          {...register('renewCount')}
+          className={`form-control m-1  ${errors.renewCount ? 'is-invalid' : ''}`}
+        />
+        <div className="invalid-feedback">{errors.renewCount?.message}</div>
       </div>
       <div className="form-group"><br/>
         <button  type="submit" className="btn btn-primary m-2">
