@@ -33,7 +33,7 @@ function UserLoans() {
     }).then(response => {
       setLoanList(response.data);
     });
-  }, []);
+  }, [loanList]);
 
   const renewLoan = id => {
     fetch(config.url.API_URL + `/api/loans/renew/${id}`, {
@@ -49,14 +49,14 @@ function UserLoans() {
           setMessage('Loan has been successfully renewed');
           setTimeout(() => {
             setMessage(null)
-          }, 1000)
+          }, 1500)
         };
       })
       .catch(err => {
         setMessage(err.message);
         setTimeout(() => {
           setMessage(null)
-        }, 1000)
+        }, 1500)
       });
   };
 
