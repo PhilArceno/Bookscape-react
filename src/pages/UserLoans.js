@@ -78,10 +78,9 @@ function UserLoans() {
                     <Tr key={loan.id}>
                       <Td>{loan.book.title}</Td>
                       <Td>{loan.book.author}</Td>
-                      <Td>{loan.startDate}</Td>
-                      <Td>{loan.dueDate}</Td>
+                      <Td>{loan.startDate.substring(0, 10)}</Td>
+                      <Td>{loan.dueDate.substring(0, 10)}</Td>
 
-<<<<<<< HEAD
                       <Button
                         colorScheme="teal"
                         size="md"
@@ -98,44 +97,6 @@ function UserLoans() {
           </Tbody>
         </Table>
       </Box>
-=======
-      <Table>
-        <Thead>
-          {' '}
-          <Tr>
-          <Th>Title</Th>
-          <Th>Author</Th>
-            <Th>Start Day</Th>
-            <Th>Due Day</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {loanList.length > 0
-            ? loanList.map(loan => {
-                return (
-                  <Tr key={loan.id}>
-                    <Td>{loan.book.title}</Td>
-                    <Td>{loan.book.author}</Td>
-                    <Td>{loan.startDate.substring(0, 10)}</Td>
-                    <Td>{loan.dueDate.substring(0, 10)}</Td>
-
-                    <Button
-                      colorScheme="teal"
-                      size="md"
-                      onClick={() => {
-                        renewLoan(loan.id);
-                      }}
-                    >
-                      Renew book
-                    </Button>
-                  </Tr>
-                );
-              })
-            : ''}
-        </Tbody>
-      </Table>
-    </Box>
->>>>>>> 93d483f8039723fdecb74fb656576e1037985052
     </>
   );
 }
