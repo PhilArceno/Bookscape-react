@@ -69,7 +69,7 @@ function AccountOperationList() {
         
          <div class = "row">
 			<div class = "col-lg-3">
-         <a class = "btn btn-primary btn-sm mb-3" href="/admin/account/add">Add New Account</a><br/></div>
+         <a class = "btn btn-primary btn-sm mb-3" href="/admin/account/add">Add New Amount</a><br/></div>
 		</div>
          <table class = "table table-striped table-bordered">
            <thead class = "table-dark">
