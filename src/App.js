@@ -60,6 +60,11 @@ function App() {
           <Route exact path="/admin/loan/add" element={<AdminPages.LoanAdd/>}/>
           <Route exact path="/admin/loan/edit/:id" element={<AdminPages.LoanEdit/>}/>
           <Route exact path="/admin/loan/return/:id" element={<AdminPages.LoanReturn/>}/>
+          <Route exact path="/admin/account/list" element ={<AdminPages.AccountOperationList/>}/>
+          <Route exact path="/admin/account/add" element ={<AdminPages.AccountAdd/>}/>
+          <Route exact path="/admin/account/:id" element ={<AdminPages.AccountDetail/>}/>
+          <Route exact path="/admin/account/edit/:id" element ={<AdminPages.AccountEdit/>}/>
+
       </>
   }
 
