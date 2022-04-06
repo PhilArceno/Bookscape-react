@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import * as Pages from './pages/';
+import * as UserPages from './pages/user';
 import { Footer, Navbar } from './components';
 import { BrowserRouter, Routes, Route, useLocation, Outlet, Navigate} from 'react-router-dom';
 import * as LibrarianPages from './pages/librarian';
@@ -71,11 +72,19 @@ function App() {
 
   const librarianRoutes = () => {
     if (authState.role == "admin" || authState.role == "librarian") return <>
-      <Route path="/google-books-search" exact element={<LibrarianPages.GoogleBooksSearch />} />
-      <Route path="/google-books/:id" exact element={<LibrarianPages.GoogleBooksDetails/>} />
+      <Route path="/google-books-search" exact element={<UserPages.GoogleBooksSearch />} />
+      <Route path="/google-books/:id" exact element={<UserPages.GoogleBooksDetails/>} />
       <Route path="/returns-scanner" exact element={<LibrarianPages.ReturnsScanner/>} />
       <Route path="/loans-scanner" exact element={<LibrarianPages.LoansScanner/>} />
       </>
+  }
+
+  const userRoutes = () => {
+    if (authState.role == "user") return (<>
+      <Route path="/book-request" exact element={<UserPages.GoogleBooksSearch />} />
+      <Route path="/book-request/:id" exact element={<UserPages.GoogleBooksDetails/>} />
+    </>
+    )
   }
 
   return (
@@ -90,6 +99,7 @@ function App() {
           <Route path="/books" exact element={<Pages.Books />} />
           <Route path="/books/:id" exact element={<Pages.BookItem isLoggedIn={isLoggedIn}/>} />
         <Route element={<RequireAuth />}>
+           {/* Routes for any user logged in */}
           <Route path="/" exact element={<Pages.Home/>} />
           <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
           <Route path="/editprofile" exact element ={<Pages.UserProfileEdit/>}/>
@@ -101,6 +111,7 @@ function App() {
         <Route path="/login"  exact element={<Pages.Login checkLoggedIn={checkLoggedIn} />} />  
           {librarianRoutes()}
           {adminRoutes()}
+          {userRoutes()}
           <Route path="*" exact element={<Pages.PageNotFound />} />
         </Routes>
         <Footer />

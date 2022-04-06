@@ -64,7 +64,7 @@ function UserList() {
            </thead>
            <tbody>
         {userList.length > 0 ? userList.map((user)=>{
-          return (<tr key={(user.id)}>
+          return (<tr key={(user.id)} onClick={() => navigate('/admin/user/'+user.id)}>
             
             <td><Link to={'/admin/user/'+user.id}>{user.userName}</Link></td>
             <td>{user.email}</td>

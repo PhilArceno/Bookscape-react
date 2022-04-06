@@ -1,11 +1,22 @@
 import { BiLinkExternal } from 'react-icons/bi';
+import {useState, useContext, useEffect} from "react";
 import defaultBook from '../images/nocoverimage.png';
 import { motion } from 'framer-motion';
 import { Box, Heading, Flex, Text } from '@chakra-ui/react';
 import { Link } from '@chakra-ui/react';
 import { Link as ReactRouterLink} from 'react-router-dom';
+import { AuthContext } from '../helpers/contexts';
 
 const ApiSearchItem = ({ id, volumeInfo }) => {
+  const { authState } = useContext(AuthContext);
+  const [link, setLink] = useState("/book-request");
+  useEffect(() => {
+    if (authState.role == "librarian" || authState.role == "admin") {
+      setLink("/google-books")
+    }
+  }, [])
+  
+
   const imageVariants = {
     hover: {
       scale: 1.7,
@@ -27,7 +38,7 @@ const ApiSearchItem = ({ id, volumeInfo }) => {
   previewLink = previewLink || 'https://books.google.co.in/';
 
   return (
-    <Link as={ReactRouterLink} to={`/google-books/${id}`} textDecoration="unset">
+    <Link as={ReactRouterLink} to={`${link}/${id}`} textDecoration="unset">
       <Box key={id} p="5" borderWidth="1px" borderRadius="lg" shadow={'lg'}>
         <Flex flexDirection={{ sm: 'column', md: 'row' }} gap="5">
           <Box>
