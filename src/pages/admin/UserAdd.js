@@ -10,7 +10,8 @@ function UserAdd() {
 
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  
+  const phoneRegExp = /^([1-9]{3})(-)([0-9]{3})(-)([0-9]{4})$/;
+  const emailRegExp = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const onSubmit = data => {
     
     Axios.post(config.url.API_URL+'/api/Users',
@@ -33,15 +34,15 @@ function UserAdd() {
  
   
   const validationSchema = Yup.object().shape({
-    UserName: Yup.string()
+    UserName: Yup.string().min(3)
     .required('UserName is required'),
-     Email: Yup.string()
+     Email: Yup.string().matches(emailRegExp,'This is not a valid email address')
      .required('Email is Required'),
-     Password: Yup.string()
+     Password: Yup.string().min(6).max(20)
      .required('Password is required'),
      ConfirmPassword: Yup.string()
-     .oneOf([Yup.ref('Password'), null], 'Passwords must match'),
-     PhoneNumber: Yup.string()
+     .oneOf([Yup.ref('Password'), null], 'Passwords must match').required('Please repeat password'),
+     PhoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid,ex: 514-123-4567')
      .required('PhoneNumber is required')
     });
 

@@ -17,20 +17,6 @@ function AccountAdd() {
 
   const onSubmit = data => {
     
-    //Axios.post(config.url.API_URL+'/api/AccountOperations/payment/'
-    /*Axios.post('https://localhost:7098/api/AccountOperations/payment/'
-    
-      +data.userId+'?amount='+data.amount,
-    { 
-     // amount:20,
-      //Amount:data.userId,
-      
-    },
-      {
-      headers : {
-        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
-      }
-    })*/
     Axios({
       method: 'post',
       url: config.url.API_URL+'/api/AccountOperations/payment/'+data.userId
