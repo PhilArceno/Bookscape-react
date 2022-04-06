@@ -82,35 +82,20 @@ export default function LargeWithNewsletter() {
               <Logo color={useColorModeValue('gray.700', 'white')} />
             </Box>
             <Text fontSize={'sm'}>
-              © 2020 Chakra Templates. All rights reserved
+              © 2022 Library Management System by Team#3 FSD01
             </Text>
-            <Stack direction={'row'} spacing={6}>
-              <SocialButton label={'Twitter'} href={'#'}>
-                <FaTwitter />
-              </SocialButton>
-              <SocialButton label={'YouTube'} href={'#'}>
-                <FaYoutube />
-              </SocialButton>
-              <SocialButton label={'Instagram'} href={'#'}>
-                <FaInstagram />
-              </SocialButton>
-            </Stack>
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Company</ListHeader>
             <Link href={'#'}>About us</Link>
-            <Link href={'#'}>Blog</Link>
             <Link href={'#'}>Contact us</Link>
-            <Link href={'#'}>Pricing</Link>
-            <Link href={'#'}>Testimonials</Link>
+            <Link href={'#'}>Help Center</Link>
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Support</ListHeader>
-            <Link href={'#'}>Help Center</Link>
             <Link href={'#'}>Terms of Service</Link>
             <Link href={'#'}>Legal</Link>
             <Link href={'#'}>Privacy Policy</Link>
-            <Link href={'#'}>Satus</Link>
           </Stack>
           <Stack align={'flex-start'}>
             <ListHeader>Stay up to date</ListHeader>
