@@ -30,12 +30,12 @@ function GoogleBooksDetails() {
       .then(text => {
         let { volumeInfo } = JSON.parse(text);
         let imgs = volumeInfo.imageLinks;
-        let coverImage;
-        if (imgs.large) coverImage = imgs.large;
-        else if (imgs.medium) coverImage = imgs.medium;
-        else if (imgs.small) coverImage = imgs.small;
-        else if (imgs.thumbnail) coverImage = imgs.thumbnail;
-        else if (imgs.smallThumbnail) coverImage = imgs.smallThumbnail;
+        let coverImage = imgs.large ?? imgs.medium ?? imgs.small ?? imgs.thumbnail ?? imgs.smallThumbnail;
+        // if (imgs.large) coverImage = imgs.large;
+        // else if (imgs.medium) coverImage = imgs.medium;
+        // else if (imgs.small) coverImage = imgs.small;
+        // else if (imgs.thumbnail) coverImage = imgs.thumbnail;
+        // else if (imgs.smallThumbnail) coverImage = imgs.smallThumbnail;
 
         console.log(volumeInfo);
         setBookDetails({
