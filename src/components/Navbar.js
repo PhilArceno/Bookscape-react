@@ -52,7 +52,7 @@ export default function Navbar({ userStatus, role }) {
 
   useEffect(() => {}, [isLoggedIn, role]);
 
-  const renderRoleLinks = () => {
+  const renderRoleProfileLinks = () => {
     let jsx = (<>
       <MenuItem>
         <Link as={ReactRouterLink} to="/returns-scanner">
@@ -84,6 +84,14 @@ export default function Navbar({ userStatus, role }) {
     }
   }
 
+  const renderNavbarRoleLinks = () => {
+    return (role === 'admin' || role === 'librarian') ? (
+      <NavLink>Google Books Search</NavLink>
+    ) : role === "user" ? (
+      <NavLink>Book Request</NavLink>
+    ) : ""
+  }
+
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -108,11 +116,7 @@ export default function Navbar({ userStatus, role }) {
               {Links.map(link => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
-              {isLoggedIn && (role === 'admin' || role === 'librarian') ? (
-                <NavLink>Google Books Search</NavLink>
-              ) : (
-                ''
-              )}
+              {isLoggedIn && renderNavbarRoleLinks()}
             </HStack>
           </HStack>
           <Flex alignItems={'center'}>
@@ -191,7 +195,7 @@ export default function Navbar({ userStatus, role }) {
                       My Borrowed books
                     </Link>
                   </MenuItem>
-                    {isLoggedIn && renderRoleLinks()}
+                    {isLoggedIn && renderRoleProfileLinks()}
                   <MenuDivider />
                   <MenuItem fontSize={'sm'} fontWeight={400} onClick={logout}>
                     Logout
