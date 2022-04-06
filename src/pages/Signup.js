@@ -25,7 +25,7 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 
 const schema = yup
   .object({
-    username: yup.string().min(4).trim().required(),
+    username: yup.string().min(4).max(24).trim().required(),
     email: yup.string().email().trim().required(),
     phoneNumber: yup.string().trim().matches(phoneRegExp, "Please use the correct format.").required(),
     password: yup.string().min(6).max(24).required(),
