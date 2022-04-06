@@ -56,7 +56,7 @@ function AccountEdit() {
       body,
       {
         headers : {
-        'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
+        'Authorization': `Bearer ${localStorage.getItem("accessToken")}` +'?amount='+data.amount,, 
       }
     })
       .then((response)=>{
