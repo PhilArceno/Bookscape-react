@@ -8,11 +8,7 @@ import { config } from '../../helpers/constants';
 
 
 function AccountDetail() {
-
-  
-
-
-  const [loan, setLoan] = useState({});
+  const [account, setAccount] = useState({});
   let {id} = useParams();
 
   useEffect(()=>{
@@ -26,52 +22,34 @@ function AccountDetail() {
         var d = response.data;
         var account = {};
         account.id = d.id;
-        account.startDate = d.startDate;
-        account.dueDate = d.dueDate;
-        loan.returnDate=d.returnDate
-        loan.onHold = d.book.onHold;
-        loan.renewCount = d.renewCount;
-
+        account.operationType = d.operationType;
+        account.amount = d.amount;
+        account.recordedTime = d.recordedTime;
         account.userId = d.user.id;
         account.userName = d.user.userName;
         account.userEmail = d.user.email;
         account.userPhoneNumber = d.user.phoneNumber
-
-        loan.bookId = d.book.id;
-        loan.title = d.book.title;
-        loan.isbn = d.book.isbn;
-        loan.publisher = d.book.publisher;
-        loan.subject = d.book.subject;
-       
-        loan.totalCopies= d.book.totalCopies;
-        loan.CopiesLoanded = d.book.CopiesLoanded
-       
-        setLoan(loan);
+        setAccount(account);
       });
      },[]);
   
   return (
     <div className="container">
       <div class="card m-2">
-        <div class="card-header">Loan Detail</div>
+        <div class="card-header">Account Detail</div>
         <div class="card-body">
-        <p>Id: {loan.id}</p>
-        <p>Start Date: {loan.startDate}</p>
-        <p>Due Date: {loan.dueDate}</p>
-        <p>returnDate:{loan.returnDate}</p>
-        <p>renewCount:{loan.renewCount}</p>
-        <p>onHold:{loan.onHold}</p>
+        <p>Id: {account.id}</p>
+        <p>AccountOperationType:{account.operationType}</p>
+        <p>Amount:{account.amount}</p>
+        
         <br/>
-        <p>User Id: {loan.userId}</p>
-        <p>Name: {loan.userName}</p>
-        <p>Email:{loan.userEmail}</p>
-        <p>Phone Number:{loan.userPhoneNumber}</p><br/>
-        <p>Book Id: {loan.bookId}</p>
-        <p>Title: {loan.title}</p>
-        <p>ISBN:{loan.isbn}</p>
+        <p>User Id: {account.userId}</p>
+        <p>Name: {account.userName}</p>
+        <p>Email:{account.userEmail}</p>
+        <p>Phone Number:{account.userPhoneNumber}</p><br/>
+        
        
-        <p>Publisher:{loan.publisher}</p>
-        <p>Subject:{loan.subject}</p>
+        
      
         
         
