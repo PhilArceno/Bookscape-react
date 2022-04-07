@@ -23,7 +23,6 @@ function LoanDetail() {
         loan.startDate = d.startDate;
         loan.dueDate = d.dueDate;
         loan.returnDate=d.returnDate
-        loan.onHold = d.book.onHold;
         loan.renewCount = d.renewCount;
 
         loan.userId = d.user.id;
@@ -54,7 +53,7 @@ function LoanDetail() {
         <p>Due Date: {loan.dueDate}</p>
         <p>returnDate:{loan.returnDate}</p>
         <p>renewCount:{loan.renewCount}</p>
-        <p>onHold:{loan.onHold}</p>
+      
         <br/>
         <p>User Id: {loan.userId}</p>
         <p>Name: {loan.userName}</p>
