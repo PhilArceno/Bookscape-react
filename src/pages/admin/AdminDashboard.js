@@ -4,7 +4,7 @@ import { Box, Heading } from '@chakra-ui/react';
 function AdminDashboard(){
     return (<div>
       <Box m={3} maxW="1600" display="flex" justifyContent={'center'}>
-        <Heading text-align={'center'}>Book List</Heading>
+        <Heading text-align={'center'}>AdminDashboard</Heading>
       </Box>
         <Box m={3} maxW="1600" display="flex" justifyContent={'center'}> 
          <div>
