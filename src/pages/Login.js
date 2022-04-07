@@ -18,11 +18,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { config } from '../helpers/constants';
 import { useNavigate } from 'react-router-dom';
+import * as validate from "../helpers/yupValidators";
 
 const schema = yup
   .object({
-    email: yup.string().email().required(),
-    password: yup.string().min(6).max(24).required(),
+    email: validate.Email,
+    password: validate.password,
   })
   .required();
 

@@ -23,6 +23,8 @@ import { AuthContext } from '../helpers/contexts/AuthContext';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import * as validate from "../helpers/yupValidators";
+
 
 export default function UserProfileEdit() {
   const { authState } = useContext(AuthContext);
@@ -83,11 +85,9 @@ export default function UserProfileEdit() {
   
 
   const validationSchema = Yup.object().shape({
-    userName: Yup.string().min(4).trim().required('UserName is required'),
-    email: Yup.string().email().trim()
-      .required('Email is Required'),
-    phoneNumber: Yup.string().trim().matches(phoneRegExp, "Please use the correct format.")
-      .required('PhoneNumber is required')
+    userName: validate.username,
+    email: validate.email,
+    phoneNumber: validate.phoneNumber
   });
   const {
     register,

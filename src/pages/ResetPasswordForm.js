@@ -21,12 +21,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import * as Yup from 'yup';
+import * as validate from "../helpers/yupValidators";
 
 const validationSchema = Yup.object({
-  password: Yup.string().min(6).max(24).required(),
-  confirmPassword: Yup.string()
-    .required()
-    .oneOf([Yup.ref('password')], 'Passwords do not match'),
+  password: validate.password,
+  confirmPassword: validate.passwordConfirm
 }).required();
 
 export default function ResetPasswordForm() {

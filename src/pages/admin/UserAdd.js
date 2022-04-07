@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Axios from 'axios';
 import { config } from '../../helpers/constants';
+import * as validate from "../../helpers/yupValidators";
 
 function UserAdd() {
 
@@ -34,16 +35,11 @@ function UserAdd() {
  
   
   const validationSchema = Yup.object().shape({
-    UserName: Yup.string().min(3)
-    .required('UserName is required'),
-     Email: Yup.string().matches(emailRegExp,'This is not a valid email address')
-     .required('Email is Required'),
-     Password: Yup.string().min(6).max(20)
-     .required('Password is required'),
-     ConfirmPassword: Yup.string()
-     .oneOf([Yup.ref('Password'), null], 'Passwords must match').required('Please repeat password'),
-     PhoneNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid,ex: 514-123-4567')
-     .required('PhoneNumber is required')
+    UserName: validate.username,
+     Email: validate.email,
+     Password: validate.password,
+     ConfirmPassword: validate.passwordConfirm,
+     PhoneNumber: validate.phoneNumber
     });
 
   const {

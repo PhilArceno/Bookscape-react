@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import Axios from 'axios';
 import { config } from '../../helpers/constants';
+import {ISBN as validateISBN} from "../../helpers/yupValidators";
 
 
 function BookEdit() {
@@ -67,8 +68,7 @@ function BookEdit() {
     .required('TotalCopies is required'),
     copiesLoaned: Yup.number()
     .required('CopiesLoaned is required'),
-    isbn: Yup.string()
-    .required('ISBN is required'),
+    isbn: validateISBN,
    subject: Yup.string()
   .required(' Subject is required'),
    author: Yup.string()

@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import Axios from 'axios';
 import { config } from '../../helpers/constants';
+import * as validate from "../../helpers/yupValidators";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -51,6 +52,7 @@ function UserEdit() {
         } else response.text();
       })
       .then(text => {
+        console.log(text);
         navigate('/admin/user/list');
       })
       .catch(error => {
@@ -59,17 +61,11 @@ function UserEdit() {
   };
 
   const validationSchema = yup.object().shape({
-    userName: yup.string().required('UserName is required'),
-    email: yup.string().required('Email is Required'),
-    phoneNumber: yup
-      .string()
-      .trim()
-      .matches(phoneRegExp, 'Please use the correct format.')
-      .required(),
-    password: yup.string().max(24),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref('password')], 'Passwords do not match'),
+    userName: validate.username,
+    email: validate.email,
+    phoneNumber: validate.phoneNumber,
+    password: validate.password,
+    confirmPassword: validate.passwordConfirm,
   });
   const {
     register,

@@ -20,19 +20,15 @@ import { config } from '../helpers/constants';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+import * as validate from "../helpers/yupValidators";
 
 const schema = yup
   .object({
-    username: yup.string().min(4).max(24).trim().required(),
-    email: yup.string().email().trim().required(),
-    phoneNumber: yup.string().trim().matches(phoneRegExp, "Please use the correct format.").required(),
-    password: yup.string().min(6).max(24).required(),
-    confirmPassword: yup
-      .string()
-      .required()
-      .oneOf([yup.ref('password')], 'Passwords do not match'),
+    username: validate.username,
+    email: validate.email,
+    phoneNumber: validate.phoneNumber,
+    password: validate.password,
+    confirmPassword: validate.confirmPassword
   })
   .required();
 
