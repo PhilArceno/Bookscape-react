@@ -1,8 +1,5 @@
 import React, { useState,useEffect, useRef } from 'react';
 import { useNavigate,useParams,Link } from "react-router-dom";
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
 import Axios from 'axios';
 import { config } from '../../helpers/constants';
 

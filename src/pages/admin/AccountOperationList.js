@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from 'react';
 import { useNavigate,useParams } from "react-router-dom";
-import { Box, Heading, Image } from '@chakra-ui/react';
 import Axios from 'axios';
 import { config } from '../../helpers/constants';
 
