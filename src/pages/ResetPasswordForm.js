@@ -102,7 +102,7 @@ export default function ResetPasswordForm() {
             <InputGroup>
               <Input
                 type={showPassword ? 'text' : 'password'}
-                placeholder="Enter a 8-24 length password"
+                placeholder="Enter a 6-24 length password"
                 {...register('password')}
               />
               <InputRightElement h={'full'}>
@@ -122,7 +122,7 @@ export default function ResetPasswordForm() {
               <Input
                 data-testid="confirmPasswordInput"
                 type={showPassword ? 'text' : 'password'}
-                placeholder="Enter a 8-24 length password"
+                placeholder="Enter a 6-24 length password"
                 {...register('confirmPassword')}
               />
               <InputRightElement h={'full'}>

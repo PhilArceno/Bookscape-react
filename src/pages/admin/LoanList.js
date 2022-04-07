@@ -67,6 +67,10 @@ function LoanList() {
     <div class ="container">
        {error?(<div className="alert alert-danger">{error}</div>):""}
 		<br/>
+    <Box m={3} maxW="1600" display="flex" justifyContent={'center'}>
+        <Heading text-align={'center'}>Loan List</Heading>
+      </Box>
+      
          <table class = "table table-striped table-bordered">
            <thead class = "table-dark">
         <tr>
@@ -79,12 +83,12 @@ function LoanList() {
         <th>Return Date</th>
         <th>Update</th>
         <th>Delete</th>
-        <th></th>
+       
         </tr>
            </thead>
            <tbody>
         {loanList.length > 0 ? loanList.map((loan)=>{
-          return (<tr key={(loan.id)}onClick={() => navigate('/admin/loan/'+loan.id)}>
+          return (<tr key={(loan.id)}>
            
             <td><a href={'/admin/loan/'+loan.id}>{loan.isbn}</a></td>
           
@@ -102,7 +106,7 @@ function LoanList() {
         </tbody>
         </table>
       </div>
-    
+   
     );
   }
   

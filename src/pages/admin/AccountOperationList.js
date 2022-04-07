@@ -1,9 +1,8 @@
 import React, { useState,useEffect } from 'react';
 import { useNavigate,useParams } from "react-router-dom";
-import { Box, Heading, Image } from '@chakra-ui/react';
 import Axios from 'axios';
 import { config } from '../../helpers/constants';
-
+import { Box, Heading, Image } from '@chakra-ui/react';
 function AccountOperationList() {
   let { id } = useParams();
   const [error, setError] = useState('');
@@ -64,7 +63,9 @@ function AccountOperationList() {
     <div class ="container">
        {error?(<div className="alert alert-danger">{error}</div>):""}
 		<br/>
-        
+    <Box m={3} maxW="1600" display="flex" justifyContent={'center'}>
+        <Heading text-align={'center'}>AccountOperation List</Heading>
+      </Box>
          <div class = "row">
 			<div class = "col-lg-3">
          <a class = "btn btn-primary btn-sm mb-3" href="/admin/account/add">Add New Amount</a><br/></div>
@@ -84,7 +85,7 @@ function AccountOperationList() {
            </thead>
            <tbody>
         {accountList.length > 0 ? accountList.map((account)=>{
-          return (<tr key={(account.id)} onClick={() => navigate('/admin/account/'+account.id)}>
+          return (<tr key={(account.id)} >
             <td><a href={'/admin/account/'+account.id}>{account.userName}</a></td>
             <th>{account.amount}</th>   
             <th>{account.recordedTime }</th> 
