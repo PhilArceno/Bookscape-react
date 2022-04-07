@@ -84,7 +84,7 @@ function LoanList() {
            </thead>
            <tbody>
         {loanList.length > 0 ? loanList.map((loan)=>{
-          return (<tr key={(loan.id)}onClick={() => navigate('/admin/loan/'+loan.id)}>
+          return (<tr key={(loan.id)}>
            
             <td><a href={'/admin/loan/'+loan.id}>{loan.isbn}</a></td>
           

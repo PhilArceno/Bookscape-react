@@ -84,7 +84,7 @@ function AccountOperationList() {
            </thead>
            <tbody>
         {accountList.length > 0 ? accountList.map((account)=>{
-          return (<tr key={(account.id)} onClick={() => navigate('/admin/account/'+account.id)}>
+          return (<tr key={(account.id)} >
             <td><a href={'/admin/account/'+account.id}>{account.userName}</a></td>
             <th>{account.amount}</th>   
             <th>{account.recordedTime }</th> 

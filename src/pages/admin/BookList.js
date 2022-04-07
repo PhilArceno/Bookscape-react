@@ -67,7 +67,7 @@ function BookList() {
             </tr></thead>
         {bookList.length > 0 ? bookList.map((book)=>{
           return (
-          <tr key={(book.id)}onClick={() => navigate('/admin/book/'+book.id)}>
+          <tr key={(book.id)}>
              <td><Image src={book.coverImage} maxW="20"/></td>
             <td><Link to={'/admin/book/'+ book.id}>{book.title}</Link></td>
             <td>{book.author}</td>
