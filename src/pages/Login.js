@@ -22,7 +22,7 @@ import * as validate from "../helpers/yupValidators";
 
 const schema = yup
   .object({
-    email: validate.Email,
+    email: validate.email,
     password: validate.password,
   })
   .required();

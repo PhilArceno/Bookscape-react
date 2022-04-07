@@ -28,7 +28,7 @@ const schema = yup
     email: validate.email,
     phoneNumber: validate.phoneNumber,
     password: validate.password,
-    confirmPassword: validate.confirmPassword
+    confirmPassword: validate.passwordConfirm
   })
   .required();
 
