@@ -6,13 +6,46 @@ import {
   Stack,
   Text,
   Link,
+  Skeleton,
+  SkeletonText,
   Button,
 } from '@chakra-ui/react';
 import { BiLinkExternal } from 'react-icons/bi';
 
-const BookDetails = ({ book, action }) => {
+const BookDetails = ({ pageLoading, book, action }) => {
 
-  return (
+  if (pageLoading == true) return (
+    <Box>
+      <Stack
+        gap="10"
+        flexDirection={{ sm: 'column', lg: 'row' }}
+        alignItems={{ sm: 'center', lg: 'unset' }}
+      >
+        <Skeleton
+          minWidth="400px"
+          height="613px"
+          rounded={'xl'}
+        />
+        <Box
+          p="5"
+          marginTop={'0!important'}
+          display="flex"
+          maxW="1160px"
+          flexDirection={'column'}
+          gap="2"
+          rounded={'xl'}
+          shadow="lg"
+        >
+          <Skeleton w={'350px'} h="50px" />
+          <SkeletonText margin="15px 0" noOfLines={4} spacing="4" w={'100%'} maxW="300px" />
+          <SkeletonText noOfLines={5} spacing="6" w={'100%'} />
+
+          <Skeleton marginTop="15px" w={'350px'} h="40px" />
+        </Box>
+      </Stack>
+    </Box>
+  ) 
+  else return (
     <Box>
       <Stack
         gap="10"

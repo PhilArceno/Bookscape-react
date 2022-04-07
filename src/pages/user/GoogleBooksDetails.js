@@ -23,6 +23,7 @@ import { AuthContext } from '../../helpers/contexts';
 function GoogleBooksDetails() {
   const { id } = useParams();
   const { authState } = useContext(AuthContext);
+  const [pageLoading, setPageLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [exists, setExists] = useState(false);
   const [copies, setCopies] = useState(5);
@@ -69,6 +70,7 @@ function GoogleBooksDetails() {
           pageCount: volumeInfo.pageCount,
         });
         isbn = volumeInfo.industryIdentifiers[1].identifier;
+        setPageLoading(false);
       });
     return isbn;
   };
@@ -229,7 +231,7 @@ function GoogleBooksDetails() {
 
   return (
     <Box m={10} maxW="1600" display="flex" justifyContent={'center'}>
-      <BookDetails book={bookDetails} action={formAction()} />
+      <BookDetails pageLoading={pageLoading} book={bookDetails} action={formAction()} />
     </Box>
   );
 }
