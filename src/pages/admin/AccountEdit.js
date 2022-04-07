@@ -52,11 +52,11 @@ function AccountEdit() {
         Loan:data.loan,
         User: User
         };
-    Axios.put(config.url.API_URL+`/api/AccountOperations/${id}`,
+    Axios.put(config.url.API_URL+`/api/AccountOperations/${id}` +'?amount='+data.amount,
       body,
       {
         headers : {
-        'Authorization': `Bearer ${localStorage.getItem("accessToken")}` +'?amount='+data.amount, 
+        'Authorization': `Bearer ${localStorage.getItem("accessToken")}` 
       }
     })
       .then((response)=>{

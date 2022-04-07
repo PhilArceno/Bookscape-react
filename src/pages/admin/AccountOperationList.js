@@ -44,9 +44,7 @@ function AccountOperationList() {
       navigate("/admin/account/edit/"+id);
     };
     
-    const balanceAccount = (id)=>{
-      navigate("/admin/account/balance/"+id);
-    };
+    
    
   const deleteAccount = (id)=>{
    
