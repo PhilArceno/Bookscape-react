@@ -64,8 +64,10 @@ function UserEdit() {
     userName: validate.username,
     email: validate.email,
     phoneNumber: validate.phoneNumber,
-    password: validate.password,
-    confirmPassword: validate.passwordConfirm,
+    password: yup.string().max(24),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref('password')], 'Passwords do not match'),
   });
   const {
     register,
