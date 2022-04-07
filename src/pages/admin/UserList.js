@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { Link, useNavigate,useParams } from "react-router-dom";
 import Axios from 'axios';
 import { config } from '../../helpers/constants';
-
+import { Box, Button, Heading } from '@chakra-ui/react';
 function UserList() {
   let { id } = useParams();
   const [error, setError] = useState('');
@@ -48,7 +48,9 @@ function UserList() {
     <div class ="container">
        {error?(<div className="alert alert-danger">{error}</div>):""}
 		<br/>
-        
+    <Box m={0} maxW="1600" display="flex" justifyContent={'center'}>
+        <Heading text-align={'center'}>User List</Heading>
+      </Box>
          <div class = "row">
 			<div class = "col-lg-3">
          <Link class = "btn btn-primary btn-sm mb-3" to="/admin/user/add">Add New user</Link><br/></div>

@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { useNavigate,useParams } from "react-router-dom";
 import Axios from 'axios';
 import { config } from '../../helpers/constants';
-
+import { Box, Heading, Image } from '@chakra-ui/react';
 function AccountOperationList() {
   let { id } = useParams();
   const [error, setError] = useState('');
@@ -63,7 +63,9 @@ function AccountOperationList() {
     <div class ="container">
        {error?(<div className="alert alert-danger">{error}</div>):""}
 		<br/>
-        
+    <Box m={3} maxW="1600" display="flex" justifyContent={'center'}>
+        <Heading text-align={'center'}>AccountOperation List</Heading>
+      </Box>
          <div class = "row">
 			<div class = "col-lg-3">
          <a class = "btn btn-primary btn-sm mb-3" href="/admin/account/add">Add New Amount</a><br/></div>

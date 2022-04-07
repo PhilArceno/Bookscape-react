@@ -49,6 +49,9 @@ function BookList() {
       <div className="container">
          {error?(<div className="alert alert-danger">{error}</div>):""}
 		<br/>
+    <Box m={3} maxW="1600" display="flex" justifyContent={'center'}>
+        <Heading text-align={'center'}>Book List</Heading>
+      </Box>
          <div class = "row">
 			<div class = "col-lg-3">
         <Link class = "btn btn-primary btn-sm mb-3" to="/admin/book/add">Add New Book</Link><br/></div></div>
@@ -61,9 +64,7 @@ function BookList() {
             <td>Publisher</td>
             <td>Subject</td>
             <td>ISBN</td>
-		      
             <td>Update<br/>Delete</td>
-          
             </tr></thead>
         {bookList.length > 0 ? bookList.map((book)=>{
           return (
@@ -74,10 +75,6 @@ function BookList() {
             <td>{book.publisher}</td>
             <td>{book.subject}</td>
             <td>{book.isbn}</td> 
-          
-           
-            
-            
             <button  class = "btn btn-primary m-2" onClick={()=>{EditBook(book.id)}}>Update</button>
             <button class = "btn btn-danger m-2 "  onClick={()=>{deleteBook(book.id)}}>Delete</button>
             </tr>
@@ -86,7 +83,6 @@ function BookList() {
           :
           ""
         }
-          
           </table>
          
         </div>

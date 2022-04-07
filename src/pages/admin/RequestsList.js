@@ -7,7 +7,7 @@ import { config } from '../../helpers/constants';
 function RequestList() {
   const [message, setMessage] = useState('');
   const [requestList, setRequestList] = useState([]);
-
+  const [error, setError] = useState('');
   useEffect(() => {
     Axios.get(config.url.API_URL + '/api/request', {
       headers: {
@@ -30,53 +30,51 @@ function RequestList() {
   };
 
   return (
-    <>
+    <div class ="container">
+      {error?(<div className="alert alert-danger">{error}</div>):""}
+		<br/>
       <Box m={10} maxW="1600" display="flex" justifyContent={'center'}>
         <Heading text-align={'center'}>Requested books</Heading>
       </Box>
-      <Box m={10} maxW="1600" display="flex" justifyContent={'center'}>
-      <Text fontSize='4xl' color='tomato' >{message}</Text>
-      </Box>
-      <Box m={10} maxW="1600" display="flex" justifyContent={'center'}>
-        <Table>
-          <Thead>
-            {' '}
-            <Tr>
-              <Th>Title</Th>
-              <Th>Author</Th>
-              <Th>User</Th>
-              <Th>Request Day</Th>
-              <Th>Cancel Request</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {requestList.length > 0
-              ? requestList.map(request => {
-                  return (
-                    <Tr key={request.id}>
-                      <Td>{request.book.title}</Td>
-                      <Td>{request.book.author}</Td>
-                      <Td>{request.user.userName}</Td>
-                      <Td>{request.requestDate.substring(0, 10)}</Td>
-                      <Td>
-                        <Button
-                          colorScheme="red"
-                          size="md"
-                          onClick={() => {
-                            cancelRequest(request.id);
-                          }}
-                        >
-                          Cancel request
-                        </Button>
-                      </Td>
-                    </Tr>
-                  );
-                })
-              : ''}
-          </Tbody>
-        </Table>
-      </Box>
-    </>
-  );
+    <div class = "row">
+ <div class = "col-lg-3">
+    
+</div>
+    <table class = "table table-striped table-bordered">
+      <thead class = "table-dark">
+
+   <tr>
+   <th>Request Day</th>
+   <th>User</th>
+     <th>Title</th>
+   <th>Author</th>
+  
+  
+   <th>Cancel Request</th>
+   </tr>
+      </thead>
+      <tbody>
+   {requestList.length > 0 ? requestList.map((request)=>{
+     return (<tr key={(request.id)} >
+       <td>{request.requestDate.substring(0, 10)}</td>
+       <td>{request.user.userName}</td>
+       <td>{request.book.title}</td>
+       <td>{request.book.author}</td>
+       
+       
+      
+       <td><button  class = "btn btn-danger" onClick={()=>{cancelRequest(request.id)}}>Cancel Request</button></td>
+       
+     </tr>)
+   })
+   :
+   ""
+ }
+   </tbody>
+   </table>
+ </div>
+</div>
+)
 }
+
 export default RequestList;
