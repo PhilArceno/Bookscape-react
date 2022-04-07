@@ -44,6 +44,7 @@ function RequestList() {
             <Tr>
               <Th>Title</Th>
               <Th>Author</Th>
+              <Th>User</Th>
               <Th>Request Day</Th>
               <Th>Cancel Request</Th>
             </Tr>
@@ -55,6 +56,7 @@ function RequestList() {
                     <Tr key={request.id}>
                       <Td>{request.book.title}</Td>
                       <Td>{request.book.author}</Td>
+                      <Td>{request.user.userName}</Td>
                       <Td>{request.requestDate.substring(0, 10)}</Td>
                       <Td>
                         <Button
