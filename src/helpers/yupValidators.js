@@ -1,14 +1,13 @@
 import * as yup from 'yup';
 
-const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const phoneRegExp = /^([1-9]{3})(-)([0-9]{3})(-)([0-9]{4})$/;
 
 const username = yup.string().min(4).max(24).trim().required();
 const email = yup.string().email().trim().required();
 const phoneNumber = yup
   .string()
   .trim()
-  .matches(phoneRegExp, 'Please use the correct format.')
+  .matches(phoneRegExp, 'Please use the correct format,ex: 514-123-4567')
   .required();
 const password = yup.string().min(6).max(24).required();
 const passwordConfirm = yup
