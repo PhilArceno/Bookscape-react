@@ -88,7 +88,7 @@ function UserEdit() {
             <form onSubmit={handleSubmit(onSubmitHandler)}>
               <input name="Id" type="hidden" value={user.id} />
               <div className="form-group">
-                <label className="control-label m-1">UserName</label>
+                <label className="control-label m-1">Username</label>
                 <input
                   name="userName"
                   type="text"
@@ -114,7 +114,7 @@ function UserEdit() {
                 <div className="invalid-feedback">{errors.email?.message}</div>
               </div>
               <div className="form-group">
-                <label className="control-label m-1">PhoneNumber</label>
+                <label className="control-label m-1">Phone Number</label>
                 <input
                   name="phoneNumber"
                   type="text"

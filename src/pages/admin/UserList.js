@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import { Link, useNavigate,useParams } from "react-router-dom";
 import Axios from 'axios';
 import { config } from '../../helpers/constants';
-import { Box, Button, Heading } from '@chakra-ui/react';
+import { Box, Heading } from '@chakra-ui/react';
 function UserList() {
   let { id } = useParams();
   const [error, setError] = useState('');
@@ -15,7 +15,7 @@ function UserList() {
       headers : {
         'Authorization': `Bearer ${localStorage.getItem("accessToken")}`, 
       }
-    }) .then((response)=>{
+    }).then((response)=>{
       setUserList(response.data);
     }).catch((error)=>{
       setError(error.message);
@@ -57,9 +57,9 @@ function UserList() {
 		</div>
          <table class = "table table-striped table-bordered">
            <thead class = "table-dark">
-        <tr><th>UserName</th>
+        <tr><th>Username</th>
         <th>Email</th>
-        <th>PhoneNumber</th>
+        <th>Phone Number</th>
         <th>Update</th>
         <th>Delete</th>
         </tr>

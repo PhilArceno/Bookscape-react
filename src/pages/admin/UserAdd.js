@@ -58,7 +58,7 @@ function UserAdd() {
 				<div className = "card-body"></div>
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
-        <label>UserName</label>
+        <label>Username</label>
         <input
           name="UserName"
           type="text"
@@ -98,7 +98,7 @@ function UserAdd() {
         <div className="invalid-feedback">{errors.ConfirmPassword?.message}</div>
       </div> 
       <div className="form-group">
-        <label>PhoneNumber</label>
+        <label>Phone Number</label>
         <input
           name="PhoneNumber"
           type="text"
