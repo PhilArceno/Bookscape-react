@@ -64,7 +64,7 @@ function UserEdit() {
     userName: validate.username,
     email: validate.email,
     phoneNumber: validate.phoneNumber,
-    password: yup.string().max(24),
+    password: yup.string().max(24).oneOf([yup.ref('passwordConfirm')], 'Passwords do not match'),
     confirmPassword: yup
       .string()
       .oneOf([yup.ref('password')], 'Passwords do not match'),
