@@ -9,6 +9,8 @@
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@hookform/resolvers": "^2.4.0",
+    "@stripe/react-stripe-js": "^1.7.1",
+    "@stripe/stripe-js": "^1.27.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^10.4.9",
     "axios": "^0.26.1",
