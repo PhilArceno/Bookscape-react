@@ -88,7 +88,7 @@ function AccountOperationList() {
           return (<tr key={(account.id)} >
             <td><a href={'/admin/account/'+account.id}>{account.userName}</a></td>
             <th>{account.amount}</th>   
-            <th>{account.recordedTime }</th> 
+            <th>{account.recordedTime.substring(0, 10) }</th> 
            
           
             <td><button class = "btn btn-primary" onClick={()=>{editAccount(account.id)}}>Update</button></td>
