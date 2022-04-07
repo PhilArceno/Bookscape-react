@@ -83,7 +83,7 @@ export default function UserProfileEdit() {
   
 
   const validationSchema = Yup.object().shape({
-    userName: Yup.string().min(4).trim().required('UserName is required'),
+    userName: Yup.string().min(4).max(24).trim().required('UserName is required'),
     email: Yup.string().email().trim()
       .required('Email is Required'),
     phoneNumber: Yup.string().trim().matches(phoneRegExp, "Please use the correct format.")
