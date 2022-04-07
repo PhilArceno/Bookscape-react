@@ -69,7 +69,7 @@ function AccountEdit() {
 
   const validationSchema = Yup.object().shape({
     
-    amount: Yup.string()
+    amount: Yup.number()
       .required('Amount is Required'),
     
   

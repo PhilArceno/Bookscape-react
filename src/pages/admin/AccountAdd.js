@@ -33,7 +33,7 @@ function AccountAdd() {
       });
   };
   const validationSchema = Yup.object().shape({
-    amount: Yup.string()
+    amount: Yup.number()
     .required(' Amount is required'),
     userId: Yup.string()
     .required(' userId is required'),
