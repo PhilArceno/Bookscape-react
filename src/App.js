@@ -102,6 +102,7 @@ function App() {
            {/* Routes for any user logged in */}
           <Route path="/" exact element={<Pages.Home/>} />
           <Route path='/myprofile' exact element ={<Pages.UserProfile isLoggedIn={isLoggedIn}/>}/>
+          <Route path='/my-balance' exact element ={<UserPages.MyBalance/>}/>
           <Route path="/editprofile" exact element ={<Pages.UserProfileEdit/>}/>
           <Route path='/resetpassword' exact element ={<Pages.ResetPasswordForm/>}/>
           <Route path='/myrequests' exact element ={<Pages.RequestList/>}/>

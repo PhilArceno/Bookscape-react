@@ -53,6 +53,12 @@ export default function Navbar({ userStatus, role }) {
   useEffect(() => {}, [isLoggedIn, role]);
 
   const renderRoleProfileLinks = () => {
+    let balanceLink = <MenuItem>
+    <Link as={ReactRouterLink} to="/my-balance">
+      My Balance
+  </Link>
+</MenuItem>;
+
     let jsx = (<>
       <MenuItem>
         <Link as={ReactRouterLink} to="/returns-scanner">
@@ -66,6 +72,7 @@ export default function Navbar({ userStatus, role }) {
         </Link>
         <br />
       </MenuItem>
+      {balanceLink}
       </>);
 
     if (role === 'librarian') {
@@ -78,10 +85,11 @@ export default function Navbar({ userStatus, role }) {
         <Link as={ReactRouterLink} to="/admin/dashboard">
           Admin
         </Link>
-        <br />
       </MenuItem>
+        {balanceLink}
       </>
     }
+    return balanceLink
   }
 
   const renderNavbarRoleLinks = () => {
