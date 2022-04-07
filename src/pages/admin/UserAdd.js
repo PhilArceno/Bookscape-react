@@ -11,15 +11,13 @@ function UserAdd() {
 
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-  const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const onSubmit = data => {
     
     Axios.post(config.url.API_URL+'/api/Users',
-    {UserName:data.UserName,
+    { UserName:data.UserName,
       Email:data.Email,
       PhoneNumber:data.PhoneNumber,
-      Password:data.Password
+      Password:data.password
     },
       {
       headers : {
@@ -37,7 +35,7 @@ function UserAdd() {
   const validationSchema = Yup.object().shape({
     UserName: validate.username,
      Email: validate.email,
-     Password: validate.password,
+     password: validate.password,
      ConfirmPassword: validate.passwordConfirm,
      PhoneNumber: validate.phoneNumber
     });
@@ -82,12 +80,12 @@ function UserAdd() {
       <div className="form-group">
         <label>Password</label>
         <input
-          name="Password"
+          name="password"
           type="password"
-          {...register('Password')}
-          className={`form-control ${errors.Password ? 'is-invalid' : ''}`}
+          {...register('password')}
+          className={`form-control ${errors.password ? 'is-invalid' : ''}`}
         />
-        <div className="invalid-feedback">{errors.Password?.message}</div>
+        <div className="invalid-feedback">{errors.password?.message}</div>
       </div> 
       <div className="form-group">
         <label>Confirm Password</label>
