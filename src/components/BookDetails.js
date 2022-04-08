@@ -83,9 +83,9 @@ const BookDetails = ({ pageLoading, book, action }) => {
             <Heading as="h4" size="xs" key={book.isbn}>
               ISBN-13 - {book.isbn}
             </Heading>
-          <Heading as="h4" size="xs">
+          {/* <Heading as="h4" size="xs">
             {book.dewey}
-          </Heading>
+          </Heading> */}
           <Text>{book.description}</Text>
           <Link href={book.previewLink} isExternal>
             {' '}
