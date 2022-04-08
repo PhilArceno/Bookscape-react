@@ -54,9 +54,9 @@ export default function Navbar({ userStatus, role }) {
 
   const renderRoleProfileLinks = () => {
     let balanceLink = <MenuItem>
-    <Link as={ReactRouterLink} to="/my-balance">
+    {/* <Link as={ReactRouterLink} to="/my-balance">
       My Balance
-  </Link>
+  </Link> */}
 </MenuItem>;
 
     let jsx = (<>
