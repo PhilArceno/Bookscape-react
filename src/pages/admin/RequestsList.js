@@ -63,7 +63,7 @@ function RequestList() {
        
        
       
-       <td><button  class = "btn btn-danger" onClick={()=>{cancelRequest(request.id)}}>Cancel Request</button></td>
+       <td><button  class = "btn btn-danger" onClick={()=>{cancelRequest(request.id)}}>Cancel</button></td>
        
      </tr>)
    })

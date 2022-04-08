@@ -18,7 +18,7 @@ function BookDetail() {
   return (
     <div className="container">
       <div className="card">
-        <div className="card-header"></div>
+        <div className="card-header">Book Detail</div>
         <div className="card-body">
         <p>Id: {book.id}</p>
         <p>Title: {book.title}</p>

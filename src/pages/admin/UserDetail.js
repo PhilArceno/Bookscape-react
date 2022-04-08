@@ -24,7 +24,7 @@ function UserDetail() {
   return (
     <div className="container">
       <div className="card">
-        <div className="card-header"></div>
+        <div className="card-header">User Detail</div>
         <div className="card-body">
         <p>Id: {user.id}</p>
         <p>UserName: {user.userName}</p>
